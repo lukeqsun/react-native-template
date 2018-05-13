@@ -1,0 +1,10 @@
+{
+    "id": "English",
+    "welcome": "Welcome",
+    "settings": {
+        "title": "Settings",
+        "language": "Language:",
+        "height": "Height:",
+        "width": "Width:"
+    }
+}

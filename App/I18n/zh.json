@@ -1,0 +1,10 @@
+{
+    "id": "中文",
+    "welcome": "欢迎",
+    "settings": {
+        "title": "设置",
+        "language": "语言:",
+        "height": "高度:",
+        "width": "宽度:"
+    }
+}
