@@ -6,5 +6,9 @@
         "language": "Language:",
         "height": "Height:",
         "width": "Width:"
+    },
+    "navigator": {
+        "ScreenA": "Screen A",
+        "Settings": "Settings"
     }
 }

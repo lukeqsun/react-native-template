@@ -1,46 +1,29 @@
 import React, {Component} from 'react';
-import {View, Text, Picker, StyleSheet} from 'react-native';
+import {Text, Picker} from 'react-native';
 import {connect} from 'react-redux';
 import SettingsActions from '../Reducers/Settings';
 import I18n from 'react-native-i18n';
-
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        flex: 1
-    },
-    header: {
-        fontSize: 20,
-        textAlign: 'left',
-        marginVertical: 10,
-        marginLeft: 10
-    },
-    picker: {
-        flex: 1,
-        marginRight: 10
-    }
-});
+import {SafeView, MyStyleSheet} from '../Utilities';
 
 class Settings extends Component {
     render() {
         const {language, changeLanguage} = this.props;
         const {setParams} = this.props.navigation;
-        console.warn(I18n.translations);
         
         const languageOptions = Object.keys(I18n.translations).map((lang, i) => {
             return <Picker.Item key={i} label={I18n.translations[lang].id} value={lang} />;
         });
 
         return (
-            <View style={styles.container}>
-                <Text style={styles.header}>{I18n.t('settings.language')}</Text>
+            <SafeView style={MyStyleSheet.get.container}>
+                <Text style={MyStyleSheet.get.titleText}>{I18n.t('settings.language', {locale: language})}</Text>
                 <Picker
-                    style={styles.picker}
+                    style={MyStyleSheet.get.flex}
                     selectedValue={language}
                     onValueChange={this._languageChanged(changeLanguage, setParams)}>
                     {languageOptions}
                 </Picker>
-            </View>
+            </SafeView>
         );
     }
 
