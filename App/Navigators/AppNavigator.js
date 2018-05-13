@@ -11,6 +11,7 @@ import {StackNavigator, DrawerNavigator, DrawerActions} from 'react-navigation';
 import {MyStyleSheet} from '../Utilities';
 import Button from '../Widgets/Button';
 import DrawerComponent from './DrawerComponent';
+import HeaderTitle from './HeaderTitle';
 import LoadingScreen from '../Components/LoadingScreen';
 import ScreenA from '../Components/ScreenA';
 import Settings from '../Components/Settings';
@@ -41,7 +42,7 @@ export const AppNavigator = StackNavigator(
         navigationOptions: ({navigation}) => ({
             headerLeft: <Button onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>Menu</Button>,
             headerStyle: MyStyleSheet.get.header,
-            title: 'Welcome!',
+            headerTitle: HeaderTitle,
             headerTintColor: 'white'
         })
     }

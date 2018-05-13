@@ -1,5 +1,6 @@
 {
     "id": "中文",
+    "appName": "React Native 模板",
     "welcome": "欢迎",
     "settings": {
         "title": "设置",

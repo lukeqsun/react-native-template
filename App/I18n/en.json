@@ -1,5 +1,6 @@
 {
     "id": "English",
+    "appName": "react-native-template",
     "welcome": "Welcome",
     "settings": {
         "title": "Settings",

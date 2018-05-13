@@ -4,7 +4,7 @@
  * Copyright (c) 2018 Youke Xiang
  */
 
-import {StyleSheet, Dimensions} from 'react-native';
+import {StyleSheet, Dimensions, Platform} from 'react-native';
 import {ColorConfig} from './Constraints';
 
 const {height, width} = Dimensions.get('screen');
@@ -33,13 +33,27 @@ const styles = (height = _height, width = _width) => {
         header: {
             backgroundColor: ColorConfig.PRIMARY
         },
+        headerTitle: {
+            fontSize: Platform.OS === 'ios' ? parseInt(fontHeight / 39) : parseInt(fontHeight / 45),
+            fontWeight: Platform.OS === 'ios' ? '400' : '200',
+            color: 'rgba(0, 0, 0, .9)',
+            textAlign: Platform.OS === 'ios' ? 'center' : 'left',
+            marginHorizontal: parseInt(fontHeight / 40),
+        },
         loadingText: {
             fontSize: parseInt(fontHeight / 30),
             color: ColorConfig.BLACK
         },
         titleText: {
+            fontSize: parseInt(fontHeight / 25),
+            color: ColorConfig.BLACK,
+            marginVertical: parseInt(height / 60),
+            marginHorizontal: parseInt(width / 60)
+        },
+        drawerLabel: {
             fontSize: parseInt(fontHeight / 30),
-            color: ColorConfig.BLACK
+            color: ColorConfig.BLACK,
+            margin: parseInt(height / 60)
         }
     };
 };

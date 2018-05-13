@@ -1,21 +1,27 @@
 import React from 'react';
 import {SafeView, MyStyleSheet} from '../Utilities';
-import {ScrollView, StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {ColorConfig} from '../Utilities/Constraints';
+import {ScrollView, View, Text, TouchableOpacity} from 'react-native';
 import {connect} from 'react-redux';
 import {SafeAreaView} from 'react-navigation';
 import I18n from 'react-native-i18n';
 
 const DrawerComponent = (props) => {
+    const {language} = props;
     return (
         <ScrollView>
             <SafeView style={MyStyleSheet.get.container} forceInset={{top: 'always', horizontal: 'never'}}>
-                <Text style={MyStyleSheet.get.titleText}>App Name Here</Text>
+                <Text style={MyStyleSheet.get.titleText}>{I18n.t('appName', {locale: language})}</Text>
                 <DrawerItems {...props} />
             </SafeView>
         </ScrollView>
     );
 };
 
+/**
+ * 
+ * @param {*} props the props from react-navigation 
+ */
 const DrawerItems = ({
     language,
     items,
@@ -71,7 +77,7 @@ const DrawerItems = ({
                                     </View>
                                 ) : null}
                                 {typeof label === 'string' ? (
-                                    <Text style={[MyStyleSheet.get.label, {color}, labelStyle, extraLabelStyle]}>
+                                    <Text style={[MyStyleSheet.get.drawerLabel, {color}, labelStyle, extraLabelStyle]}>
                                         {I18n.t(`navigator.${label}`, {locale: language})}
                                     </Text>
                                 ) : (
@@ -87,7 +93,7 @@ const DrawerItems = ({
 };
 
 DrawerItems.defaultProps = {
-    activeTintColor: '#2196f3',
+    activeTintColor: ColorConfig.PRIMARY,
     activeBackgroundColor: 'rgba(0, 0, 0, .04)',
     inactiveTintColor: 'rgba(0, 0, 0, .87)',
     inactiveBackgroundColor: 'transparent'
