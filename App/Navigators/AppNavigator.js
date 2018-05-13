@@ -8,19 +8,23 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {createReduxBoundAddListener, createReactNavigationReduxMiddleware} from 'react-navigation-redux-helpers';
 import {StackNavigator, DrawerNavigator, DrawerActions} from 'react-navigation';
-
+import {MyStyleSheet} from '../Utilities';
 import Button from '../Widgets/Button';
+import DrawerComponent from './DrawerComponent';
+import HeaderTitle from './HeaderTitle';
 import LoadingScreen from '../Components/LoadingScreen';
-import Notepad from '../Components/Notepad';
+import ScreenA from '../Components/ScreenA';
 import Settings from '../Components/Settings';
 
 const Drawer = DrawerNavigator({
-    Notepad: {
-        screen: Notepad
+    ScreenA: {
+        screen: ScreenA
     },
     Settings: {
         screen: Settings
     }
+},{
+    contentComponent: DrawerComponent
 });
 
 export const AppNavigator = StackNavigator(
@@ -37,8 +41,8 @@ export const AppNavigator = StackNavigator(
         headerMode: 'float',
         navigationOptions: ({navigation}) => ({
             headerLeft: <Button onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>Menu</Button>,
-            headerStyle: {backgroundColor: '#4C3E54'},
-            title: 'Welcome!',
+            headerStyle: MyStyleSheet.get.header,
+            headerTitle: HeaderTitle,
             headerTintColor: 'white'
         })
     }

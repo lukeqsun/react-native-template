@@ -15,6 +15,10 @@ import SettingsActions from '../Reducers/Settings';
 import NavigationHelper from '../Utilities/Helpers/NavigationHelper';
 
 class LoadingScreen extends Component {
+    static navigationOptions = {
+        header: null
+    };
+    
     componentDidMount() {
         this.initApp();
     }

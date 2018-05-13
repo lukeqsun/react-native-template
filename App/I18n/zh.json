@@ -1,10 +1,15 @@
 {
     "id": "中文",
+    "appName": "React Native 模板",
     "welcome": "欢迎",
     "settings": {
         "title": "设置",
-        "language": "语言:",
+        "language": "请选择语言:",
         "height": "高度:",
         "width": "宽度:"
+    },
+    "navigator": {
+        "ScreenA": "屏幕A",
+        "Settings": "设置"
     }
 }

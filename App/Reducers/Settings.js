@@ -1,6 +1,5 @@
 import {createReducer, createActions} from 'reduxsauce';
 import I18n from 'react-native-i18n';
-import CacheStore from 'react-native-cache-store';
 
 /* ------------- Types and Action Creators ------------- */
 
@@ -21,7 +20,6 @@ export const INITIAL_STATE = {
 
 // request the data from an api
 export const changeLanguage = (state, {language}) => {
-    CacheStore.set('language', language);
     return {language};
 };
 

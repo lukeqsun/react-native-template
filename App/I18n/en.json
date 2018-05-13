@@ -1,10 +1,15 @@
 {
     "id": "English",
+    "appName": "react-native-template",
     "welcome": "Welcome",
     "settings": {
         "title": "Settings",
         "language": "Language:",
         "height": "Height:",
         "width": "Width:"
+    },
+    "navigator": {
+        "ScreenA": "Screen A",
+        "Settings": "Settings"
     }
 }
