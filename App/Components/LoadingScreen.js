@@ -9,8 +9,7 @@ import {Text, View} from 'react-native';
 import {connect} from 'react-redux';
 import CacheStore from 'react-native-cache-store';
 
-import MyStyleSheet from '../Utilities/MyStyleSheet';
-import {SafeView} from '../Utilities/SafeView';
+import {SafeView, MyStyleSheet, FontAwesomeSpinner} from '../Utilities';
 import SettingsActions from '../Reducers/Settings';
 import NavigationHelper from '../Utilities/Helpers/NavigationHelper';
 
@@ -32,7 +31,7 @@ class LoadingScreen extends Component {
                 }
                 NavigationHelper.resetTo(this, 'Drawer');
             });
-        }, 500);
+        }, 2000);
     }
 
     render() {
@@ -40,6 +39,7 @@ class LoadingScreen extends Component {
             <SafeView>
                 <View style={MyStyleSheet.get.container}>
                     <Text style={MyStyleSheet.get.loadingText}>Loading...</Text>
+                    <FontAwesomeSpinner style={MyStyleSheet.get.titleText}>{FontAwesomeSpinner.Icons.spinner}</FontAwesomeSpinner>
                 </View>
             </SafeView>
         );
