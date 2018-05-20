@@ -7,9 +7,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {createReduxBoundAddListener, createReactNavigationReduxMiddleware} from 'react-navigation-redux-helpers';
-import {StackNavigator, DrawerNavigator, DrawerActions} from 'react-navigation';
+import {StackNavigator, DrawerNavigator} from 'react-navigation';
 import {MyStyleSheet} from '../Utilities';
-import Button from '../Widgets/Button';
 import DrawerComponent from './DrawerComponent';
 import HeaderTitle from './HeaderTitle';
 import {HeaderLeft} from './HeaderLeft';
