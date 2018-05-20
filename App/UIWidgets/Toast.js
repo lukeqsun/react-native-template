@@ -7,10 +7,11 @@ import React from 'react';
 
 import {View, Text, Animated} from 'react-native';
 import {BaseComponent} from '../Utilities';
+import {connect} from 'react-redux';
 
-export default class Toaster extends BaseComponent {
+class Toast extends BaseComponent {
     static defaultProps = {
-        duration: 1500,
+        duration: 3000,
         textColor: '#ffffff',
         fontSize: 14,
         lineHeight: 20,
@@ -32,16 +33,31 @@ export default class Toaster extends BaseComponent {
         };
     }
 
+    componentWillReceiveProps({toast}) {
+        const {message, duration} = toast;
+        console.warn(duration);
+        
+        if (message) {
+            this.show(message);
+            this.hide(duration);
+        } else {
+            this.hide(duration);
+        }
+    }
+
     show(message) {
         this.timeoutId && clearTimeout(this.timeoutId);
         this.opacity.setValue(0);
         this.setState({toastText: message, toastVisible: true});
         Animated.timing(this.opacity, {toValue: 1, duration: 200}).start();
+    }
+
+    hide(duration) {
         this.timeoutId = setTimeout(() => {
             Animated.timing(this.opacity, {toValue: 0, duration: 200}).start(() => {
                 this.setState({toastVisible: false});
             });
-        }, this.props.duration);
+        }, duration);
     }
 
     componentWillUnmount() {
@@ -83,7 +99,15 @@ export default class Toaster extends BaseComponent {
                 </Animated.View>
             );
         } else {
-            return null;
+            return <View />;
         }
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        toast: state.toast
+    };
+};
+
+export default connect(mapStateToProps)(Toast);

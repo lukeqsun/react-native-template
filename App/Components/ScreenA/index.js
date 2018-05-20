@@ -5,12 +5,13 @@
  */
 
 import React from 'react';
-import {Text, View, SafeAreaView} from 'react-native';
+import {Text, View} from 'react-native';
 import {MyStyleSheet, BaseComponent} from '../../Utilities';
 import {connect} from 'react-redux';
 import I18n from 'react-native-i18n';
-import {Toaster, Button} from '../../UIWidgets';
+import {Button, RootView} from '../../UIWidgets';
 import {ColorConfig} from '../../Utilities/Constraints';
+import ToastActions from '../../Reducers/Toast';
 
 class ScreenA extends BaseComponent {
     constructor(props) {
@@ -30,14 +31,15 @@ class ScreenA extends BaseComponent {
     }
 
     _onToasterPress() {
-        this.Toaster.show('Toaster shown');
+        const {showToast} = this.props;
+        showToast('test');
     }
 
     render() {
         const {language} = this.props;
 
         return (
-            <SafeAreaView style={MyStyleSheet.get.flexBox}>
+            <RootView style={MyStyleSheet.get.flexBox}>
                 <View style={MyStyleSheet.get.container}>
                     <View style={[MyStyleSheet.get.row]}>
                         <Text style={[MyStyleSheet.get.textSmall, MyStyleSheet.get.flexBox]}>
@@ -51,8 +53,7 @@ class ScreenA extends BaseComponent {
                         <Button text="Toaster" color={ColorConfig.WARNING} onPress={() => this._onToasterPress()} />
                     </View>
                 </View>
-                <Toaster ref={(ref) => (this.Toaster = ref)} />
-            </SafeAreaView>
+            </RootView>
         );
     }
 }
@@ -63,4 +64,8 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps)(ScreenA);
+const mapStateToDispatch = (dispatch) => ({
+    showToast: (message) => dispatch(ToastActions.showToast(message))
+});
+
+export default connect(mapStateToProps, mapStateToDispatch)(ScreenA);

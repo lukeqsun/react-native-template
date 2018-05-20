@@ -33,7 +33,7 @@ class LoadingScreen extends BaseComponent {
                 }
                 NavigationHelper.resetTo(this, 'Drawer');
             });
-        }, 2000);
+        }, 500);
     }
 
     render() {

@@ -4,11 +4,11 @@
  * Copyright (c) 2018 Youke Xiang
  */
 
-import React, {Component} from 'react';
+import React from 'react';
 import {View, TouchableOpacity, Text, Image} from 'react-native';
-import {MyStyleSheet} from '../Utilities';
+import {MyStyleSheet, BaseComponent} from '../Utilities';
 
-export default class Button extends Component {
+export default class Button extends BaseComponent {
     render() {
         const {useDefaultStyle, disabled, color} = this.props;
         let _useDefaultStyle = useDefaultStyle || true;

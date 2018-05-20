@@ -11,5 +11,6 @@ const navReducer = createNavigationReducer(AppNavigator);
 
 export const appReducer = combineReducers({
     nav: navReducer,
-    settings: require('./Settings').reducer
+    settings: require('./Settings').reducer,
+    toast: require('./Toast').reducer
 });

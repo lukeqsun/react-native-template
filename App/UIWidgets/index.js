@@ -7,11 +7,13 @@
 import Button from './Button';
 import FontAwesomeIcon from './FontAwesomeJs/Icon';
 import FontAwesomeSpinner from './FontAwesomeJs/SpinningIcon';
-import Toaster from './Toaster';
+import Toast from './Toast';
+import RootView from './RootView';
 
 module.exports = {
     Button: Button,
     FontAwesomeIcon: FontAwesomeIcon,
     FontAwesomeSpinner: FontAwesomeSpinner,
-    Toaster: Toaster
+    Toast: Toast,
+    RootView: RootView
 };
