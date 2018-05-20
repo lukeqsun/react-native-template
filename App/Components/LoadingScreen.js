@@ -39,7 +39,7 @@ class LoadingScreen extends BaseComponent {
     render() {
         return (
             <SafeAreaView style={MyStyleSheet.get.flexBox}>
-                <View style={MyStyleSheet.get.container}>
+                <View style={[MyStyleSheet.get.container, MyStyleSheet.get.center]}>
                     <Text style={MyStyleSheet.get.loadingText}>Loading...</Text>
                     <FontAwesomeSpinner style={MyStyleSheet.get.titleText}>
                         {FontAwesomeSpinner.Icons.spinner}

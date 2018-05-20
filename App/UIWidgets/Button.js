@@ -10,11 +10,13 @@ import {MyStyleSheet} from '../Utilities';
 
 export default class Button extends Component {
     render() {
-        const {useDefaultStyle, disabled} = this.props;
-        let _useDefaultStyle = useDefaultStyle;
+        const {useDefaultStyle, disabled, color} = this.props;
+        let _useDefaultStyle = useDefaultStyle || true;
 
         let containerStyle = [MyStyleSheet.get.btnActive, this.props.style];
-
+        if (color) {
+            containerStyle = [...containerStyle, {backgroundColor: color}];
+        }
         if (disabled && _useDefaultStyle) {
             containerStyle = [MyStyleSheet.get.btnDisabled, this.props.style];
         }

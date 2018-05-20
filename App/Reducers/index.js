@@ -5,7 +5,7 @@
  */
 import {combineReducers} from 'redux';
 import {createNavigationReducer} from 'react-navigation-redux-helpers';
-import {AppNavigator} from '../Navigators/AppNavigator';
+import {AppNavigator} from '../Navigator/AppNavigator';
 
 const navReducer = createNavigationReducer(AppNavigator);
 

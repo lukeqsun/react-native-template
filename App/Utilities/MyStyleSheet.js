@@ -23,9 +23,14 @@ const styles = (height = _height, width = _width) => {
     return {
         container: {
             flex: 1,
+            paddingHorizontal: parseInt(width / 80),
+            paddingVertical: parseInt(height / 100),
+            backgroundColor: ColorConfig.WHITE
+        },
+        center: {
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: ColorConfig.WHITE
+            alignContent: 'center'
         },
         flexBox: {
             flex: 1
@@ -73,23 +78,25 @@ const styles = (height = _height, width = _width) => {
             alignSelf: 'center'
         },
         spaceLeft: {
-            marginLeft: parseInt(width /50)
+            marginLeft: parseInt(width / 50)
         },
         btnActive: {
             justifyContent: 'center',
             alignItems: 'center',
-            padding: parseInt(height / 100),
-            height: parseInt(height / 15),
+            alignSelf: 'center',
+            paddingHorizontal: parseInt(width / 30),
+            paddingVertical: parseInt(height / 100),
             backgroundColor: 'transparent',
-            borderRadius: 5
+            borderRadius: parseInt(height / 100)
         },
         btnDisabled: {
             justifyContent: 'center',
             alignItems: 'center',
-            padding: parseInt(height / 100),
-            height: parseInt(height / 15),
+            alignSelf: 'center',
+            paddingHorizontal: parseInt(width / 30),
+            paddingVertical: parseInt(height / 100),
             backgroundColor: '#aaa',
-            borderRadius: 5
+            borderRadius: parseInt(height / 100)
         },
         row: {
             flexDirection: 'row'
