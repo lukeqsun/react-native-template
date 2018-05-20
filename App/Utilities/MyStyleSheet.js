@@ -38,7 +38,7 @@ const styles = (height = _height, width = _width) => {
             fontWeight: Platform.OS === 'ios' ? '400' : '200',
             color: 'rgba(0, 0, 0, .9)',
             textAlign: Platform.OS === 'ios' ? 'center' : 'left',
-            marginHorizontal: parseInt(fontHeight / 40),
+            marginHorizontal: parseInt(fontHeight / 40)
         },
         loadingText: {
             fontSize: parseInt(fontHeight / 30),
@@ -54,6 +54,45 @@ const styles = (height = _height, width = _width) => {
             fontSize: parseInt(fontHeight / 30),
             color: ColorConfig.BLACK,
             margin: parseInt(height / 60)
+        },
+        textLightColor: {
+            color: ColorConfig.WHITE
+        },
+        textSmall: {
+            fontSize: parseInt(fontHeight / 40)
+        },
+        textMedium: {
+            fontSize: parseInt(fontHeight / 30)
+        },
+        textLarge: {
+            fontSize: parseInt(fontHeight / 20)
+        },
+        textCenter: {
+            textAlign: 'center',
+            justifyContent: 'center',
+            alignSelf: 'center'
+        },
+        spaceLeft: {
+            marginLeft: parseInt(width /50)
+        },
+        btnActive: {
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: parseInt(height / 100),
+            height: parseInt(height / 15),
+            backgroundColor: 'transparent',
+            borderRadius: 5
+        },
+        btnDisabled: {
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: parseInt(height / 100),
+            height: parseInt(height / 15),
+            backgroundColor: '#aaa',
+            borderRadius: 5
+        },
+        row: {
+            flexDirection: 'row'
         }
     };
 };

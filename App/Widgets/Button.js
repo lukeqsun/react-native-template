@@ -5,48 +5,43 @@
  */
 
 import React, {Component} from 'react';
-import {View, TouchableOpacity, Text, Dimensions} from 'react-native';
-var {height} = Dimensions.get('window');
+import {View, TouchableOpacity, Text, Image} from 'react-native';
+import {MyStyleSheet} from '../Utilities';
 
 export default class Button extends Component {
     render() {
-        var fontColor = this.props.color || '#fff';
-        var containerStyle = [
-            {
-                justifyContent: 'center',
-                alignItems: 'center',
-                padding: height / 100,
-                height: height / 15,
-                backgroundColor: this.props.disabledColor || 'transparent',
-                borderRadius: 5
-            },
-            this.props.style
-        ];
+        const {useDefaultStyle, disabled} = this.props;
+        let _useDefaultStyle = useDefaultStyle;
 
-        if (this.props.disabled && this.props.useDefaultStyle) {
-            fontColor = '#fff';
-            containerStyle = [
-                this.props.style,
-                {
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    padding: height / 100,
-                    height: height / 15,
-                    backgroundColor: this.props.disabledColor
-                }
-            ];
+        let containerStyle = [MyStyleSheet.get.btnActive, this.props.style];
+
+        if (disabled && _useDefaultStyle) {
+            containerStyle = [MyStyleSheet.get.btnDisabled, this.props.style];
         }
-        return (
-            <TouchableOpacity {...this.props} disabled={this.props.disabled}>
-                <View style={containerStyle}>
+        const childView = () => {
+            const {children, text, image, tintColor} = this.props;
+            const _tintColor = tintColor ? tintColor : '#fff';
+            if (text || typeof children == 'string') {
+                return (
                     <Text
-                        style={{
-                            fontSize: parseInt(height / 38),
-                            color: fontColor
-                        }}>
-                        {this.props.children}
+                        style={[
+                            MyStyleSheet.get.textMedium,
+                            {
+                                color: _tintColor
+                            }
+                        ]}>
+                        {text || children}
                     </Text>
-                </View>
+                );
+            } else if (image) {
+                return <Image source={image} tintColor={_tintColor} />;
+            } else if (children) {
+                return <View style={MyStyleSheet.get.row}>{children}</View>;
+            }
+        };
+        return (
+            <TouchableOpacity {...this.props} disabled={disabled}>
+                <View style={containerStyle}>{childView()}</View>
             </TouchableOpacity>
         );
     }
