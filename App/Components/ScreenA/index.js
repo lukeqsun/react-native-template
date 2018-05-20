@@ -19,8 +19,6 @@ class ScreenA extends Component {
         };
     }
 
-    componentWillMount() {}
-
     onOrientationChange(orientation, height, width) {
         this.setState({height, width});
     }

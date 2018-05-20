@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import SettingsActions from '../Reducers/Settings';
 import I18n from 'react-native-i18n';
 import {SafeView, MyStyleSheet} from '../Utilities';
+import CacheStore from 'react-native-cache-store';
 
 class Settings extends Component {
     render() {
@@ -29,6 +30,7 @@ class Settings extends Component {
 
     _languageChanged = (changeLanguage, setParams) => (newLang) => {
         changeLanguage(newLang);
+        CacheStore.set('SETTINGS_LANGUAGE', newLang);
         setParams({
             title: I18n.t('settings.title', {locale: newLang})
         });
