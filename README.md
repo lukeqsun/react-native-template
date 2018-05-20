@@ -16,8 +16,25 @@ After you have downloaded or cloned this repository, run `npm install` or `yarn`
 - iOS `react-native run-ios`
 - Android `react-native run-android` *not support yet
 
-## Functionalities
+
+## Specs
+- Multi-language supported
+- Font Awesome 5.0 icons
+- Orientation handled
+- Drawer navigator
 - Adding...
+
+## UI Elements
+- Toast
+- Button
+- Adding...
+
+## Plug-Ins
+- [redux](https://github.com/AlexanderZaytsev/react-native-i18n)
+- [react-navigation](https://reactnavigation.org/)
+- [react-native-i18n](https://github.com/AlexanderZaytsev/react-native-i18n)
+- [react-native-orientation](https://github.com/yamill/react-native-orientation)
+- [react-native-cache-store](https://github.com/cheeaun/react-native-cache-store)
 
 ## Contributors
 PR welcome!!!
