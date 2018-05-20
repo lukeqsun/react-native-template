@@ -5,7 +5,6 @@
  */
 
 import {createReducer, createActions} from 'reduxsauce';
-import I18n from 'react-native-i18n';
 
 const {Types, Creators} = createActions({
     showToast: ['message', 'duration'],

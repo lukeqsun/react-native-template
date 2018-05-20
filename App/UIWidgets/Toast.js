@@ -8,6 +8,7 @@ import React from 'react';
 import {View, Text, Animated} from 'react-native';
 import {BaseComponent} from '../Utilities';
 import {connect} from 'react-redux';
+import I18n from 'react-native-i18n';
 
 class Toast extends BaseComponent {
     static defaultProps = {
@@ -33,15 +34,16 @@ class Toast extends BaseComponent {
         };
     }
 
-    componentWillReceiveProps({toast}) {
+    componentWillReceiveProps({toast, language}) {
         const {message, duration} = toast;
-        console.warn(duration);
-        
         if (message) {
-            this.show(message);
-            this.hide(duration);
-        } else {
-            this.hide(duration);
+            let _message = I18n.t(message, {locale: language}) || message;
+            this.show(_message);
+            this.timeoutId = setTimeout(() => {
+                Animated.timing(this.opacity, {toValue: 0, duration: 200}).start(() => {
+                    this.setState({toastVisible: false});
+                });
+            }, duration);
         }
     }
 
@@ -50,14 +52,6 @@ class Toast extends BaseComponent {
         this.opacity.setValue(0);
         this.setState({toastText: message, toastVisible: true});
         Animated.timing(this.opacity, {toValue: 1, duration: 200}).start();
-    }
-
-    hide(duration) {
-        this.timeoutId = setTimeout(() => {
-            Animated.timing(this.opacity, {toValue: 0, duration: 200}).start(() => {
-                this.setState({toastVisible: false});
-            });
-        }, duration);
     }
 
     componentWillUnmount() {
@@ -106,7 +100,8 @@ class Toast extends BaseComponent {
 
 const mapStateToProps = (state) => {
     return {
-        toast: state.toast
+        toast: state.toast,
+        language: state.settings.language
     };
 };
 

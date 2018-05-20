@@ -32,7 +32,7 @@ class ScreenA extends BaseComponent {
 
     _onToasterPress() {
         const {showToast} = this.props;
-        showToast('test');
+        showToast('welcome');
     }
 
     render() {
