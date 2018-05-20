@@ -5,11 +5,12 @@
  */
 import {combineReducers} from 'redux';
 import {createNavigationReducer} from 'react-navigation-redux-helpers';
-import {AppNavigator} from '../Navigators/AppNavigator';
+import {AppNavigator} from '../Navigator/AppNavigator';
 
 const navReducer = createNavigationReducer(AppNavigator);
 
 export const appReducer = combineReducers({
     nav: navReducer,
-    settings: require('./Settings').reducer
+    settings: require('./Settings').reducer,
+    toast: require('./Toast').reducer
 });

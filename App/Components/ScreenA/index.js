@@ -4,13 +4,16 @@
  * Copyright (c) 2018 Youke Xiang
  */
 
-import React, {Component} from 'react';
+import React from 'react';
 import {Text, View} from 'react-native';
-import {SafeView, MyStyleSheet} from '../../Utilities';
+import {MyStyleSheet, BaseComponent} from '../../Utilities';
 import {connect} from 'react-redux';
 import I18n from 'react-native-i18n';
+import {Button, RootView} from '../../UIWidgets';
+import {ColorConfig} from '../../Utilities/Constraints';
+import ToastActions from '../../Reducers/Toast';
 
-class ScreenA extends Component {
+class ScreenA extends BaseComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -19,24 +22,38 @@ class ScreenA extends Component {
         };
     }
 
-    onOrientationChange(orientation, height, width) {
-        this.setState({height, width});
+    componentDidMount() {
+        super.componentDidMount();
+    }
+
+    onOrientationChange() {
+        this.setState({height: this.screenHeight, width: this.screenWidth});
+    }
+
+    _onToasterPress() {
+        const {showToast} = this.props;
+        showToast('welcome');
     }
 
     render() {
         const {language} = this.props;
 
         return (
-            <SafeView onOrientationChange={this.onOrientationChange.bind(this)}>
+            <RootView style={MyStyleSheet.get.flexBox}>
                 <View style={MyStyleSheet.get.container}>
-                    <Text style={MyStyleSheet.get.loadingText}>
-                        {I18n.t('settings.height', {locale: language})} {this.state.height}
-                    </Text>
-                    <Text style={MyStyleSheet.get.font}>
-                        {I18n.t('settings.width', {locale: language})} {this.state.width}
-                    </Text>
+                    <View style={[MyStyleSheet.get.row]}>
+                        <Text style={[MyStyleSheet.get.textSmall, MyStyleSheet.get.flexBox]}>
+                            {I18n.t('settings.height', {locale: language})} {this.state.height}
+                        </Text>
+                        <Text style={[MyStyleSheet.get.textSmall, MyStyleSheet.get.flexBox]}>
+                            {I18n.t('settings.width', {locale: language})} {this.state.width}
+                        </Text>
+                    </View>
+                    <View>
+                        <Button text="Toaster" color={ColorConfig.WARNING} onPress={() => this._onToasterPress()} />
+                    </View>
                 </View>
-            </SafeView>
+            </RootView>
         );
     }
 }
@@ -47,4 +64,8 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps)(ScreenA);
+const mapStateToDispatch = (dispatch) => ({
+    showToast: (message) => dispatch(ToastActions.showToast(message))
+});
+
+export default connect(mapStateToProps, mapStateToDispatch)(ScreenA);

@@ -1,3 +1,8 @@
+/*
+ * Created on Sun May 20 2018
+ *
+ * Copyright (c) 2018 Youke Xiang
+ */
 import React from 'react';
 import {Animated} from 'react-native';
 import {MyStyleSheet} from '../Utilities';

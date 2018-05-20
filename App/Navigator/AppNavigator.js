@@ -7,25 +7,28 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {createReduxBoundAddListener, createReactNavigationReduxMiddleware} from 'react-navigation-redux-helpers';
-import {StackNavigator, DrawerNavigator, DrawerActions} from 'react-navigation';
+import {StackNavigator, DrawerNavigator} from 'react-navigation';
 import {MyStyleSheet} from '../Utilities';
-import Button from '../Widgets/Button';
 import DrawerComponent from './DrawerComponent';
 import HeaderTitle from './HeaderTitle';
+import {HeaderLeft} from './HeaderLeft';
 import LoadingScreen from '../Components/LoadingScreen';
 import ScreenA from '../Components/ScreenA';
 import Settings from '../Components/Settings';
 
-const Drawer = DrawerNavigator({
-    ScreenA: {
-        screen: ScreenA
+const Drawer = DrawerNavigator(
+    {
+        ScreenA: {
+            screen: ScreenA
+        },
+        Settings: {
+            screen: Settings
+        }
     },
-    Settings: {
-        screen: Settings
+    {
+        contentComponent: DrawerComponent
     }
-},{
-    contentComponent: DrawerComponent
-});
+);
 
 export const AppNavigator = StackNavigator(
     {
@@ -40,7 +43,7 @@ export const AppNavigator = StackNavigator(
         initialRouteName: 'LoadingScreen', //default screen
         headerMode: 'float',
         navigationOptions: ({navigation}) => ({
-            headerLeft: <Button onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>Menu</Button>,
+            headerLeft: HeaderLeft(navigation),
             headerStyle: MyStyleSheet.get.header,
             headerTitle: HeaderTitle,
             headerTintColor: 'white'

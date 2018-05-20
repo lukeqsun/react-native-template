@@ -23,11 +23,16 @@ const styles = (height = _height, width = _width) => {
     return {
         container: {
             flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
+            paddingHorizontal: parseInt(width / 80),
+            paddingVertical: parseInt(height / 100),
             backgroundColor: ColorConfig.WHITE
         },
-        flex: {
+        center: {
+            justifyContent: 'center',
+            alignItems: 'center',
+            alignContent: 'center'
+        },
+        flexBox: {
             flex: 1
         },
         header: {
@@ -38,7 +43,7 @@ const styles = (height = _height, width = _width) => {
             fontWeight: Platform.OS === 'ios' ? '400' : '200',
             color: 'rgba(0, 0, 0, .9)',
             textAlign: Platform.OS === 'ios' ? 'center' : 'left',
-            marginHorizontal: parseInt(fontHeight / 40),
+            marginHorizontal: parseInt(fontHeight / 40)
         },
         loadingText: {
             fontSize: parseInt(fontHeight / 30),
@@ -54,6 +59,47 @@ const styles = (height = _height, width = _width) => {
             fontSize: parseInt(fontHeight / 30),
             color: ColorConfig.BLACK,
             margin: parseInt(height / 60)
+        },
+        textLightColor: {
+            color: ColorConfig.WHITE
+        },
+        textSmall: {
+            fontSize: parseInt(fontHeight / 40)
+        },
+        textMedium: {
+            fontSize: parseInt(fontHeight / 30)
+        },
+        textLarge: {
+            fontSize: parseInt(fontHeight / 20)
+        },
+        textCenter: {
+            textAlign: 'center',
+            justifyContent: 'center',
+            alignSelf: 'center'
+        },
+        spaceLeft: {
+            marginLeft: parseInt(width / 50)
+        },
+        btnActive: {
+            justifyContent: 'center',
+            alignItems: 'center',
+            alignSelf: 'center',
+            paddingHorizontal: parseInt(width / 30),
+            paddingVertical: parseInt(height / 100),
+            backgroundColor: 'transparent',
+            borderRadius: parseInt(height / 100)
+        },
+        btnDisabled: {
+            justifyContent: 'center',
+            alignItems: 'center',
+            alignSelf: 'center',
+            paddingHorizontal: parseInt(width / 30),
+            paddingVertical: parseInt(height / 100),
+            backgroundColor: '#aaa',
+            borderRadius: parseInt(height / 100)
+        },
+        row: {
+            flexDirection: 'row'
         }
     };
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import './I18n/I18n';
-import AppWithNavigationState, {middleware} from './Navigators/AppNavigator';
+import AppWithNavigationState, {middleware} from './Navigator/AppNavigator';
 import {appReducer} from './Reducers';
 
 const store = createStore(appReducer, applyMiddleware(middleware));

@@ -4,21 +4,23 @@
  * Copyright (c) 2018 Youke Xiang
  */
 
-import React, {Component} from 'react';
-import {Text, View} from 'react-native';
+import React from 'react';
+import {Text, View, SafeAreaView} from 'react-native';
 import {connect} from 'react-redux';
 import CacheStore from 'react-native-cache-store';
 
-import {SafeView, MyStyleSheet, FontAwesomeSpinner} from '../Utilities';
+import {MyStyleSheet, BaseComponent} from '../Utilities';
+import {FontAwesomeSpinner} from '../UIWidgets';
 import SettingsActions from '../Reducers/Settings';
 import NavigationHelper from '../Utilities/Helpers/NavigationHelper';
 
-class LoadingScreen extends Component {
+class LoadingScreen extends BaseComponent {
     static navigationOptions = {
         header: null
     };
-    
+
     componentDidMount() {
+        super.componentDidMount();
         this.initApp();
     }
 
@@ -31,17 +33,19 @@ class LoadingScreen extends Component {
                 }
                 NavigationHelper.resetTo(this, 'Drawer');
             });
-        }, 2000);
+        }, 500);
     }
 
     render() {
         return (
-            <SafeView>
-                <View style={MyStyleSheet.get.container}>
+            <SafeAreaView style={MyStyleSheet.get.flexBox}>
+                <View style={[MyStyleSheet.get.container, MyStyleSheet.get.center]}>
                     <Text style={MyStyleSheet.get.loadingText}>Loading...</Text>
-                    <FontAwesomeSpinner style={MyStyleSheet.get.titleText}>{FontAwesomeSpinner.Icons.spinner}</FontAwesomeSpinner>
+                    <FontAwesomeSpinner style={MyStyleSheet.get.titleText}>
+                        {FontAwesomeSpinner.Icons.spinner}
+                    </FontAwesomeSpinner>
                 </View>
-            </SafeView>
+            </SafeAreaView>
         );
     }
 }

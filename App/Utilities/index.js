@@ -5,15 +5,12 @@
  */
 
 import MyStyleSheet from './MyStyleSheet';
-import {SafeView} from './SafeView';
+import BaseComponent from './BaseComponent';
 import Constraints from './Constraints';
-import FontAwesomeIcon from './FontAwesomeJs/Icon';
-import FontAwesomeSpinner from './FontAwesomeJs/SpinningIcon';
+
 
 module.exports = {
     MyStyleSheet: MyStyleSheet,
-    SafeView: SafeView,
     Constraints: Constraints,
-    FontAwesomeIcon: FontAwesomeIcon,
-    FontAwesomeSpinner: FontAwesomeSpinner
+    BaseComponent: BaseComponent
 };
