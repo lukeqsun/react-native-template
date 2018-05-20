@@ -4,7 +4,7 @@
  * Copyright (c) 2018 Youke Xiang
  */
 import React from 'react';
-import {SafeView, MyStyleSheet} from '../Utilities';
+import {MyStyleSheet} from '../Utilities';
 import {ColorConfig} from '../Utilities/Constraints';
 import {ScrollView, View, Text, TouchableOpacity} from 'react-native';
 import {connect} from 'react-redux';
@@ -15,17 +15,17 @@ const DrawerComponent = (props) => {
     const {language} = props;
     return (
         <ScrollView>
-            <SafeView style={MyStyleSheet.get.container} forceInset={{top: 'always', horizontal: 'never'}}>
+            <SafeAreaView style={MyStyleSheet.get.container} forceInset={{top: 'always', horizontal: 'never'}}>
                 <Text style={MyStyleSheet.get.titleText}>{I18n.t('appName', {locale: language})}</Text>
                 <DrawerItems {...props} />
-            </SafeView>
+            </SafeAreaView>
         </ScrollView>
     );
 };
 
 /**
- * 
- * @param {*} props the props from react-navigation 
+ *
+ * @param {*} props the props from react-navigation
  */
 const DrawerItems = ({
     language,
@@ -47,7 +47,7 @@ const DrawerItems = ({
     drawerPosition
 }) => {
     return (
-        <View style={[MyStyleSheet.get.flex, itemsContainerStyle]}>
+        <View style={[MyStyleSheet.get.flexBox, itemsContainerStyle]}>
             {items.map((route, index) => {
                 const focused = activeItemKey === route.key;
                 const color = focused ? activeTintColor : inactiveTintColor;

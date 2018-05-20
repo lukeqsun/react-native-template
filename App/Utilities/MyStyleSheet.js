@@ -27,7 +27,7 @@ const styles = (height = _height, width = _width) => {
             alignItems: 'center',
             backgroundColor: ColorConfig.WHITE
         },
-        flex: {
+        flexBox: {
             flex: 1
         },
         header: {

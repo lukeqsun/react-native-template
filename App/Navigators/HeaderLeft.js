@@ -5,8 +5,8 @@
  */
 
 import React from 'react';
-import Button from '../Widgets/Button';
-import {FontAwesomeIcon, MyStyleSheet} from '../Utilities';
+import {Button, FontAwesomeIcon} from '../UIWidgets';
+import {MyStyleSheet} from '../Utilities';
 import {DrawerActions} from 'react-navigation';
 import _ from 'lodash';
 

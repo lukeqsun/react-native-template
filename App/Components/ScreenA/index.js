@@ -4,13 +4,13 @@
  * Copyright (c) 2018 Youke Xiang
  */
 
-import React, {Component} from 'react';
-import {Text, View} from 'react-native';
-import {SafeView, MyStyleSheet} from '../../Utilities';
+import React from 'react';
+import {Text, View, SafeAreaView} from 'react-native';
+import {MyStyleSheet, BaseComponent} from '../../Utilities';
 import {connect} from 'react-redux';
 import I18n from 'react-native-i18n';
 
-class ScreenA extends Component {
+class ScreenA extends BaseComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -19,15 +19,19 @@ class ScreenA extends Component {
         };
     }
 
-    onOrientationChange(orientation, height, width) {
-        this.setState({height, width});
+    componentDidMount () {
+        super.componentDidMount();
+    }
+
+    onOrientationChange() {
+        this.setState({height: this.screenHeight, width: this.screenWidth});
     }
 
     render() {
         const {language} = this.props;
 
         return (
-            <SafeView onOrientationChange={this.onOrientationChange.bind(this)}>
+            <SafeAreaView style={MyStyleSheet.get.flexBox}>
                 <View style={MyStyleSheet.get.container}>
                     <Text style={MyStyleSheet.get.loadingText}>
                         {I18n.t('settings.height', {locale: language})} {this.state.height}
@@ -36,7 +40,7 @@ class ScreenA extends Component {
                         {I18n.t('settings.width', {locale: language})} {this.state.width}
                     </Text>
                 </View>
-            </SafeView>
+            </SafeAreaView>
         );
     }
 }

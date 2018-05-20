@@ -1,21 +1,23 @@
-/*
- * Created on Sun May 06 2018
- * This class is used as the root view, it listening the orientation changes.
- * 
- * Copyright (c) 2018 Youke Xiang
+/**
+ *
  */
+import {Component} from 'react';
 
-import React, {Component} from 'react';
-import {SafeAreaView, Dimensions} from 'react-native';
-
+import {Dimensions, PixelRatio} from 'react-native';
 import Orientation from 'react-native-orientation';
 import MyStyleSheet from './MyStyleSheet';
+const {height, width} = Dimensions.get('screen');
 
-class SafeView extends Component {
+class BaseComponent extends Component {
     constructor(props) {
         super(props);
-        this.state = {height: 0, width: 0};
     }
+
+    screenWidth = width;
+
+    screenHeight = height;
+
+    onePixel = (PixelRatio.get() == 3 ? 2 : 1) / PixelRatio.get();
 
     componentDidMount() {
         const initial = Orientation.getInitialOrientation();
@@ -23,16 +25,12 @@ class SafeView extends Component {
         Orientation.addOrientationListener(this._orientationDidChange.bind(this));
     }
 
-    _orientationDidChange(orientation) {
+    _orientationDidChange() {
         const {height, width} = Dimensions.get('screen');
 
         this._setDimensionsToStyle(height, width);
-
-
-        // return the orientation to parent view for later using
-        if (this.props.onOrientationChange) {
-            this.props.onOrientationChange(orientation, height, width);
-        }
+        this.screenWidth = width;
+        this.screenHeight = height;
     }
 
     _setDimensionsToStyle(height, width) {
@@ -43,14 +41,6 @@ class SafeView extends Component {
     componentWillUnmount() {
         Orientation.removeOrientationListener(this._orientationDidChange);
     }
-
-    render() {
-        return (
-            <SafeAreaView {...this.props} style={{flex: 1, backgroundColor: '#fff'}}>
-                {this.props.children}
-            </SafeAreaView>
-        );
-    }
 }
 
-module.exports = {SafeView};
+export default BaseComponent;
