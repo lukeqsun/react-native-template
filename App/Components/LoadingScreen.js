@@ -26,7 +26,7 @@ class LoadingScreen extends Component {
     initApp() {
         setTimeout(() => {
             const {changeLanguage} = this.props;
-            CacheStore.get('language').then((language) => {
+            CacheStore.get('SETTINGS_LANGUAGE').then((language) => {
                 if (language) {
                     changeLanguage(language);
                 }
