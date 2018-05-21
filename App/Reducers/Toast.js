@@ -7,7 +7,7 @@
 import {createReducer, createActions} from 'reduxsauce';
 
 const {Types, Creators} = createActions({
-    showToast: ['message', 'duration'],
+    showToast: ['message', 'duration']
 });
 
 export const SettingsTypes = Types;
@@ -20,5 +20,5 @@ export const showToast = (state, {message, duration = 3000}) => {
 };
 
 export const reducer = createReducer(INITIAL_STATE, {
-    [Types.SHOW_TOAST]: showToast,
+    [Types.SHOW_TOAST]: showToast
 });

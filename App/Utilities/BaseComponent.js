@@ -13,23 +13,24 @@ class BaseComponent extends Component {
     }
 
     screenWidth = width;
-
     screenHeight = height;
+
+    screenSize = Math.round(Math.abs(Math.sqrt(Math.pow(height, 2) + Math.pow(width, 2))));
 
     onePixel = (PixelRatio.get() == 3 ? 2 : 1) / PixelRatio.get();
 
     _orientationDidChange() {
         const {height, width} = Dimensions.get('screen');
-
         this._setDimensionsToStyle(height, width);
 
         this.screenWidth = width;
         this.screenHeight = height;
+
         this.onOrientationChange();
     }
 
     _setDimensionsToStyle(height, width) {
-        MyStyleSheet.Dimensions = {height: height, width: width}; // set to style sheet
+        MyStyleSheet.Dimensions = {height: height, width: width, screenSize: this.screenSize}; // set to style sheet
     }
 
     componentDidMount() {

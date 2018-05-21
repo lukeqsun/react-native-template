@@ -4,14 +4,16 @@ import {createStore, applyMiddleware} from 'redux';
 import './I18n/I18n';
 import AppWithNavigationState, {middleware} from './Navigator/AppNavigator';
 import {appReducer} from './Reducers';
-
+import {RootView} from './UIWidgets';
 const store = createStore(appReducer, applyMiddleware(middleware));
 
 class Root extends React.Component {
     render() {
         return (
             <Provider store={store}>
-                <AppWithNavigationState />
+                <RootView style={{flex:1}}>
+                    <AppWithNavigationState />
+                </RootView>
             </Provider>
         );
     }

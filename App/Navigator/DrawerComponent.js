@@ -70,7 +70,7 @@ const DrawerItems = ({
                                 [drawerPosition === 'left' ? 'right' : 'left']: 'never',
                                 vertical: 'never'
                             }}>
-                            <View style={[MyStyleSheet.get.item, itemStyle]}>
+                            <View style={[MyStyleSheet.get.drawerItem, itemStyle]}>
                                 {icon ? (
                                     <View
                                         style={[

@@ -69,7 +69,7 @@ class Toast extends BaseComponent {
                         opacity: this.opacity,
                         alignItems: 'center',
                         position: 'absolute',
-                        top: parseInt(this.screenHeight * 0.75),
+                        top: parseInt(this.screenHeight * 0.8),
                         left: this.leftPath
                     }}>
                     <View

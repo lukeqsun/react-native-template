@@ -1,6 +1,6 @@
 import React from 'react';
 import Toast from './Toast';
-import {SafeAreaView} from 'react-native';
+import {View} from 'react-native';
 
 import {BaseComponent} from '../Utilities';
 
@@ -11,10 +11,10 @@ class RootView extends BaseComponent {
 
     render() {
         return (
-            <SafeAreaView {...this.props}>
+            <View {...this.props}>
                 {this.props.children}
                 <Toast />
-            </SafeAreaView>
+            </View>
         );
     }
 }

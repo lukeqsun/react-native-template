@@ -20,7 +20,7 @@ export const INITIAL_STATE = {
 };
 
 export const changeLanguage = (state, {language}) => {
-    return merge({}, {language});
+    return merge(state, {language});
 };
 
 export const reducer = createReducer(INITIAL_STATE, {

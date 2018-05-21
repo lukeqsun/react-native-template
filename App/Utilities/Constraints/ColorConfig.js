@@ -3,14 +3,17 @@
  *
  * Copyright (c) 2018 Youke Xiang
  */
-const black = '#2b2b2b';
-const white = '#fff';
-const primary = '#007bff';
-const secondary = '#6c757d';
-const success = '#28a745';
-const danger = '#dc3545';
-const warning = '#ffc107';
-const info = '#17a2b8';
+let black = '#2b2b2b';
+let white = '#fff';
+let primary = '#007bff';
+let secondary = '#6c757d';
+let success = '#28a745';
+let danger = '#dc3545';
+let warning = '#ffc107';
+let info = '#17a2b8';
+let textLight = white;
+let textDark = black;
+let background = white;
 
 class ColorConfig {
     static get BLACK() {
@@ -43,6 +46,18 @@ class ColorConfig {
 
     static get INFO() {
         return info;
+    }
+
+    static get TEXT_LIGHT(){
+        return textLight;
+    }
+
+    static get TEXT_DARK(){
+        return textDark;
+    }
+
+    static get BACKGROUND(){
+        return background;
     }
 }
 

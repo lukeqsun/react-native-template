@@ -5,11 +5,11 @@
  */
 
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, SafeAreaView} from 'react-native';
 import {MyStyleSheet, BaseComponent} from '../../Utilities';
 import {connect} from 'react-redux';
 import I18n from 'react-native-i18n';
-import {Button, RootView} from '../../UIWidgets';
+import {Button} from '../../UIWidgets';
 import {ColorConfig} from '../../Utilities/Constraints';
 import ToastActions from '../../Reducers/Toast';
 
@@ -39,21 +39,21 @@ class ScreenA extends BaseComponent {
         const {language} = this.props;
 
         return (
-            <RootView style={MyStyleSheet.get.flexBox}>
-                <View style={MyStyleSheet.get.container}>
+            <View style={MyStyleSheet.get.flexBox}>
+                <SafeAreaView style={MyStyleSheet.get.container}>
                     <View style={[MyStyleSheet.get.row]}>
                         <Text style={[MyStyleSheet.get.textSmall, MyStyleSheet.get.flexBox]}>
                             {I18n.t('settings.height', {locale: language})} {this.state.height}
                         </Text>
-                        <Text style={[MyStyleSheet.get.textSmall, MyStyleSheet.get.flexBox]}>
+                        <Text style={[MyStyleSheet.get.textSmall]}>
                             {I18n.t('settings.width', {locale: language})} {this.state.width}
                         </Text>
                     </View>
                     <View>
                         <Button text="Toaster" color={ColorConfig.WARNING} onPress={() => this._onToasterPress()} />
                     </View>
-                </View>
-            </RootView>
+                </SafeAreaView>
+            </View>
         );
     }
 }
