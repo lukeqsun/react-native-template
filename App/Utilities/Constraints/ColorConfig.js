@@ -3,62 +3,39 @@
  *
  * Copyright (c) 2018 Youke Xiang
  */
-let black = '#2b2b2b';
-let white = '#fff';
-let primary = '#007bff';
-let secondary = '#6c757d';
-let success = '#28a745';
-let danger = '#dc3545';
-let warning = '#ffc107';
-let info = '#17a2b8';
-let textLight = white;
-let textDark = black;
-let background = white;
+import {Component} from 'react';
 
-class ColorConfig {
-    static get BLACK() {
-        return black;
+const themes = {
+    default: {
+        black: '#2b2b2b',
+        white: '#fff',
+        primary: '#007bff',
+        secondary: '#6c757d',
+        success: '#28a745',
+        danger: '#dc3545',
+        warning: '#ffc107',
+        info: '#17a2b8',
+        textLight: '#fff',
+        textDark: '#000',
+        background: '#fff'
+    },
+    black: {
+        black: '#000',
+        white: '#fff',
+        primary: '#ccc',
+        secondary: '#ccc',
+        success: '#ccc',
+        danger: '#ccc',
+        warning: '#ccc',
+        info: '#ccc',
+        textLight: '#ccc',
+        textDark: '#ccc',
+        background: '#ccc'
     }
+};
 
-    static get WHITE() {
-        return white;
-    }
-
-    static get PRIMARY() {
-        return primary;
-    }
-
-    static get SECONDARY() {
-        return secondary;
-    }
-
-    static get SUCCESS() {
-        return success;
-    }
-
-    static get DANGER() {
-        return danger;
-    }
-
-    static get WARNING() {
-        return warning;
-    }
-
-    static get INFO() {
-        return info;
-    }
-
-    static get TEXT_LIGHT(){
-        return textLight;
-    }
-
-    static get TEXT_DARK(){
-        return textDark;
-    }
-
-    static get BACKGROUND(){
-        return background;
+export default class ColorConfig extends Component {
+    static get(theme = 'default') {
+        return themes[theme];
     }
 }
-
-export default ColorConfig;

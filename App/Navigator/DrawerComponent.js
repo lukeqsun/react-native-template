@@ -12,11 +12,13 @@ import {SafeAreaView} from 'react-navigation';
 import I18n from 'react-native-i18n';
 
 const DrawerComponent = (props) => {
-    const {language} = props;
+    const {language, theme} = props;
+    const styles = MyStyleSheet.get(theme);
+
     return (
-        <ScrollView>
-            <SafeAreaView style={MyStyleSheet.get.container} forceInset={{top: 'always', horizontal: 'never'}}>
-                <Text style={MyStyleSheet.get.titleText}>{I18n.t('appName', {locale: language})}</Text>
+        <ScrollView style={styles.container}>
+            <SafeAreaView style={styles.container} forceInset={{top: 'always', horizontal: 'never'}}>
+                <Text style={styles.titleText}>{I18n.t('appName', {locale: language})}</Text>
                 <DrawerItems {...props} />
             </SafeAreaView>
         </ScrollView>
@@ -28,6 +30,7 @@ const DrawerComponent = (props) => {
  * @param {*} props the props from react-navigation
  */
 const DrawerItems = ({
+    theme,
     language,
     items,
     activeItemKey,
@@ -46,8 +49,9 @@ const DrawerItems = ({
     iconContainerStyle,
     drawerPosition
 }) => {
+    const styles = MyStyleSheet.get(theme);
     return (
-        <View style={[MyStyleSheet.get.flexBox, itemsContainerStyle]}>
+        <View style={[styles.flexBox, itemsContainerStyle]}>
             {items.map((route, index) => {
                 const focused = activeItemKey === route.key;
                 const color = focused ? activeTintColor : inactiveTintColor;
@@ -70,19 +74,19 @@ const DrawerItems = ({
                                 [drawerPosition === 'left' ? 'right' : 'left']: 'never',
                                 vertical: 'never'
                             }}>
-                            <View style={[MyStyleSheet.get.drawerItem, itemStyle]}>
+                            <View style={[styles.drawerItem, itemStyle]}>
                                 {icon ? (
                                     <View
                                         style={[
-                                            MyStyleSheet.get.icon,
-                                            focused ? null : MyStyleSheet.get.inactiveIcon,
+                                            styles.icon,
+                                            focused ? null : styles.inactiveIcon,
                                             iconContainerStyle
                                         ]}>
                                         {icon}
                                     </View>
                                 ) : null}
                                 {typeof label === 'string' ? (
-                                    <Text style={[MyStyleSheet.get.drawerLabel, {color}, labelStyle, extraLabelStyle]}>
+                                    <Text style={[styles.drawerLabel, {color}, labelStyle, extraLabelStyle]}>
                                         {I18n.t(`navigator.${label}`, {locale: language})}
                                     </Text>
                                 ) : (
@@ -98,7 +102,7 @@ const DrawerItems = ({
 };
 
 DrawerItems.defaultProps = {
-    activeTintColor: ColorConfig.PRIMARY,
+    activeTintColor: '#000',
     activeBackgroundColor: 'rgba(0, 0, 0, .04)',
     inactiveTintColor: 'rgba(0, 0, 0, .87)',
     inactiveBackgroundColor: 'transparent'
@@ -106,7 +110,8 @@ DrawerItems.defaultProps = {
 
 const mapStateToProps = (state) => {
     return {
-        language: state.settings.language
+        language: state.settings.language,
+        theme: state.settings.theme
     };
 };
 

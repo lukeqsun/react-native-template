@@ -5,28 +5,38 @@ import SettingsActions from '../Reducers/Settings';
 import I18n from 'react-native-i18n';
 import {MyStyleSheet, BaseComponent} from '../Utilities';
 import CacheStore from 'react-native-cache-store';
+import {Button} from '../UIWidgets';
+import ColorConfig from '../Utilities/Constraints/ColorConfig';
 
 class Settings extends BaseComponent {
     render() {
-        const {language, changeLanguage} = this.props;
+        const {language, changeLanguage, changeTheme, theme} = this.props;
         const {setParams} = this.props.navigation;
-
+        const styles = MyStyleSheet.get(theme);
         const languageOptions = Object.keys(I18n.translations).map((lang, i) => {
             return <Picker.Item key={i} label={I18n.translations[lang].id} value={lang} />;
         });
-
         return (
-            <SafeAreaView style={MyStyleSheet.get.container}>
-                <Text style={MyStyleSheet.get.titleText}>{I18n.t('settings.language', {locale: language})}</Text>
+            <SafeAreaView style={styles.container}>
+                <Text style={styles.titleText}>{I18n.t('settings.language', {locale: language})}</Text>
                 <Picker
-                    style={MyStyleSheet.get.flexBox}
+                    style={styles.flexBox}
                     selectedValue={language}
                     onValueChange={this._languageChanged(changeLanguage, setParams)}>
                     {languageOptions}
                 </Picker>
+                <Button
+                    text="ChangeColor"
+                    color={ColorConfig.get(theme).primary}
+                    onPress={() => this._onColorChangePress(changeTheme)}
+                />
             </SafeAreaView>
         );
     }
+
+    _onColorChangePress = (changeTheme) => {
+        changeTheme();
+    };
 
     _languageChanged = (changeLanguage, setParams) => (newLang) => {
         changeLanguage(newLang);
@@ -39,12 +49,14 @@ class Settings extends BaseComponent {
 
 const mapStateToProps = (state) => {
     return {
-        language: state.settings.language
+        language: state.settings.language,
+        theme: state.settings.theme
     };
 };
 
 const mapStateToDispatch = (dispatch) => ({
-    changeLanguage: (newLang) => dispatch(SettingsActions.changeLanguage(newLang))
+    changeLanguage: (newLang) => dispatch(SettingsActions.changeLanguage(newLang)),
+    changeTheme: () => dispatch(SettingsActions.changeTheme())
 });
 
 export default connect(mapStateToProps, mapStateToDispatch)(Settings);

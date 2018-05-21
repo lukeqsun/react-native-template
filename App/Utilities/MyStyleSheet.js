@@ -3,7 +3,6 @@
  *
  * Copyright (c) 2018 Youke Xiang
  */
-
 import {StyleSheet, Dimensions, Platform} from 'react-native';
 import {ColorConfig} from './Constraints';
 
@@ -18,11 +17,11 @@ let _screenSize;
  * @param {int} width Width of screen
  * @return {object} object for stylesheet
  */
-const styles = (height = _height, width = _width) => {
+const styles = (theme = 'default', height = _height, width = _width) => {
     return {
         container: {
             flex: 1,
-            backgroundColor: ColorConfig.BACKGROUND
+            backgroundColor: ColorConfig.get(theme).background
         },
         center: {
             justifyContent: 'center',
@@ -33,7 +32,7 @@ const styles = (height = _height, width = _width) => {
             flex: 1
         },
         header: {
-            backgroundColor: ColorConfig.PRIMARY
+            backgroundColor: ColorConfig.get(theme).primary
         },
         headerTitle: {
             fontSize: Platform.OS === 'ios' ? parseInt(_screenSize / 39) : parseInt(_screenSize / 45),
@@ -101,12 +100,12 @@ const styles = (height = _height, width = _width) => {
     };
 };
 
-export default class MyStyleSheet {
+class MyStyleSheet {
     /**
      * @return {object} react native stylesheet
      */
-    static get get() {
-        return StyleSheet.create(styles());
+    static get(theme) {
+        return StyleSheet.create(styles(theme));
     }
     /**
      * @param  {object} {height,width} A object contains height and width
@@ -115,6 +114,8 @@ export default class MyStyleSheet {
         _height = height;
         _width = width;
         _screenSize = screenSize;
-        styles(height, width);
+        styles(undefined, height, width);
     }
 }
+
+export default MyStyleSheet;

@@ -8,16 +8,17 @@ import MyStyleSheet from './MyStyleSheet';
 const {height, width} = Dimensions.get('screen');
 
 class BaseComponent extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     screenWidth = width;
     screenHeight = height;
 
     screenSize = Math.round(Math.abs(Math.sqrt(Math.pow(height, 2) + Math.pow(width, 2))));
 
     onePixel = (PixelRatio.get() == 3 ? 2 : 1) / PixelRatio.get();
+    
+    constructor(props) {
+        super(props);
+        this._setDimensionsToStyle(height, width);
+    }
 
     _orientationDidChange() {
         const {height, width} = Dimensions.get('screen');
