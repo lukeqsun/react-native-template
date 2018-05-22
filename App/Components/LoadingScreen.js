@@ -31,17 +31,19 @@ class LoadingScreen extends BaseComponent {
                 if (language) {
                     changeLanguage(language);
                 }
-                NavigationHelper.resetTo(this, 'Drawer');
+                NavigationHelper.resetTo(this, 'TabNavigator');
             });
         }, 500);
     }
 
     render() {
+        const {theme} = this.props;
+        const styles = MyStyleSheet.get(theme);
         return (
-            <SafeAreaView style={MyStyleSheet.get.flexBox}>
-                <View style={[MyStyleSheet.get.container, MyStyleSheet.get.center]}>
-                    <Text style={MyStyleSheet.get.loadingText}>Loading...</Text>
-                    <FontAwesomeSpinner style={MyStyleSheet.get.titleText}>
+            <SafeAreaView style={styles.flexBox}>
+                <View style={[styles.container, styles.center]}>
+                    <Text style={styles.textLarge}>Loading...</Text>
+                    <FontAwesomeSpinner style={styles.textLarge}>
                         {FontAwesomeSpinner.Icons.spinner}
                     </FontAwesomeSpinner>
                 </View>
@@ -52,7 +54,8 @@ class LoadingScreen extends BaseComponent {
 
 const mapStateToProps = (state) => {
     return {
-        language: state.settings.language
+        language: state.settings.language,
+        theme: state.settings.theme
     };
 };
 

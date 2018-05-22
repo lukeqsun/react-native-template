@@ -34,7 +34,7 @@ class Toast extends BaseComponent {
         };
     }
 
-    componentWillReceiveProps({toast, language}) {
+    UNSAFE_componentWillReceiveProps({toast, language}) {
         const {message, duration} = toast;
         if (message) {
             let _message = I18n.t(message, {locale: language}) || message;

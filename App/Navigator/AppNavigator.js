@@ -7,15 +7,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {createReduxBoundAddListener, createReactNavigationReduxMiddleware} from 'react-navigation-redux-helpers';
-import {StackNavigator, DrawerNavigator} from 'react-navigation';
+import {StackNavigator, createBottomTabNavigator} from 'react-navigation';
 import {MyStyleSheet} from '../Utilities';
-import DrawerComponent from './DrawerComponent';
+import TabBarComponent from './TabBarComponent';
 import HeaderTitle from './HeaderTitle';
-import {HeaderLeft} from './HeaderLeft';
+import HeaderLeft from './HeaderLeft';
+import Header from './Header';
 import LoadingScreen from '../Components/LoadingScreen';
 import ScreenA from '../Components/ScreenA';
 import Settings from '../Components/Settings';
-
+/*
 const Drawer = DrawerNavigator(
     {
         ScreenA: {
@@ -29,24 +30,39 @@ const Drawer = DrawerNavigator(
         contentComponent: DrawerComponent
     }
 );
+*/
+
+const _TabNavigator = createBottomTabNavigator(
+    {
+        ScreenA: {
+            screen: ScreenA
+        },
+        Settings: {
+            screen: Settings
+        }
+    },
+    {
+        tabBarComponent: TabBarComponent,
+        tabBarPosition: 'bottom'
+    }
+);
 
 export const AppNavigator = StackNavigator(
     {
         LoadingScreen: {
             screen: LoadingScreen
         },
-        Drawer: {
-            screen: Drawer
+        TabNavigator: {
+            screen: _TabNavigator
         }
     },
     {
         initialRouteName: 'LoadingScreen', //default screen
         headerMode: 'float',
-        navigationOptions: ({navigation}) => ({
-            headerLeft: HeaderLeft(navigation),
-            headerStyle: MyStyleSheet.get.header,
-            headerTitle: HeaderTitle,
-            headerTintColor: 'white'
+        navigationOptions: (props) => ({
+            header: (props) => <Header {...props} />,
+            headerLeft: <HeaderLeft {...props} />,
+            headerTitle: <HeaderTitle {...props} />
         })
     }
 );

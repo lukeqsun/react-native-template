@@ -9,11 +9,19 @@ import {Text, View, SafeAreaView} from 'react-native';
 import {MyStyleSheet, BaseComponent} from '../../Utilities';
 import {connect} from 'react-redux';
 import I18n from 'react-native-i18n';
-import {Button} from '../../UIWidgets';
+import {Button, FontAwesomeIcon} from '../../UIWidgets';
 import {ColorConfig} from '../../Utilities/Constraints';
 import ToastActions from '../../Reducers/Toast';
 
 class ScreenA extends BaseComponent {
+    static navigationOptions = {
+        tabBarIcon: ({tintColor, theme}) => (
+            <FontAwesomeIcon
+                style={[MyStyleSheet.get(theme).tabBarIconText, {fontFamily: 'Font Awesome 5 Brands', color: tintColor}]}>
+                {'\uf420'}
+            </FontAwesomeIcon>
+        )
+    };
     constructor(props) {
         super(props);
         this.state = {
@@ -36,21 +44,25 @@ class ScreenA extends BaseComponent {
     }
 
     render() {
-        const {language} = this.props;
-
+        const {language, theme} = this.props;
+        const styles = MyStyleSheet.get(theme);
         return (
-            <View style={MyStyleSheet.get.flexBox}>
-                <SafeAreaView style={MyStyleSheet.get.container}>
-                    <View style={[MyStyleSheet.get.row]}>
-                        <Text style={[MyStyleSheet.get.textSmall, MyStyleSheet.get.flexBox]}>
+            <View style={styles.flexBox}>
+                <SafeAreaView style={styles.container}>
+                    <View style={[styles.row]}>
+                        <Text style={[styles.textSmall, styles.flexBox]}>
                             {I18n.t('settings.height', {locale: language})} {this.state.height}
                         </Text>
-                        <Text style={[MyStyleSheet.get.textSmall]}>
+                        <Text style={[styles.textSmall]}>
                             {I18n.t('settings.width', {locale: language})} {this.state.width}
                         </Text>
                     </View>
                     <View>
-                        <Button text="Toaster" color={ColorConfig.WARNING} onPress={() => this._onToasterPress()} />
+                        <Button
+                            text="ShowToast"
+                            color={ColorConfig.get(theme).warning}
+                            onPress={() => this._onToasterPress()}
+                        />
                     </View>
                 </SafeAreaView>
             </View>
@@ -60,7 +72,8 @@ class ScreenA extends BaseComponent {
 
 const mapStateToProps = (state) => {
     return {
-        language: state.settings.language
+        language: state.settings.language,
+        theme: state.settings.theme
     };
 };
 

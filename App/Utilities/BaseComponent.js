@@ -8,10 +8,6 @@ import MyStyleSheet from './MyStyleSheet';
 const {height, width} = Dimensions.get('screen');
 
 class BaseComponent extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     screenWidth = width;
     screenHeight = height;
 
@@ -19,13 +15,21 @@ class BaseComponent extends Component {
 
     onePixel = (PixelRatio.get() == 3 ? 2 : 1) / PixelRatio.get();
 
-    _orientationDidChange() {
+    constructor(props) {
+        super(props);
+        this._setDimensionsToStyle(height, width);
+        this.state = {
+            orientation: null
+        };
+    }
+
+    _orientationDidChange(orientation) {
         const {height, width} = Dimensions.get('screen');
         this._setDimensionsToStyle(height, width);
 
         this.screenWidth = width;
         this.screenHeight = height;
-
+        this.setState({orientation: orientation}); // HACK: set state here to re-rend views
         this.onOrientationChange();
     }
 
