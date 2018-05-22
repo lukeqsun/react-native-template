@@ -17,7 +17,7 @@ export default Creators;
 export const INITIAL_STATE = Immutable({message: '', duration: 3000});
 
 export const showToast = (state, {message, duration = 3000}) => {
-    return state.merge({message, duration});
+    return {message, duration}; // unable using immutable merge here. it should always receive new props
 };
 
 export const reducer = createReducer(INITIAL_STATE, {
