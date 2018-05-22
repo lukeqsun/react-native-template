@@ -5,10 +5,17 @@ import SettingsActions from '../Reducers/Settings';
 import I18n from 'react-native-i18n';
 import {MyStyleSheet, BaseComponent} from '../Utilities';
 import CacheStore from 'react-native-cache-store';
-import {Button} from '../UIWidgets';
+import {Button, FontAwesomeIcon} from '../UIWidgets';
 import ColorConfig from '../Utilities/Constraints/ColorConfig';
 
 class Settings extends BaseComponent {
+    static navigationOptions = {
+        tabBarIcon: ({tintColor, theme}) => (
+            <FontAwesomeIcon style={[MyStyleSheet.get(theme).tabBarIconText, {color: tintColor}]}>
+                {FontAwesomeIcon.Icons.cogs}
+            </FontAwesomeIcon>
+        )
+    };
     render() {
         const {language, changeLanguage, changeTheme, theme} = this.props;
         const {setParams} = this.props.navigation;

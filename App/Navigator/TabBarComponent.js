@@ -10,6 +10,7 @@ import {connect} from 'react-redux';
 import CrossFadeIcon from './CrossFadeIcon';
 import {BaseComponent, Constraints} from '../Utilities';
 import MyStyleSheet from '../Utilities/MyStyleSheet';
+import I18n from 'react-native-i18n';
 const majorVersion = parseInt(Platform.Version, 10);
 const isIos = Platform.OS === 'ios';
 const isIOS11 = majorVersion >= 11 && isIos;
@@ -28,23 +29,20 @@ class TabBarBottom extends BaseComponent {
         adaptive: isIOS11
     };
 
-    _renderLabel = ({route, focused}) => {
+    _renderLabel({route, focused}) {
         const {
-            activeTintColor,
             theme,
             language,
-            inactiveTintColor,
             labelStyle,
             showLabel,
-            showIcon,
             allowFontScaling
         } = this.props;
-
-        if (showLabel === false) {
+        
+        if (this.state.orientation == 'LANDSCAPE') {
             return null;
         }
 
-        const label = route.routeName;
+        const label = I18n.t(`navigator.${route.routeName}`, {locale: language});
         const tintColor = focused ? ColorConfig.get(theme).primary : ColorConfig.get(theme).secondary;
         let styles = MyStyleSheet.get(theme);
         if (typeof label === 'string') {
@@ -63,35 +61,35 @@ class TabBarBottom extends BaseComponent {
         }
 
         return label;
-    };
+    }
 
-    _renderIcon = ({route, focused}) => {
-        const {navigation, activeTintColor, inactiveTintColor, renderIcon, showIcon, showLabel} = this.props;
+    _renderIcon({route, focused}) {
+        const {navigation, theme, renderIcon, showIcon} = this.props;
         if (showIcon === false) {
             return null;
         }
+        const styles = MyStyleSheet.get(theme);
 
         const activeOpacity = focused ? 1 : 0;
         const inactiveOpacity = focused ? 0 : 1;
-
         return (
             <CrossFadeIcon
                 route={route}
                 navigation={navigation}
                 activeOpacity={activeOpacity}
                 inactiveOpacity={inactiveOpacity}
-                activeTintColor={activeTintColor}
-                inactiveTintColor={inactiveTintColor}
+                activeTintColor={ColorConfig.get(theme).primary}
+                inactiveTintColor={ColorConfig.get(theme).secondary}
                 renderIcon={renderIcon}
-                style={[styles.iconWithExplicitHeight]}
+                style={styles.tabBarIcon}
             />
         );
-    };
+    }
 
     render() {
         const {navigation, onTabPress, jumpTo, style, tabStyle, theme} = this.props;
         const {routes} = navigation.state;
-
+        const styles = MyStyleSheet.get(theme);
         const tabBarStyle = [styles.tabBar, style];
 
         return (
@@ -131,57 +129,6 @@ class TabBarBottom extends BaseComponent {
         );
     }
 }
-
-const DEFAULT_HEIGHT = 49;
-const COMPACT_HEIGHT = 29;
-
-const styles = StyleSheet.create({
-    tabBar: {
-        backgroundColor: '#F7F7F7', // Default background color in iOS 10
-        borderTopWidth: StyleSheet.hairlineWidth,
-        borderTopColor: 'rgba(0, 0, 0, .3)',
-        flexDirection: 'row'
-    },
-    tabBarCompact: {
-        height: COMPACT_HEIGHT
-    },
-    tabBarRegular: {
-        height: DEFAULT_HEIGHT
-    },
-    tab: {
-        flex: 1,
-        alignItems: isIos ? 'center' : 'stretch'
-    },
-    tabPortrait: {
-        justifyContent: 'flex-end',
-        flexDirection: 'column'
-    },
-    tabLandscape: {
-        justifyContent: 'center',
-        flexDirection: 'row'
-    },
-    iconWithoutLabel: {
-        flex: 1
-    },
-    iconWithLabel: {
-        flex: 1
-    },
-    iconWithExplicitHeight: {
-        height: Platform.isPad ? DEFAULT_HEIGHT : COMPACT_HEIGHT
-    },
-    label: {
-        textAlign: 'center',
-        backgroundColor: 'transparent'
-    },
-    labelBeneath: {
-        fontSize: 10,
-        marginBottom: 1.5
-    },
-    labelBeside: {
-        fontSize: 13,
-        marginLeft: 20
-    }
-});
 
 const mapStateToProps = (state) => {
     return {

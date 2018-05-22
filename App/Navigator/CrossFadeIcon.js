@@ -7,7 +7,7 @@ import React from 'react';
 import {Animated, View, StyleSheet} from 'react-native';
 
 export default class TabBarIcon extends React.Component {
-    
+    //TODO: some animation here
     render() {
         const {
             route,

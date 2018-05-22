@@ -97,11 +97,24 @@ const styles = (theme = 'default', height = _height, width = _width) => {
         row: {
             flexDirection: 'row'
         },
-        tabLabel:{
+        tabLabel: {
             textAlign: 'center',
             backgroundColor: 'transparent',
             fontSize: parseInt(_screenSize / 80),
             marginBottom: 1.5
+        },
+        tabBar: {
+            backgroundColor: '#F7F7F7', // Default background color in iOS 10
+            borderTopWidth: StyleSheet.hairlineWidth,
+            borderTopColor: 'rgba(0, 0, 0, .3)',
+            flexDirection: 'row'
+        },
+        tabBarIcon: {
+            height: parseInt(height / 28),
+            margin: parseInt(_screenSize / 150)
+        },
+        tabBarIconText: {
+            fontSize: parseInt(height / 28)
         }
     };
 };

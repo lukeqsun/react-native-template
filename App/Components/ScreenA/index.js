@@ -9,11 +9,19 @@ import {Text, View, SafeAreaView} from 'react-native';
 import {MyStyleSheet, BaseComponent} from '../../Utilities';
 import {connect} from 'react-redux';
 import I18n from 'react-native-i18n';
-import {Button} from '../../UIWidgets';
+import {Button, FontAwesomeIcon} from '../../UIWidgets';
 import {ColorConfig} from '../../Utilities/Constraints';
 import ToastActions from '../../Reducers/Toast';
 
 class ScreenA extends BaseComponent {
+    static navigationOptions = {
+        tabBarIcon: ({tintColor, theme}) => (
+            <FontAwesomeIcon
+                style={[MyStyleSheet.get(theme).tabBarIconText, {fontFamily: 'Font Awesome 5 Brands', color: tintColor}]}>
+                {'\uf420'}
+            </FontAwesomeIcon>
+        )
+    };
     constructor(props) {
         super(props);
         this.state = {
@@ -50,7 +58,11 @@ class ScreenA extends BaseComponent {
                         </Text>
                     </View>
                     <View>
-                        <Button text="ShowToast" color={ColorConfig.get(theme).warning} onPress={() => this._onToasterPress()} />
+                        <Button
+                            text="ShowToast"
+                            color={ColorConfig.get(theme).warning}
+                            onPress={() => this._onToasterPress()}
+                        />
                     </View>
                 </SafeAreaView>
             </View>
