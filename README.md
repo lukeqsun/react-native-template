@@ -14,14 +14,15 @@ After you have downloaded or cloned this repository, run `npm install` or `yarn`
 
 #### Build and run
 - iOS `react-native run-ios`
-- Android `react-native run-android` *not support yet
+- Android `react-native run-android` *not test yet
 
 
 ## Specs
 - Multi-language supported
-- Font Awesome 5.0 icons
-- Orientation handled
-- Drawer navigator
+- Font Awesome 5.0 icons, also support custom TrueType
+- Orientation handled, responsive components size available
+- A tab navigator
+- Theme selection available
 - Adding...
 
 ## UI Elements
