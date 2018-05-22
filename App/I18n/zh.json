@@ -11,5 +11,9 @@
     "navigator": {
         "ScreenA": "屏幕A",
         "Settings": "设置"
+    },
+    "buttons": {
+        "ShowToast": "显示弹出",
+        "ChangeTheme": "更改主题"
     }
 }

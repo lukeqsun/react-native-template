@@ -31,7 +31,7 @@ class LoadingScreen extends BaseComponent {
                 if (language) {
                     changeLanguage(language);
                 }
-                NavigationHelper.resetTo(this, 'Drawer');
+                NavigationHelper.resetTo(this, 'TabNavigator');
             });
         }, 500);
     }

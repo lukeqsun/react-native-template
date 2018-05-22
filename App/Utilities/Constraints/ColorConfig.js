@@ -17,20 +17,22 @@ const themes = {
         info: '#17a2b8',
         textLight: '#fff',
         textDark: '#000',
-        background: '#fff'
+        background: '#fff',
+        secondaryBackground: '#ccc'
     },
-    black: {
+    gray: {
         black: '#000',
         white: '#fff',
-        primary: '#ccc',
-        secondary: '#ccc',
-        success: '#ccc',
-        danger: '#ccc',
-        warning: '#ccc',
-        info: '#ccc',
-        textLight: '#ccc',
+        primary: '#555',
+        secondary: '#888',
+        success: '#a1a1a1',
+        danger: '#c1c1c1',
+        warning: '#eee',
+        info: '#c1c1c1',
+        textLight: '#eee',
         textDark: '#ccc',
-        background: '#ccc'
+        background: '#2b2b2b',
+        secondaryBackground: '#ccc'
     }
 };
 

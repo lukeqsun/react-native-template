@@ -5,9 +5,8 @@
  */
 
 import {createReducer, createActions} from 'reduxsauce';
-import merge from 'lodash/merge';
 import I18n from 'react-native-i18n';
-import ColorConfig from '../Utilities/Constraints/ColorConfig';
+import Immutable from 'seamless-immutable';
 
 const {Types, Creators} = createActions({
     changeLanguage: ['language'],
@@ -17,19 +16,24 @@ const {Types, Creators} = createActions({
 export const SettingsTypes = Types;
 export default Creators;
 
-export const INITIAL_STATE = {
+// using immutable to improve performance and makes copies of dynamically allocated memory 
+export const INITIAL_STATE = Immutable({
     language: I18n.locale.substr(0, 2),
     theme: 'default'
-};
+});
 
 export const changeLanguage = (state, {language}) => {
-    return merge(state, {language});
+    /*
+    // if you dont have immutable do this:
+    state.language = language;
+    return state; 
+    */
+    return state.merge({language});
 };
 
 export const changeTheme = (state, {theme}) => {
-    theme = 'black';
-    ColorConfig.setColorTheme = 'black';
-    return {theme};
+    theme = state.theme == 'gray' ? 'default' : 'gray';
+    return state.merge({theme});
 };
 
 export const reducer = createReducer(INITIAL_STATE, {

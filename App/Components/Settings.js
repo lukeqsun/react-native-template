@@ -26,7 +26,7 @@ class Settings extends BaseComponent {
                     {languageOptions}
                 </Picker>
                 <Button
-                    text="ChangeColor"
+                    text="ChangeTheme"
                     color={ColorConfig.get(theme).primary}
                     onPress={() => this._onColorChangePress(changeTheme)}
                 />

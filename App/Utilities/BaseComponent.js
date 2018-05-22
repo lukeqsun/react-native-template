@@ -14,19 +14,22 @@ class BaseComponent extends Component {
     screenSize = Math.round(Math.abs(Math.sqrt(Math.pow(height, 2) + Math.pow(width, 2))));
 
     onePixel = (PixelRatio.get() == 3 ? 2 : 1) / PixelRatio.get();
-    
+
     constructor(props) {
         super(props);
         this._setDimensionsToStyle(height, width);
+        this.state = {
+            orientation: null
+        };
     }
 
-    _orientationDidChange() {
+    _orientationDidChange(orientation) {
         const {height, width} = Dimensions.get('screen');
         this._setDimensionsToStyle(height, width);
 
         this.screenWidth = width;
         this.screenHeight = height;
-
+        this.setState({orientation: orientation}); // HACK: set state here to re-rend views
         this.onOrientationChange();
     }
 

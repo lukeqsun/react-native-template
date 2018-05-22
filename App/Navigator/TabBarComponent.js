@@ -1,0 +1,193 @@
+/*
+ * 
+ * invoked from https://github.com/react-navigation/react-navigation-tabs
+ * 
+ */
+import React from 'react';
+import {Animated, TouchableWithoutFeedback, StyleSheet, View, Platform} from 'react-native';
+import SafeAreaView from 'react-native-safe-area-view';
+import {connect} from 'react-redux';
+import CrossFadeIcon from './CrossFadeIcon';
+import {BaseComponent, Constraints} from '../Utilities';
+import MyStyleSheet from '../Utilities/MyStyleSheet';
+const majorVersion = parseInt(Platform.Version, 10);
+const isIos = Platform.OS === 'ios';
+const isIOS11 = majorVersion >= 11 && isIos;
+
+const DEFAULT_MAX_TAB_ITEM_WIDTH = 125;
+const {ColorConfig} = Constraints;
+class TabBarBottom extends BaseComponent {
+    static defaultProps = {
+        activeTintColor: '#3478f6', // Default active tint color in iOS 10
+        activeBackgroundColor: 'transparent',
+        inactiveTintColor: '#929292', // Default inactive tint color in iOS 10
+        inactiveBackgroundColor: 'transparent',
+        showLabel: true,
+        showIcon: true,
+        allowFontScaling: true,
+        adaptive: isIOS11
+    };
+
+    _renderLabel = ({route, focused}) => {
+        const {
+            activeTintColor,
+            theme,
+            language,
+            inactiveTintColor,
+            labelStyle,
+            showLabel,
+            showIcon,
+            allowFontScaling
+        } = this.props;
+
+        if (showLabel === false) {
+            return null;
+        }
+
+        const label = route.routeName;
+        const tintColor = focused ? ColorConfig.get(theme).primary : ColorConfig.get(theme).secondary;
+        let styles = MyStyleSheet.get(theme);
+        if (typeof label === 'string') {
+            return (
+                <Animated.Text
+                    numberOfLines={1}
+                    style={[styles.tabLabel, {color: tintColor}, labelStyle]}
+                    allowFontScaling={allowFontScaling}>
+                    {label}
+                </Animated.Text>
+            );
+        }
+
+        if (typeof label === 'function') {
+            return label({route, focused, tintColor});
+        }
+
+        return label;
+    };
+
+    _renderIcon = ({route, focused}) => {
+        const {navigation, activeTintColor, inactiveTintColor, renderIcon, showIcon, showLabel} = this.props;
+        if (showIcon === false) {
+            return null;
+        }
+
+        const activeOpacity = focused ? 1 : 0;
+        const inactiveOpacity = focused ? 0 : 1;
+
+        return (
+            <CrossFadeIcon
+                route={route}
+                navigation={navigation}
+                activeOpacity={activeOpacity}
+                inactiveOpacity={inactiveOpacity}
+                activeTintColor={activeTintColor}
+                inactiveTintColor={inactiveTintColor}
+                renderIcon={renderIcon}
+                style={[styles.iconWithExplicitHeight]}
+            />
+        );
+    };
+
+    render() {
+        const {navigation, onTabPress, jumpTo, style, tabStyle, theme} = this.props;
+        const {routes} = navigation.state;
+
+        const tabBarStyle = [styles.tabBar, style];
+
+        return (
+            <SafeAreaView style={tabBarStyle} forceInset={{bottom: 'always', top: 'never'}}>
+                {routes.map((route, index) => {
+                    const focused = index === navigation.state.index;
+                    const scene = {route, focused};
+
+                    const backgroundColor = focused
+                        ? ColorConfig.get(theme).secondaryBackground
+                        : ColorConfig.get(theme).background;
+
+                    return (
+                        <TouchableWithoutFeedback
+                            key={route.key}
+                            onPress={() => {
+                                onTabPress({route});
+                                jumpTo(route.key);
+                            }}>
+                            <View
+                                style={[
+                                    {
+                                        flex: 1,
+                                        alignItems: isIos ? 'center' : 'stretch',
+                                        height: parseInt(this.screenHeight * 0.07)
+                                    },
+                                    {backgroundColor},
+                                    tabStyle
+                                ]}>
+                                {this._renderIcon(scene)}
+                                {this._renderLabel(scene)}
+                            </View>
+                        </TouchableWithoutFeedback>
+                    );
+                })}
+            </SafeAreaView>
+        );
+    }
+}
+
+const DEFAULT_HEIGHT = 49;
+const COMPACT_HEIGHT = 29;
+
+const styles = StyleSheet.create({
+    tabBar: {
+        backgroundColor: '#F7F7F7', // Default background color in iOS 10
+        borderTopWidth: StyleSheet.hairlineWidth,
+        borderTopColor: 'rgba(0, 0, 0, .3)',
+        flexDirection: 'row'
+    },
+    tabBarCompact: {
+        height: COMPACT_HEIGHT
+    },
+    tabBarRegular: {
+        height: DEFAULT_HEIGHT
+    },
+    tab: {
+        flex: 1,
+        alignItems: isIos ? 'center' : 'stretch'
+    },
+    tabPortrait: {
+        justifyContent: 'flex-end',
+        flexDirection: 'column'
+    },
+    tabLandscape: {
+        justifyContent: 'center',
+        flexDirection: 'row'
+    },
+    iconWithoutLabel: {
+        flex: 1
+    },
+    iconWithLabel: {
+        flex: 1
+    },
+    iconWithExplicitHeight: {
+        height: Platform.isPad ? DEFAULT_HEIGHT : COMPACT_HEIGHT
+    },
+    label: {
+        textAlign: 'center',
+        backgroundColor: 'transparent'
+    },
+    labelBeneath: {
+        fontSize: 10,
+        marginBottom: 1.5
+    },
+    labelBeside: {
+        fontSize: 13,
+        marginLeft: 20
+    }
+});
+
+const mapStateToProps = (state) => {
+    return {
+        language: state.settings.language,
+        theme: state.settings.theme
+    };
+};
+
+export default connect(mapStateToProps)(TabBarBottom);

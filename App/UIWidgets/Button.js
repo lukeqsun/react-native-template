@@ -35,7 +35,7 @@ class Button extends BaseComponent {
                                 color: _tintColor
                             }
                         ]}>
-                        {I18n.t(text || children, {locale: language})}
+                        {I18n.t(`buttons.${text || children}`, {locale: language})}
                     </Text>
                 );
             } else if (image) {

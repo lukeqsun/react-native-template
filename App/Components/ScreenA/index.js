@@ -50,7 +50,7 @@ class ScreenA extends BaseComponent {
                         </Text>
                     </View>
                     <View>
-                        <Button text="welcome" color={ColorConfig.get(theme).warning} onPress={() => this._onToasterPress()} />
+                        <Button text="ShowToast" color={ColorConfig.get(theme).warning} onPress={() => this._onToasterPress()} />
                     </View>
                 </SafeAreaView>
             </View>

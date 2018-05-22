@@ -11,5 +11,9 @@
     "navigator": {
         "ScreenA": "Screen A",
         "Settings": "Settings"
+    },
+    "buttons": {
+        "ShowToast": "Show Toast",
+        "ChangeTheme": "Change Theme"
     }
 }

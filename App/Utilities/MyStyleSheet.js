@@ -96,6 +96,12 @@ const styles = (theme = 'default', height = _height, width = _width) => {
         },
         row: {
             flexDirection: 'row'
+        },
+        tabLabel:{
+            textAlign: 'center',
+            backgroundColor: 'transparent',
+            fontSize: parseInt(_screenSize / 80),
+            marginBottom: 1.5
         }
     };
 };

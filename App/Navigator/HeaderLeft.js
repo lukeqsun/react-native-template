@@ -5,12 +5,15 @@
  */
 
 import React from 'react';
-import {Button, FontAwesomeIcon} from '../UIWidgets';
+import {View} from 'react-native';
+import {FontAwesomeIcon} from '../UIWidgets';
 import {MyStyleSheet} from '../Utilities';
-import {DrawerActions} from 'react-navigation';
-import _ from 'lodash';
+// import {DrawerActions} from 'react-navigation';
+// import _ from 'lodash';
 
-export const HeaderLeft = (navigation) => {
+export const HeaderLeft = () => {
+    // give up the drawer navigation, using app logo for header left
+    /*
     const _onPress = _.debounce(() => navigation.dispatch(DrawerActions.toggleDrawer()), 500, {
         leading: true,
         trailing: false
@@ -31,5 +34,18 @@ export const HeaderLeft = (navigation) => {
                 {'\uf406'}
             </FontAwesomeIcon>
         </Button>
+    );*/
+    return (
+        <View>
+            <FontAwesomeIcon
+                style={[
+                    MyStyleSheet.get.textLightColor,
+                    MyStyleSheet.get.textMedium,
+                    MyStyleSheet.get.spaceLeft,
+                    MyStyleSheet.get.textCenter
+                ]}>
+                {'\uf3a3'}
+            </FontAwesomeIcon>
+        </View>
     );
 };
