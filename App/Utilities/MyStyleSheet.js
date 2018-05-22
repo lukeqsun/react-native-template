@@ -18,10 +18,11 @@ let _screenSize;
  * @return {object} object for stylesheet
  */
 const styles = (theme = 'default', height = _height, width = _width) => {
+    const colorSet = ColorConfig.get(theme);
     return {
         container: {
             flex: 1,
-            backgroundColor: ColorConfig.get(theme).background
+            backgroundColor: colorSet.background
         },
         center: {
             justifyContent: 'center',
@@ -32,32 +33,35 @@ const styles = (theme = 'default', height = _height, width = _width) => {
             flex: 1
         },
         header: {
-            backgroundColor: ColorConfig.get(theme).primary
+            backgroundColor: colorSet.primary
         },
         headerTitle: {
             fontSize: Platform.OS === 'ios' ? parseInt(_screenSize / 39) : parseInt(_screenSize / 45),
             fontWeight: Platform.OS === 'ios' ? '400' : '200',
-            color: 'rgba(0, 0, 0, .9)',
+            color: colorSet.textLight,
             textAlign: Platform.OS === 'ios' ? 'center' : 'left',
             marginHorizontal: parseInt(_screenSize / 40)
         },
         loadingText: {
             fontSize: parseInt(_screenSize / 30),
-            color: ColorConfig.TEXT_DARK
+            color: colorSet.textDart
         },
         titleText: {
             fontSize: parseInt(_screenSize / 38),
-            color: ColorConfig.TEXT_DARK,
+            color: colorSet.textDart,
             marginVertical: parseInt(height / 60),
             marginHorizontal: parseInt(width / 60)
         },
         drawerLabel: {
             fontSize: parseInt(_screenSize / 40),
-            color: ColorConfig.TEXT_DARK,
+            color: colorSet.textDart,
             margin: parseInt(height / 60)
         },
-        textLightColor: {
-            color: ColorConfig.TEXT_LIGHT
+        textLight: {
+            color: colorSet.textLight
+        },
+        textDark: {
+            color: colorSet.textDark
         },
         textSmall: {
             fontSize: parseInt(_screenSize / 40)

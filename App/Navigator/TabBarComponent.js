@@ -4,7 +4,7 @@
  * 
  */
 import React from 'react';
-import {Animated, TouchableWithoutFeedback, StyleSheet, View, Platform} from 'react-native';
+import {Animated, TouchableWithoutFeedback, View, Platform} from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
 import {connect} from 'react-redux';
 import CrossFadeIcon from './CrossFadeIcon';
@@ -15,7 +15,6 @@ const majorVersion = parseInt(Platform.Version, 10);
 const isIos = Platform.OS === 'ios';
 const isIOS11 = majorVersion >= 11 && isIos;
 
-const DEFAULT_MAX_TAB_ITEM_WIDTH = 125;
 const {ColorConfig} = Constraints;
 class TabBarBottom extends BaseComponent {
     static defaultProps = {
@@ -23,7 +22,6 @@ class TabBarBottom extends BaseComponent {
         activeBackgroundColor: 'transparent',
         inactiveTintColor: '#929292', // Default inactive tint color in iOS 10
         inactiveBackgroundColor: 'transparent',
-        showLabel: true,
         showIcon: true,
         allowFontScaling: true,
         adaptive: isIOS11
@@ -34,11 +32,10 @@ class TabBarBottom extends BaseComponent {
             theme,
             language,
             labelStyle,
-            showLabel,
             allowFontScaling
         } = this.props;
         
-        if (this.state.orientation == 'LANDSCAPE') {
+        if (this.state.orientation == 'LANDSCAPE') { // hide the label when landscape
             return null;
         }
 

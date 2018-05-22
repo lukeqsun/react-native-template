@@ -21,11 +21,20 @@ class Settings extends BaseComponent {
         const {setParams} = this.props.navigation;
         const styles = MyStyleSheet.get(theme);
         const languageOptions = Object.keys(I18n.translations).map((lang, i) => {
-            return <Picker.Item key={i} label={I18n.translations[lang].id} value={lang} />;
+            return (
+                <Picker.Item
+                    key={i}
+                    color={ColorConfig.get(theme).textDark}
+                    label={I18n.translations[lang].id}
+                    value={lang}
+                />
+            );
         });
         return (
             <SafeAreaView style={styles.container}>
-                <Text style={styles.titleText}>{I18n.t('settings.language', {locale: language})}</Text>
+                <Text style={[styles.titleText, styles.textDark]}>
+                    {I18n.t('settings.language', {locale: language})}
+                </Text>
                 <Picker
                     style={styles.flexBox}
                     selectedValue={language}

@@ -11,7 +11,8 @@ import {StackNavigator, createBottomTabNavigator} from 'react-navigation';
 import {MyStyleSheet} from '../Utilities';
 import TabBarComponent from './TabBarComponent';
 import HeaderTitle from './HeaderTitle';
-import {HeaderLeft} from './HeaderLeft';
+import HeaderLeft from './HeaderLeft';
+import Header from './Header';
 import LoadingScreen from '../Components/LoadingScreen';
 import ScreenA from '../Components/ScreenA';
 import Settings from '../Components/Settings';
@@ -58,11 +59,10 @@ export const AppNavigator = StackNavigator(
     {
         initialRouteName: 'LoadingScreen', //default screen
         headerMode: 'float',
-        navigationOptions: ({navigation}) => ({
-            headerLeft: HeaderLeft(navigation),
-            headerStyle: MyStyleSheet.get.header,
-            headerTitle: HeaderTitle,
-            headerTintColor: 'white'
+        navigationOptions: (props) => ({
+            header: (props) => <Header {...props} />,
+            headerLeft: <HeaderLeft {...props} />,
+            headerTitle: <HeaderTitle {...props} />
         })
     }
 );
