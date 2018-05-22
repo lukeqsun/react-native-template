@@ -11,12 +11,13 @@ import I18n from 'react-native-i18n';
 
 const AnimatedText = Animated.Text;
 
-const HeaderTitle = ({style, language, ...rest}) => {
+const HeaderTitle = ({style, language, theme, ...rest}) => {
+    let styles = MyStyleSheet.get(theme);
     return (
         <AnimatedText
             numberOfLines={1}
             {...rest}
-            style={[MyStyleSheet.get.headerTitle, style]}
+            style={[styles.headerTitle, style]}
             accessibilityTraits="header">
             {rest.children ? rest.children : I18n.t('welcome', {locale: language})}
         </AnimatedText>
@@ -25,7 +26,8 @@ const HeaderTitle = ({style, language, ...rest}) => {
 
 const mapStateToProps = (state) => {
     return {
-        language: state.settings.language
+        language: state.settings.language,
+        theme: state.settings.theme
     };
 };
 

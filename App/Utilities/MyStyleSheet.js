@@ -3,7 +3,6 @@
  *
  * Copyright (c) 2018 Youke Xiang
  */
-
 import {StyleSheet, Dimensions, Platform} from 'react-native';
 import {ColorConfig} from './Constraints';
 
@@ -11,21 +10,19 @@ const {height, width} = Dimensions.get('screen');
 
 let _height = height;
 let _width = width;
-
+let _screenSize;
 /**
  * Put all styles here , and you will get dynamic dimension
  * @param {int} height Height of screen
  * @param {int} width Width of screen
  * @return {object} object for stylesheet
  */
-const styles = (height = _height, width = _width) => {
-    const fontHeight = height > width ? height : width; // font height alway keep same
+const styles = (theme = 'default', height = _height, width = _width) => {
+    const colorSet = ColorConfig.get(theme);
     return {
         container: {
             flex: 1,
-            paddingHorizontal: parseInt(width / 80),
-            paddingVertical: parseInt(height / 100),
-            backgroundColor: ColorConfig.WHITE
+            backgroundColor: colorSet.background
         },
         center: {
             justifyContent: 'center',
@@ -36,41 +33,44 @@ const styles = (height = _height, width = _width) => {
             flex: 1
         },
         header: {
-            backgroundColor: ColorConfig.PRIMARY
+            backgroundColor: colorSet.primary
         },
         headerTitle: {
-            fontSize: Platform.OS === 'ios' ? parseInt(fontHeight / 39) : parseInt(fontHeight / 45),
+            fontSize: Platform.OS === 'ios' ? parseInt(_screenSize / 39) : parseInt(_screenSize / 45),
             fontWeight: Platform.OS === 'ios' ? '400' : '200',
-            color: 'rgba(0, 0, 0, .9)',
+            color: colorSet.textLight,
             textAlign: Platform.OS === 'ios' ? 'center' : 'left',
-            marginHorizontal: parseInt(fontHeight / 40)
+            marginHorizontal: parseInt(_screenSize / 40)
         },
         loadingText: {
-            fontSize: parseInt(fontHeight / 30),
-            color: ColorConfig.BLACK
+            fontSize: parseInt(_screenSize / 30),
+            color: colorSet.textDart
         },
         titleText: {
-            fontSize: parseInt(fontHeight / 25),
-            color: ColorConfig.BLACK,
+            fontSize: parseInt(_screenSize / 38),
+            color: colorSet.textDart,
             marginVertical: parseInt(height / 60),
             marginHorizontal: parseInt(width / 60)
         },
         drawerLabel: {
-            fontSize: parseInt(fontHeight / 30),
-            color: ColorConfig.BLACK,
+            fontSize: parseInt(_screenSize / 40),
+            color: colorSet.textDart,
             margin: parseInt(height / 60)
         },
-        textLightColor: {
-            color: ColorConfig.WHITE
+        textLight: {
+            color: colorSet.textLight
+        },
+        textDark: {
+            color: colorSet.textDark
         },
         textSmall: {
-            fontSize: parseInt(fontHeight / 40)
+            fontSize: parseInt(_screenSize / 40)
         },
         textMedium: {
-            fontSize: parseInt(fontHeight / 30)
+            fontSize: parseInt(_screenSize / 35)
         },
         textLarge: {
-            fontSize: parseInt(fontHeight / 20)
+            fontSize: parseInt(_screenSize / 30)
         },
         textCenter: {
             textAlign: 'center',
@@ -100,23 +100,45 @@ const styles = (height = _height, width = _width) => {
         },
         row: {
             flexDirection: 'row'
+        },
+        tabLabel: {
+            textAlign: 'center',
+            backgroundColor: 'transparent',
+            fontSize: parseInt(_screenSize / 80),
+            marginBottom: 1.5
+        },
+        tabBar: {
+            backgroundColor: '#F7F7F7', // Default background color in iOS 10
+            borderTopWidth: StyleSheet.hairlineWidth,
+            borderTopColor: 'rgba(0, 0, 0, .3)',
+            flexDirection: 'row'
+        },
+        tabBarIcon: {
+            height: parseInt(height / 28),
+            margin: parseInt(_screenSize / 150)
+        },
+        tabBarIconText: {
+            fontSize: parseInt(height / 28)
         }
     };
 };
 
-export default class MyStyleSheet {
+class MyStyleSheet {
     /**
      * @return {object} react native stylesheet
      */
-    static get get() {
-        return StyleSheet.create(styles());
+    static get(theme) {
+        return StyleSheet.create(styles(theme));
     }
     /**
      * @param  {object} {height,width} A object contains height and width
      */
-    static set Dimensions({height, width}) {
+    static set Dimensions({height, width, screenSize}) {
         _height = height;
         _width = width;
-        styles(height, width);
+        _screenSize = screenSize;
+        styles(undefined, height, width);
     }
 }
+
+export default MyStyleSheet;
