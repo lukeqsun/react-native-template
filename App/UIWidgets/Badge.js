@@ -24,22 +24,24 @@ class Badge extends BaseComponent {
     }
 
     render() {
-        let {backgroundColor, fontSize, label, textColor, size} = this.props;
-        let _height = parseInt(this.screenSize / 40);
-        switch (size) {
-            case 'small':
-                _height = parseInt(this.screenSize / 50);
-                break;
-            case 'large':
-                _height = parseInt(this.screenSize / 30);
-                break;
-        }
-        if (label === 0) {
-            _height = parseInt(this.screenSize / 120);
-            label = '';
-        }
+        let {backgroundColor, fontSize, labels, textColor, size, badgeKey} = this.props;
+        let _height = parseInt(this.screenHeight / 35);
+
+        if (size == 'small') _height = parseInt(this.screenHeight / 40);
+        else if (size == 'large') _height = parseInt(this.screenHeight / 30);
+
+        let label = labels[badgeKey] || this.props.label;
+        
+        if (label == 0) {
+            _height = parseInt(this.screenHeight / 120);
+        } 
+
         let _fontSize = parseInt(_height / 1.5);
         let _borderRadius = parseInt(_height / 2);
+
+        if (label === undefined) {
+            return null;
+        }
 
         return (
             <View
@@ -55,7 +57,7 @@ class Badge extends BaseComponent {
                         borderRadius: _borderRadius,
                         height: _height,
                         minWidth: _height,
-                        backgroundColor: backgroundColor || '#f00',
+                        backgroundColor: backgroundColor || '#ff3b30',
                         justifyContent: 'center',
                         transform: [{scale: this.springValue}],
                         paddingHorizontal: _height * 0.2
@@ -66,7 +68,7 @@ class Badge extends BaseComponent {
                             alignSelf: 'center',
                             fontSize: fontSize || _fontSize
                         }}>
-                        {label}
+                        {label || ''}
                     </Animated.Text>
                 </Animated.View>
             </View>
@@ -78,7 +80,7 @@ const mapStateToProps = (state) => {
     return {
         language: state.settings.language,
         theme: state.settings.theme,
-        label: state.badge.label
+        labels: state.badge.labels
     };
 };
 

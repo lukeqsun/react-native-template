@@ -1,19 +1,22 @@
 import React from 'react';
-import {Text, Picker, SafeAreaView} from 'react-native';
+import {Text, Picker, SafeAreaView, View} from 'react-native';
 import {connect} from 'react-redux';
 import SettingsActions from '../Reducers/Settings';
 import I18n from 'react-native-i18n';
 import {MyStyleSheet, BaseComponent} from '../Utilities';
 import CacheStore from 'react-native-cache-store';
-import {Button, FontAwesomeIcon} from '../UIWidgets';
+import {Button, FontAwesomeIcon, Badge} from '../UIWidgets';
 import ColorConfig from '../Utilities/Constraints/ColorConfig';
 
 class Settings extends BaseComponent {
     static navigationOptions = {
         tabBarIcon: ({tintColor, theme}) => (
-            <FontAwesomeIcon style={[MyStyleSheet.get(theme).tabBarIconText, {color: tintColor}]}>
-                {FontAwesomeIcon.Icons.cogs}
-            </FontAwesomeIcon>
+            <View>
+                <Badge label={0} size="small" badgeKey="SettingsBadge" />
+                <FontAwesomeIcon style={[MyStyleSheet.get(theme).tabBarIconText, {color: tintColor}]}>
+                    {FontAwesomeIcon.Icons.cog}
+                </FontAwesomeIcon>
+            </View>
         )
     };
     render() {

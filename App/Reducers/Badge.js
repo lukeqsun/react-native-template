@@ -8,18 +8,29 @@ import {createReducer, createActions} from 'reduxsauce';
 import Immutable from 'seamless-immutable';
 
 const {Types, Creators} = createActions({
-    updateLabel: ['label']
+    updateLabel: ['label', 'key'],
+    deleteAllLabel: []
 });
 
 export const SettingsTypes = Types;
 export default Creators;
 
-export const INITIAL_STATE = Immutable({label: 0});
+export const INITIAL_STATE = Immutable({labels: {}});
 
 export const updateLabel = (state, {label, key}) => {
-    return {label, key};
+    let labels = Immutable.asMutable(state.labels); // modify the immutable
+    labels[key] = label;
+
+    return state.merge({labels});
+};
+
+export const deleteAllLabel = (state) => {
+    let labels = {}; // modify the immutable
+
+    return state.merge({labels});
 };
 
 export const reducer = createReducer(INITIAL_STATE, {
-    [Types.UPDATE_LABEL]: updateLabel
+    [Types.UPDATE_LABEL]: updateLabel,
+    [Types.DELETE_ALL_LABEL]: deleteAllLabel
 });

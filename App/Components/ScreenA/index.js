@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import {Text, View, SafeAreaView} from 'react-native';
+import {Text, View, SafeAreaView, ScrollView} from 'react-native';
 import {MyStyleSheet, BaseComponent} from '../../Utilities';
 import {connect} from 'react-redux';
 import I18n from 'react-native-i18n';
@@ -20,7 +20,7 @@ class ScreenA extends BaseComponent {
             let {tintColor, theme} = props;
             return (
                 <View>
-                    <Badge label={0} size="small" />
+                    <Badge size="small" badgeKey="ScreenABadge" />
                     <FontAwesomeIcon
                         style={[
                             MyStyleSheet.get(theme).tabBarIconText,
@@ -48,11 +48,16 @@ class ScreenA extends BaseComponent {
         showToast('welcome');
     }
 
-    _onBtnBadgePress() {
+    _onBtnAddBadgePress(key) {
         this.state.badgeLabel = this.state.badgeLabel + 5;
         const {updateBadgeLabel} = this.props;
-        updateBadgeLabel(this.state.badgeLabel);
-        this.setState({badgeLabel: this.state.badgeLabel});
+        updateBadgeLabel(this.state.badgeLabel, key);
+    }
+
+    _onDeleteAllBadgePress() {
+        const {deleteAllBadgeLabel} = this.props;
+        this.setState({badgeLabel: 0});
+        deleteAllBadgeLabel();
     }
 
     render() {
@@ -62,28 +67,47 @@ class ScreenA extends BaseComponent {
         return (
             <View style={styles.flexBox}>
                 <SafeAreaView style={styles.container}>
-                    <View style={[styles.row]}>
-                        <Text style={[styles.textSmall, styles.flexBox, styles.textDark]}>
-                            {I18n.t('settings.height', {locale: language})} {this.screenHeight}
-                        </Text>
-                        <Text style={[styles.textSmall, styles.textDark]}>
-                            {I18n.t('settings.width', {locale: language})} {this.screenWidth}
-                        </Text>
-                    </View>
-                    <View>
-                        <Button
-                            text="ShowToast"
-                            color={ColorConfig.get(theme).warning}
-                            onPress={() => this._onToasterPress()}
-                        />
-                    </View>
-                    <View style={{marginTop: 10}}>
-                        <Button
-                            text="AddToBadge"
-                            color={ColorConfig.get(theme).success}
-                            onPress={() => this._onBtnBadgePress()}
-                        />
-                    </View>
+                    <ScrollView>
+                        <View style={[styles.row]}>
+                            <Text style={[styles.textSmall, styles.flexBox, styles.textDark]}>
+                                {I18n.t('settings.height', {locale: language})} {this.screenHeight}
+                            </Text>
+                            <Text style={[styles.textSmall, styles.textDark]}>
+                                {I18n.t('settings.width', {locale: language})} {this.screenWidth}
+                            </Text>
+                        </View>
+                        <View>
+                            <Button
+                                text="ShowToast"
+                                color={ColorConfig.get(theme).warning}
+                                onPress={() => this._onToasterPress()}
+                            />
+                        </View>
+                        <View>
+                            <Text style={[styles.textCenter, styles.titleText]}>Badge</Text>
+                            <View style={{marginTop: 10}}>
+                                <Button
+                                    text="AddToScreenA"
+                                    color={ColorConfig.get(theme).success}
+                                    onPress={() => this._onBtnAddBadgePress('ScreenABadge')}
+                                />
+                            </View>
+                            <View style={{marginTop: 10}}>
+                                <Button
+                                    text="AddToSettings"
+                                    color={ColorConfig.get(theme).success}
+                                    onPress={() => this._onBtnAddBadgePress('SettingsBadge')}
+                                />
+                            </View>
+                            <View style={{marginTop: 10}}>
+                                <Button
+                                    text="DeleteAllBadge"
+                                    color={ColorConfig.get(theme).danger}
+                                    onPress={() => this._onDeleteAllBadgePress()}
+                                />
+                            </View>
+                        </View>
+                    </ScrollView>
                 </SafeAreaView>
             </View>
         );
@@ -99,7 +123,8 @@ const mapStateToProps = (state) => {
 
 const mapStateToDispatch = (dispatch) => ({
     showToast: (message) => dispatch(ToastActions.showToast(message)),
-    updateBadgeLabel: (label) => dispatch(BadgeActions.updateLabel(label)),
+    updateBadgeLabel: (label, key) => dispatch(BadgeActions.updateLabel(label, key)),
+    deleteAllBadgeLabel: (label, key) => dispatch(BadgeActions.deleteAllLabel(label, key))
 });
 
 export default connect(mapStateToProps, mapStateToDispatch)(ScreenA);
