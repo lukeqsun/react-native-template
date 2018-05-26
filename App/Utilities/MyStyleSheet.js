@@ -19,6 +19,7 @@ let _screenSize;
  */
 const styles = (theme = 'default', height = _height, width = _width) => {
     const colorSet = ColorConfig.get(theme);
+    
     return {
         container: {
             flex: 1,
@@ -44,17 +45,17 @@ const styles = (theme = 'default', height = _height, width = _width) => {
         },
         loadingText: {
             fontSize: parseInt(_screenSize / 30),
-            color: colorSet.textDart
+            color: colorSet.textDark
         },
         titleText: {
             fontSize: parseInt(_screenSize / 38),
-            color: colorSet.textDart,
+            color: colorSet.textDark,
             marginVertical: parseInt(height / 60),
             marginHorizontal: parseInt(width / 60)
         },
         drawerLabel: {
             fontSize: parseInt(_screenSize / 40),
-            color: colorSet.textDart,
+            color: colorSet.textDark,
             margin: parseInt(height / 60)
         },
         textLight: {

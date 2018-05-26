@@ -17,7 +17,6 @@ class BaseComponent extends Component {
 
     constructor(props) {
         super(props);
-        this._setDimensionsToStyle(height, width);
         this.state = {
             orientation: null
         };

@@ -14,6 +14,9 @@
     },
     "buttons": {
         "ShowToast": "Show Toast",
-        "ChangeTheme": "Change Theme"
+        "ChangeTheme": "Change Theme",
+        "AddToScreenA": "Add To ScreenA",
+        "DeleteAllBadge": "Delete All Badge",
+        "AddToSettings": "Add To Settings"
     }
 }
