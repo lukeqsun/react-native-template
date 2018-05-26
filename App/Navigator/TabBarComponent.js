@@ -28,14 +28,10 @@ class TabBarBottom extends BaseComponent {
     };
 
     _renderLabel({route, focused}) {
-        const {
-            theme,
-            language,
-            labelStyle,
-            allowFontScaling
-        } = this.props;
-        
-        if (this.state.orientation == 'LANDSCAPE') { // hide the label when landscape
+        const {theme, language, labelStyle, allowFontScaling} = this.props;
+
+        if (this.state.orientation == 'LANDSCAPE') {
+            // hide the label when landscape
             return null;
         }
 
@@ -88,6 +84,10 @@ class TabBarBottom extends BaseComponent {
         const {routes} = navigation.state;
         const styles = MyStyleSheet.get(theme);
         const tabBarStyle = [styles.tabBar, style];
+        let tabBarHeight = parseInt(this.screenHeight * 0.07);
+        if (this.state.orientation == 'LANDSCAPE') {
+            tabBarHeight = parseInt(this.screenHeight * 0.1);
+        }
 
         return (
             <SafeAreaView style={tabBarStyle} forceInset={{bottom: 'always', top: 'never'}}>
@@ -111,7 +111,8 @@ class TabBarBottom extends BaseComponent {
                                     {
                                         flex: 1,
                                         alignItems: isIos ? 'center' : 'stretch',
-                                        height: parseInt(this.screenHeight * 0.07)
+                                        height: tabBarHeight,
+                                        justifyContent:'center'
                                     },
                                     {backgroundColor},
                                     tabStyle
