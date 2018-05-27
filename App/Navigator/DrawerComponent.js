@@ -5,7 +5,6 @@
  */
 import React from 'react';
 import {MyStyleSheet} from '../Utilities';
-import {ColorConfig} from '../Utilities/Constraints';
 import {ScrollView, View, Text, TouchableOpacity} from 'react-native';
 import {connect} from 'react-redux';
 import {SafeAreaView} from 'react-navigation';

@@ -10,7 +10,6 @@ import {MyStyleSheet, BaseComponent} from '../../Utilities';
 import {connect} from 'react-redux';
 import I18n from 'react-native-i18n';
 import {Button, FontAwesomeIcon, Badge} from '../../UIWidgets';
-import {ColorConfig} from '../../Utilities/Constraints';
 import ToastActions from '../../Reducers/Toast';
 import BadgeActions from '../../Reducers/Badge';
 
@@ -63,7 +62,7 @@ class ScreenA extends BaseComponent {
     render() {
         const {language, theme} = this.props;
         const styles = MyStyleSheet.get(theme);
-
+        const themeColor = MyStyleSheet.getThemeColor(theme);
         return (
             <View style={styles.flexBox}>
                 <SafeAreaView style={styles.container}>
@@ -79,7 +78,7 @@ class ScreenA extends BaseComponent {
                         <View>
                             <Button
                                 text="ShowToast"
-                                color={ColorConfig.get(theme).warning}
+                                color={themeColor.warning}
                                 onPress={() => this._onToasterPress()}
                             />
                         </View>
@@ -88,21 +87,21 @@ class ScreenA extends BaseComponent {
                             <View style={{marginTop: 10}}>
                                 <Button
                                     text="AddToScreenA"
-                                    color={ColorConfig.get(theme).success}
+                                    color={themeColor.success}
                                     onPress={() => this._onBtnAddBadgePress('ScreenABadge')}
                                 />
                             </View>
                             <View style={{marginTop: 10}}>
                                 <Button
                                     text="AddToSettings"
-                                    color={ColorConfig.get(theme).success}
+                                    color={themeColor.success}
                                     onPress={() => this._onBtnAddBadgePress('SettingsBadge')}
                                 />
                             </View>
                             <View style={{marginTop: 10}}>
                                 <Button
                                     text="DeleteAllBadge"
-                                    color={ColorConfig.get(theme).danger}
+                                    color={themeColor.danger}
                                     onPress={() => this._onDeleteAllBadgePress()}
                                 />
                             </View>

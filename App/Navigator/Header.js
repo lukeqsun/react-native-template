@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Animated, Dimensions, Image, Platform, StyleSheet, View, I18nManager, ViewPropTypes} from 'react-native';
+import {Animated, Image, Platform, StyleSheet, View, I18nManager} from 'react-native';
 import {MaskedViewIOS} from 'react-navigation/src/PlatformHelpers';
 import SafeAreaView from 'react-native-safe-area-view';
 import {connect} from 'react-redux';
@@ -9,7 +9,7 @@ import HeaderTitle from './HeaderTitle';
 import HeaderBackButton from 'react-navigation/src/views/Header/HeaderBackButton';
 import ModularHeaderBackButton from 'react-navigation/src/views/Header//ModularHeaderBackButton';
 import HeaderStyleInterpolator from 'react-navigation/src/views/Header//HeaderStyleInterpolator';
-import {ColorConfig} from '../Utilities/Constraints';
+import {Constraints} from '../Utilities';
 
 const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
@@ -322,7 +322,7 @@ class Header extends React.PureComponent {
             hasRightComponent: !!right
         });
 
-        const {isLandscape, transitionPreset} = this.props;
+        const {transitionPreset} = this.props;
 
         const wrapperProps = {
             style: styles.header,
@@ -408,11 +408,10 @@ class Header extends React.PureComponent {
             warnIfHeaderStyleDefined(flexBasis, 'flexBasis');
             warnIfHeaderStyleDefined(flexWrap, 'flexWrap');
         }
-
-        // TODO: warn if any unsafe styles are provided
+        const themeColor = Constraints.Themes.get(theme);
         const containerStyles = [
             options.headerTransparent ? styles.transparentContainer : styles.container,
-            {height: appBarHeight, backgroundColor: ColorConfig.get(theme).primary},
+            {height: appBarHeight, backgroundColor: themeColor.primary},
             safeHeaderStyle
         ];
 

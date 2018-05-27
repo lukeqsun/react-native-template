@@ -6,8 +6,6 @@ import I18n from 'react-native-i18n';
 import {MyStyleSheet, BaseComponent} from '../Utilities';
 import CacheStore from 'react-native-cache-store';
 import {Button, FontAwesomeIcon, Badge} from '../UIWidgets';
-import ColorConfig from '../Utilities/Constraints/ColorConfig';
-
 class Settings extends BaseComponent {
     static navigationOptions = {
         tabBarIcon: ({tintColor, theme}) => (
@@ -23,11 +21,13 @@ class Settings extends BaseComponent {
         const {language, changeLanguage, changeTheme, theme} = this.props;
         const {setParams} = this.props.navigation;
         const styles = MyStyleSheet.get(theme);
+        const themeColor = MyStyleSheet.getThemeColor(theme);
+
         const languageOptions = Object.keys(I18n.translations).map((lang, i) => {
             return (
                 <Picker.Item
                     key={i}
-                    color={ColorConfig.get(theme).textDark}
+                    color={themeColor.textDark}
                     label={I18n.translations[lang].id}
                     value={lang}
                 />
@@ -46,7 +46,7 @@ class Settings extends BaseComponent {
                 </Picker>
                 <Button
                     text="ChangeTheme"
-                    color={ColorConfig.get(theme).primary}
+                    color={themeColor.primary}
                     onPress={() => this._onColorChangePress(changeTheme)}
                 />
             </SafeAreaView>

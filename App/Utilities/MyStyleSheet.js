@@ -4,7 +4,7 @@
  * Copyright (c) 2018 Youke Xiang
  */
 import {StyleSheet, Dimensions, Platform} from 'react-native';
-import {ColorConfig} from './Constraints';
+import Constraints from './Constraints';
 
 const {height, width} = Dimensions.get('screen');
 
@@ -18,12 +18,11 @@ let _screenSize;
  * @return {object} object for stylesheet
  */
 const styles = (theme = 'default', height = _height, width = _width) => {
-    const colorSet = ColorConfig.get(theme);
-    
+    const themeColor = Constraints.Themes.get(theme);
     return {
         container: {
             flex: 1,
-            backgroundColor: colorSet.background
+            backgroundColor: themeColor.background
         },
         center: {
             justifyContent: 'center',
@@ -34,35 +33,35 @@ const styles = (theme = 'default', height = _height, width = _width) => {
             flex: 1
         },
         header: {
-            backgroundColor: colorSet.primary
+            backgroundColor: themeColor.primary
         },
         headerTitle: {
             fontSize: Platform.OS === 'ios' ? parseInt(_screenSize / 39) : parseInt(_screenSize / 45),
             fontWeight: Platform.OS === 'ios' ? '400' : '200',
-            color: colorSet.textLight,
+            color: themeColor.textLight,
             textAlign: Platform.OS === 'ios' ? 'center' : 'left',
             marginHorizontal: parseInt(_screenSize / 40)
         },
         loadingText: {
             fontSize: parseInt(_screenSize / 30),
-            color: colorSet.textDark
+            color: themeColor.textDark
         },
         titleText: {
             fontSize: parseInt(_screenSize / 38),
-            color: colorSet.textDark,
+            color: themeColor.textDark,
             marginVertical: parseInt(height / 60),
             marginHorizontal: parseInt(width / 60)
         },
         drawerLabel: {
             fontSize: parseInt(_screenSize / 40),
-            color: colorSet.textDark,
+            color: themeColor.textDark,
             margin: parseInt(height / 60)
         },
         textLight: {
-            color: colorSet.textLight
+            color: themeColor.textLight
         },
         textDark: {
-            color: colorSet.textDark
+            color: themeColor.textDark
         },
         textSmall: {
             fontSize: parseInt(_screenSize / 40)
@@ -126,10 +125,18 @@ const styles = (theme = 'default', height = _height, width = _width) => {
 
 class MyStyleSheet {
     /**
+     * @param  {String} theme Theme name
      * @return {object} react native stylesheet
      */
     static get(theme) {
         return StyleSheet.create(styles(theme));
+    }
+    /**
+     * @param  {String} theme Theme name
+     * @return {object} Theme colors
+     */
+    static getThemeColor(theme) {
+        return Constraints.Themes.get(theme);
     }
     /**
      * @param  {object} {height,width} A object contains height and width

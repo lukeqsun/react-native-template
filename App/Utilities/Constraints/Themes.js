@@ -3,9 +3,8 @@
  *
  * Copyright (c) 2018 Youke Xiang
  */
-import {Component} from 'react';
 
-const themes = {
+const _themes = {
     default: {
         black: '#2b2b2b',
         white: '#fff',
@@ -36,8 +35,8 @@ const themes = {
     }
 };
 
-export default class ColorConfig extends Component {
+export default class Themes {
     static get(theme = 'default') {
-        return themes[theme];
+        return _themes[theme];
     }
 }

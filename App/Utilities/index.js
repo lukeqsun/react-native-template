@@ -8,7 +8,6 @@ import MyStyleSheet from './MyStyleSheet';
 import BaseComponent from './BaseComponent';
 import Constraints from './Constraints';
 
-
 module.exports = {
     MyStyleSheet: MyStyleSheet,
     Constraints: Constraints,

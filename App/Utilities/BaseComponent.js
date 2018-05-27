@@ -29,7 +29,6 @@ class BaseComponent extends Component {
         this.screenWidth = width;
         this.screenHeight = height;
         this.setState({orientation: orientation}); // HACK: set state here to re-rend views
-        this.onOrientationChange();
     }
 
     _setDimensionsToStyle(height, width) {

@@ -5,14 +5,11 @@
  */
 
 import * as React from 'react';
-export interface MyStyleSheet {
+import Constraints from './Constraints';
+export interface IMyStyleSheet {
     Dimensions?: Object;
-    /**
-     *
-     * @param theme Name of theme
-     * @return {Object} The theme object
-     */
     get?(theme: String): Object;
+    getThemeColor(theme: String): Constraints.ITheme;
 }
 
 export class BaseComponent<P = {}, S = {}, SS = any> extends React.Component<P, S, SS> {
@@ -21,16 +18,10 @@ export class BaseComponent<P = {}, S = {}, SS = any> extends React.Component<P, 
     screenSize?: number;
     onePixel?: number;
 }
-export declare const MyStyleSheet: MyStyleSheet;
+export declare const MyStyleSheet: IMyStyleSheet;
 
-export namespace Constraints {
-    export interface IColorConfig {
-        /**
-         *
-         * @param theme Name of theme
-         * @return {Object} The theme object
-         */
-        get?(theme: String): Object;
-    }
-    export declare const ColorConfig: IColorConfig;
+export interface IConstraints {
+    Themes?: Constraints.ITheme;
 }
+
+export declare const Constraints: IConstraints;

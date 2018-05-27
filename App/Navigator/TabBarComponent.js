@@ -15,7 +15,6 @@ const majorVersion = parseInt(Platform.Version, 10);
 const isIos = Platform.OS === 'ios';
 const isIOS11 = majorVersion >= 11 && isIos;
 
-const {ColorConfig} = Constraints;
 class TabBarBottom extends BaseComponent {
     static defaultProps = {
         activeTintColor: '#3478f6', // Default active tint color in iOS 10
@@ -34,9 +33,9 @@ class TabBarBottom extends BaseComponent {
             // hide the label when landscape
             return null;
         }
-
+        const themeColor = Constraints.Themes.get(theme);
         const label = I18n.t(`navigator.${route.routeName}`, {locale: language});
-        const tintColor = focused ? ColorConfig.get(theme).primary : ColorConfig.get(theme).secondary;
+        const tintColor = focused ? themeColor.primary : themeColor.secondary;
         let styles = MyStyleSheet.get(theme);
         if (typeof label === 'string') {
             return (
@@ -62,7 +61,7 @@ class TabBarBottom extends BaseComponent {
             return null;
         }
         const styles = MyStyleSheet.get(theme);
-
+        const themeColor = Constraints.Themes.get(theme);
         const activeOpacity = focused ? 1 : 0;
         const inactiveOpacity = focused ? 0 : 1;
         return (
@@ -71,8 +70,8 @@ class TabBarBottom extends BaseComponent {
                 navigation={navigation}
                 activeOpacity={activeOpacity}
                 inactiveOpacity={inactiveOpacity}
-                activeTintColor={ColorConfig.get(theme).primary}
-                inactiveTintColor={ColorConfig.get(theme).secondary}
+                activeTintColor={themeColor.primary}
+                inactiveTintColor={themeColor.secondary}
                 renderIcon={renderIcon}
                 style={styles.tabBarIcon}
             />
@@ -83,6 +82,7 @@ class TabBarBottom extends BaseComponent {
         const {navigation, onTabPress, jumpTo, style, tabStyle, theme} = this.props;
         const {routes} = navigation.state;
         const styles = MyStyleSheet.get(theme);
+        const themeColor = Constraints.Themes.get(theme);
         const tabBarStyle = [styles.tabBar, style];
         let tabBarHeight = parseInt(this.screenHeight * 0.07);
         if (this.state.orientation == 'LANDSCAPE') {
@@ -96,8 +96,8 @@ class TabBarBottom extends BaseComponent {
                     const scene = {route, focused};
 
                     const backgroundColor = focused
-                        ? ColorConfig.get(theme).secondaryBackground
-                        : ColorConfig.get(theme).background;
+                        ? themeColor.secondaryBackground
+                        : themeColor.background;
 
                     return (
                         <TouchableWithoutFeedback

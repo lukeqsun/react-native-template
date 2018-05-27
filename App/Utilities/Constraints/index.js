@@ -4,9 +4,13 @@
  * Copyright (c) 2018 Youke Xiang
  */
 import AppConfig from './AppConfig';
-import ColorConfig from './ColorConfig';
+import Themes from './Themes';
 
-module.exports = {
-    AppConfig: AppConfig,
-    ColorConfig: ColorConfig
-};
+export default class Constraints {
+    static get Themes() {
+        return Themes;
+    }
+    static get AppConfig() {
+        return AppConfig;
+    }
+}
