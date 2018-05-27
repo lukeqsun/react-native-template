@@ -45,10 +45,6 @@ class BaseComponent extends Component {
     componentWillUnmount() {
         Orientation.removeOrientationListener(this._orientationDidChange);
     }
-    /**
-     * abstraction function for child using
-     */
-    onOrientationChange() {}
 }
 
 export default BaseComponent;
