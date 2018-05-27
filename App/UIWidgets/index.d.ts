@@ -1,3 +1,8 @@
+/*
+ * Created on Sun May 27 2018
+ *
+ * Copyright (c) 2018 Youke Xiang
+ */
 import {ReactNode} from 'react';
 import {TouchableOpacityProps, ImageSourcePropType, TextProps} from 'react-native';
 import {BaseComponent} from '../Utilities';
