@@ -18,6 +18,7 @@ After you have downloaded or cloned this repository, run `npm install` or `yarn`
 
 
 ## Specs
+- TypeScript declarations, easy to code(if IDE support)
 - Multi-language supported
 - Font Awesome 5.0 icons, also support custom TrueType
 - Orientation handled, responsive components size available
@@ -28,6 +29,7 @@ After you have downloaded or cloned this repository, run `npm install` or `yarn`
 ## UI Elements
 - Toast
 - Button
+- Badge
 - Adding...
 
 ## Plug-Ins
