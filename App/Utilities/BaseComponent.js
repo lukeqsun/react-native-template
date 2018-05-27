@@ -44,6 +44,10 @@ class BaseComponent extends Component {
     componentWillUnmount() {
         Orientation.removeOrientationListener(this._orientationDidChange);
     }
+
+    isLandscape() {
+       return this.state.orientation == 'LANDSCAPE';
+    }
 }
 
 export default BaseComponent;

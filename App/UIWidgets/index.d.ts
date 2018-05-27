@@ -20,8 +20,12 @@ export interface FontAwesomeIconProps extends TextProps {}
 export class FontAwesomeIcon extends BaseComponent<FontAwesomeIconProps> {}
 
 export interface BadgeProps {
-    key?: string;
+    badgeKey?: string;
     label?: string;
+    size?: string;
+    textColor?: string;
+    fontSize?: string;
+    backgroundColor?: string;
 }
 
 export class Badge extends BaseComponent<BadgeProps> {}

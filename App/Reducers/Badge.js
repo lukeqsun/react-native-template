@@ -8,7 +8,7 @@ import {createReducer, createActions} from 'reduxsauce';
 import Immutable from 'seamless-immutable';
 
 const {Types, Creators} = createActions({
-    updateLabel: ['label', 'key'],
+    updateLabel: ['label', 'key', '_updateBadgeKey'],
     deleteAllLabel: []
 });
 
@@ -20,8 +20,8 @@ export const INITIAL_STATE = Immutable({labels: {}});
 export const updateLabel = (state, {label, key}) => {
     let labels = Immutable.asMutable(state.labels); // modify the immutable
     labels[key] = label;
-
-    return state.merge({labels});
+    let _updateBadgeKey = key;
+    return state.merge({labels, _updateBadgeKey});
 };
 
 export const deleteAllLabel = (state) => {

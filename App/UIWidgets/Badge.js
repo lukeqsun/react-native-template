@@ -15,7 +15,13 @@ class Badge extends BaseComponent {
         this.springValue = new Animated.Value(1);
     }
 
-    UNSAFE_componentWillReceiveProps() {
+    UNSAFE_componentWillReceiveProps({_updateBadgeKey}) {
+        if (this.props.badgeKey == _updateBadgeKey) {
+            this._spring();
+        }
+    }
+
+    _spring() {
         this.springValue = new Animated.Value(0.9);
         Animated.spring(this.springValue, {
             toValue: 1,
@@ -31,10 +37,14 @@ class Badge extends BaseComponent {
         else if (size == 'large') _height = parseInt(this.screenHeight / 30);
 
         let label = labels[badgeKey] || this.props.label;
-        
+
         if (label == 0) {
             _height = parseInt(this.screenHeight / 120);
-        } 
+        }
+
+        if (this.isLandscape()) {
+            _height *= 1.5;
+        }
 
         let _fontSize = parseInt(_height / 1.5);
         let _borderRadius = parseInt(_height / 2);
@@ -80,7 +90,8 @@ const mapStateToProps = (state) => {
     return {
         language: state.settings.language,
         theme: state.settings.theme,
-        labels: state.badge.labels
+        labels: state.badge.labels,
+        _updateBadgeKey: state.badge._updateBadgeKey
     };
 };
 
