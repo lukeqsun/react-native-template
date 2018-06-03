@@ -27,7 +27,7 @@ class Settings extends BaseComponent {
             return (
                 <Picker.Item
                     key={i}
-                    color={themeColor.textDark}
+                    color={themeColor.textDark.toHex()}
                     label={I18n.translations[lang].id}
                     value={lang}
                 />
@@ -46,7 +46,7 @@ class Settings extends BaseComponent {
                 </Picker>
                 <Button
                     text="ChangeTheme"
-                    color={themeColor.primary}
+                    color={themeColor.primary.toHex()}
                     onPress={() => this._onColorChangePress(changeTheme)}
                 />
             </SafeAreaView>

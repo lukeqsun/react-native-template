@@ -9,7 +9,7 @@ import Constraints from './Constraints';
 export interface IMyStyleSheet {
     Dimensions?: Object;
     get?(theme: String): Object;
-    getThemeColor(theme: String): Constraints.ITheme;
+    getThemeColor(theme: String): Constraints.IColors;
 }
 export declare const MyStyleSheet: IMyStyleSheet;
 

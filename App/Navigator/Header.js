@@ -411,7 +411,7 @@ class Header extends React.PureComponent {
         const themeColor = Constraints.Themes.get(theme);
         const containerStyles = [
             options.headerTransparent ? styles.transparentContainer : styles.container,
-            {height: appBarHeight, backgroundColor: themeColor.primary},
+            {height: appBarHeight, backgroundColor: themeColor.primary.toHex()},
             safeHeaderStyle
         ];
 

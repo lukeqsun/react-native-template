@@ -85,13 +85,13 @@ class ScreenA extends BaseComponent {
                             <Text style={[styles.textCenter, styles.titleText]}>Pop Up</Text>
                             <Button
                                 text="ShowToast"
-                                color={themeColor.warning}
+                                color={themeColor.warning.toDarkerColor(50)}
                                 onPress={() => this._onToasterPress()}
                             />
                             <View style={{marginTop: 10}}>
                                 <Button
                                     text="ShowAlertDialog"
-                                    color={themeColor.warning}
+                                    color={themeColor.warning.toHex()}
                                     onPress={() => this._onAlertDialogPress()}
                                 />
                             </View>
@@ -101,21 +101,21 @@ class ScreenA extends BaseComponent {
                             <View style={{marginTop: 10}}>
                                 <Button
                                     text="AddToScreenA"
-                                    color={themeColor.success}
+                                    color={themeColor.success.toHex()}
                                     onPress={() => this._onBtnAddBadgePress('ScreenABadge')}
                                 />
                             </View>
                             <View style={{marginTop: 10}}>
                                 <Button
                                     text="AddToSettings"
-                                    color={themeColor.success}
+                                    color={themeColor.success.toRGBA(0.7)}
                                     onPress={() => this._onBtnAddBadgePress('SettingsBadge')}
                                 />
                             </View>
                             <View style={{marginTop: 10}}>
                                 <Button
                                     text="DeleteAllBadge"
-                                    color={themeColor.danger}
+                                    color={themeColor.danger.toHex()}
                                     onPress={() => this._onDeleteAllBadgePress()}
                                 />
                             </View>

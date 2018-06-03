@@ -23,7 +23,7 @@ const styles = (theme = 'default', height = _height, width = _width) => {
     return {
         container: {
             flex: 1,
-            backgroundColor: themeColor.background
+            backgroundColor: themeColor.background.toHex()
         },
         center: {
             justifyContent: 'center',
@@ -34,35 +34,35 @@ const styles = (theme = 'default', height = _height, width = _width) => {
             flex: 1
         },
         header: {
-            backgroundColor: themeColor.primary
+            backgroundColor: themeColor.primary.toHex()
         },
         headerTitle: {
             fontSize: Platform.OS === 'ios' ? parseInt(_screenSize / 39) : parseInt(_screenSize / 45),
             fontWeight: Platform.OS === 'ios' ? '400' : '200',
-            color: themeColor.textLight,
+            color: themeColor.textLight.toHex(),
             textAlign: Platform.OS === 'ios' ? 'center' : 'left',
             marginHorizontal: parseInt(_screenSize / 40)
         },
         loadingText: {
             fontSize: parseInt(_screenSize / 30),
-            color: themeColor.textDark
+            color: themeColor.textDark.toHex()
         },
         titleText: {
             fontSize: parseInt(_screenSize / 38),
-            color: themeColor.textDark,
+            color: themeColor.textDark.toHex(),
             marginVertical: parseInt(height / 60),
             marginHorizontal: parseInt(width / 60)
         },
         drawerLabel: {
             fontSize: parseInt(_screenSize / 40),
-            color: themeColor.textDark,
+            color: themeColor.textDark.toHex(),
             margin: parseInt(height / 60)
         },
         textLight: {
-            color: themeColor.textLight
+            color: themeColor.textLight.toHex()
         },
         textDark: {
-            color: themeColor.textDark
+            color: themeColor.textDark.toHex()
         },
         textSmall: {
             fontSize: parseInt(_screenSize / 40)

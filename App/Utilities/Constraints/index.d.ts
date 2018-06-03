@@ -1,16 +1,21 @@
+declare class Color {
+    toRGBA(opacity: number): string;
+    toHex(): string;
+}
+
 interface IColors {
-    black: string;
-    white: string;
-    primary: string;
-    secondary: string;
-    success: string;
-    danger: string;
-    warning: string;
-    info: string;
-    textLight: string;
-    textDark: string;
-    background: string;
-    secondaryBackground: string;
+    black: Color;
+    white: Color;
+    primary: Color;
+    secondary: Color;
+    success: Color;
+    danger: Color;
+    warning: Color;
+    info: Color;
+    textLight: Color;
+    textDark: Color;
+    background: Color;
+    secondaryBackground: Color;
 }
 export interface ITheme {
     /**
