@@ -15,6 +15,10 @@ class BaseComponent extends Component {
 
     onePixel = (PixelRatio.get() == 3 ? 2 : 1) / PixelRatio.get();
 
+    getSize(size) {
+        return parseInt(this.screenSize * (size / 1000) * (1 + this.onePixel));
+    }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -46,7 +50,7 @@ class BaseComponent extends Component {
     }
 
     isLandscape() {
-       return this.state.orientation == 'LANDSCAPE';
+        return this.state.orientation == 'LANDSCAPE';
     }
 }
 

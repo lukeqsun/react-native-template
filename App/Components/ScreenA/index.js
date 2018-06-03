@@ -10,8 +10,9 @@ import {MyStyleSheet, BaseComponent} from '../../Utilities';
 import {connect} from 'react-redux';
 import I18n from 'react-native-i18n';
 import {Button, FontAwesomeIcon, Badge} from '../../UIWidgets';
-import ToastActions from '../../Reducers/Toast';
+import DialogsActions from '../../Reducers/Dialogs';
 import BadgeActions from '../../Reducers/Badge';
+import AlertDialog from '../../UIWidgets/AlertDialog';
 
 class ScreenA extends BaseComponent {
     static navigationOptions = {
@@ -59,6 +60,13 @@ class ScreenA extends BaseComponent {
         deleteAllBadgeLabel();
     }
 
+    _onAlertDialogPress() {
+        const {showAlert} = this.props;
+        showAlert('This is alert message!', (cb) => {
+            console.log(cb);
+        });
+    }
+
     render() {
         const {language, theme} = this.props;
         const styles = MyStyleSheet.get(theme);
@@ -76,11 +84,19 @@ class ScreenA extends BaseComponent {
                             </Text>
                         </View>
                         <View>
+                            <Text style={[styles.textCenter, styles.titleText]}>Pop Up</Text>
                             <Button
                                 text="ShowToast"
                                 color={themeColor.warning}
                                 onPress={() => this._onToasterPress()}
                             />
+                            <View style={{marginTop: 10}}>
+                                <Button
+                                    text="ShowAlertDialog"
+                                    color={themeColor.warning}
+                                    onPress={() => this._onAlertDialogPress()}
+                                />
+                            </View>
                         </View>
                         <View>
                             <Text style={[styles.textCenter, styles.titleText]}>Badge</Text>
@@ -121,7 +137,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapStateToDispatch = (dispatch) => ({
-    showToast: (message) => dispatch(ToastActions.showToast(message)),
+    showToast: (message) => dispatch(DialogsActions.showToast(message)),
+    showAlert: (message, onPress) => dispatch(DialogsActions.showAlert(message, onPress)),
     updateBadgeLabel: (label, key) => dispatch(BadgeActions.updateLabel(label, key)),
     deleteAllBadgeLabel: (label, key) => dispatch(BadgeActions.deleteAllLabel(label, key))
 });

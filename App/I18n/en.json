@@ -17,6 +17,7 @@
         "ChangeTheme": "Change Theme",
         "AddToScreenA": "Add To ScreenA",
         "DeleteAllBadge": "Delete All Badge",
-        "AddToSettings": "Add To Settings"
+        "AddToSettings": "Add To Settings",
+        "ShowAlertDialog": "Show Alert Dialog"
     }
 }

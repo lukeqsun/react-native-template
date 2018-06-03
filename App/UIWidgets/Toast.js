@@ -34,9 +34,9 @@ class Toast extends BaseComponent {
         };
     }
 
-    UNSAFE_componentWillReceiveProps({toast, language}) {
-        const {message, duration} = toast;
-        if (message) {
+    UNSAFE_componentWillReceiveProps({dialogs, language}) {
+        const {message, duration, type} = dialogs;
+        if (message && type == 'toast') {
             let _message = I18n.t(message, {locale: language}) || message;
             this.show(_message);
             this.timeoutId = setTimeout(() => {
@@ -100,7 +100,7 @@ class Toast extends BaseComponent {
 
 const mapStateToProps = (state) => {
     return {
-        toast: state.toast,
+        dialogs: state.dialogs,
         language: state.settings.language
     };
 };

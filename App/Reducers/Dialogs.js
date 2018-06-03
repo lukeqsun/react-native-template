@@ -8,7 +8,8 @@ import {createReducer, createActions} from 'reduxsauce';
 import Immutable from 'seamless-immutable';
 
 const {Types, Creators} = createActions({
-    showToast: ['message', 'duration']
+    showToast: ['message', 'duration'],
+    showAlert: ['message', 'onPress']
 });
 
 export const SettingsTypes = Types;
@@ -17,9 +18,14 @@ export default Creators;
 export const INITIAL_STATE = Immutable({message: '', duration: 3000});
 
 export const showToast = (state, {message, duration = 3000}) => {
-    return {message, duration}; // unable using immutable merge here. it should always receive new props
+    return {type: 'toast', message, duration}; // unable using immutable merge here. it should always receive new props
+};
+
+export const showAlert = (state, {message, onPress}) => {
+    return {type: 'alert', message, onPress};
 };
 
 export const reducer = createReducer(INITIAL_STATE, {
-    [Types.SHOW_TOAST]: showToast
+    [Types.SHOW_TOAST]: showToast,
+    [Types.SHOW_ALERT]: showAlert
 });

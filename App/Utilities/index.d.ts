@@ -17,6 +17,7 @@ export class BaseComponent<P = {}, S = {}, SS = any> extends React.Component<P, 
     screenHeight?: number;
     screenSize?: number;
     onePixel?: number;
+    getSize(): number;
     isLandscape(): boolean;
 }
 export declare const MyStyleSheet: IMyStyleSheet;
