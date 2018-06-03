@@ -1,7 +1,7 @@
 import React from 'react';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
-import './I18n/I18n';
+import './I18n';
 import AppWithNavigationState, {middleware} from './Navigator/AppNavigator';
 import {appReducer} from './Reducers';
 import {RootView} from './UIWidgets';

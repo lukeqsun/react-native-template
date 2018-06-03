@@ -9,6 +9,7 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import {connect} from 'react-redux';
 
 import BaseDialog from './BaseDialog';
+import {I18n} from '../Utilities';
 
 class AlertDialog extends BaseDialog {
     constructor(props) {
@@ -28,6 +29,7 @@ class AlertDialog extends BaseDialog {
     }
 
     renderContent() {
+        const {language} = this.props;
         return (
             <View
                 style={{
@@ -52,7 +54,7 @@ class AlertDialog extends BaseDialog {
                             lineHeight: 20,
                             textAlign: 'center'
                         }}>
-                        {this.state.message}
+                        {I18n.t('alerts', this.state.message, {locale: language})}
                     </Text>
                 </View>
                 <View

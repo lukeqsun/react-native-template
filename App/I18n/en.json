@@ -19,5 +19,8 @@
         "DeleteAllBadge": "Delete All Badge",
         "AddToSettings": "Add To Settings",
         "ShowAlertDialog": "Show Alert Dialog"
+    },
+    "alerts": {
+        "DefaultMessage": "Default message"
     }
 }

@@ -6,13 +6,11 @@
 
 import React from 'react';
 import {Text, View, SafeAreaView, ScrollView} from 'react-native';
-import {MyStyleSheet, BaseComponent} from '../../Utilities';
+import {MyStyleSheet, BaseComponent, I18n} from '../../Utilities';
 import {connect} from 'react-redux';
-import I18n from 'react-native-i18n';
 import {Button, FontAwesomeIcon, Badge} from '../../UIWidgets';
 import DialogsActions from '../../Reducers/Dialogs';
 import BadgeActions from '../../Reducers/Badge';
-import AlertDialog from '../../UIWidgets/AlertDialog';
 
 class ScreenA extends BaseComponent {
     static navigationOptions = {
@@ -77,10 +75,10 @@ class ScreenA extends BaseComponent {
                     <ScrollView>
                         <View style={[styles.row]}>
                             <Text style={[styles.textSmall, styles.flexBox, styles.textDark]}>
-                                {I18n.t('settings.height', {locale: language})} {this.screenHeight}
+                                {I18n.t('settings', 'height', {locale: language})} {this.screenHeight}
                             </Text>
                             <Text style={[styles.textSmall, styles.textDark]}>
-                                {I18n.t('settings.width', {locale: language})} {this.screenWidth}
+                                {I18n.t('settings', 'width', {locale: language})} {this.screenWidth}
                             </Text>
                         </View>
                         <View>

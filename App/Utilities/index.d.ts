@@ -11,6 +11,12 @@ export interface IMyStyleSheet {
     get?(theme: String): Object;
     getThemeColor(theme: String): Constraints.ITheme;
 }
+export declare const MyStyleSheet: IMyStyleSheet;
+
+export interface II18n {
+    t(prefix, scope, options);
+}
+export declare const I18n: II18n;
 
 export class BaseComponent<P = {}, S = {}, SS = any> extends React.Component<P, S, SS> {
     screenWidth?: number;
@@ -20,7 +26,6 @@ export class BaseComponent<P = {}, S = {}, SS = any> extends React.Component<P, 
     getSize(): number;
     isLandscape(): boolean;
 }
-export declare const MyStyleSheet: IMyStyleSheet;
 
 export interface IConstraints {
     Themes?: Constraints.ITheme;
