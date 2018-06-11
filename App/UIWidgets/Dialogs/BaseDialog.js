@@ -7,7 +7,7 @@
 import React from 'react';
 
 import {Animated, TouchableOpacity, Modal} from 'react-native';
-import {BaseComponent} from '../Utilities';
+import {BaseComponent} from '../../Utilities';
 
 class BaseDialog extends BaseComponent {
     static defaultProps = {

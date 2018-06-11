@@ -11,7 +11,7 @@ import {connect} from 'react-redux';
 import {Button, FontAwesomeIcon, Badge} from '../../UIWidgets';
 import DialogsActions from '../../Reducers/Dialogs';
 import BadgeActions from '../../Reducers/Badge';
-import Color from '../../Utilities/Classes/Color';
+import SinglePicker from '../../UIWidgets/Dialogs/SinglePicker';
 
 class ScreenA extends BaseComponent {
     static navigationOptions = {
@@ -66,11 +66,14 @@ class ScreenA extends BaseComponent {
         });
     }
 
+    _onSinglePickerPress() {
+        this.SinglePicker.show();
+    }
+
     render() {
         const {language, theme} = this.props;
         const styles = MyStyleSheet.get(theme);
         const themeColor = MyStyleSheet.getThemeColor(theme);
-        
         return (
             <View style={styles.flexBox}>
                 <SafeAreaView style={styles.container}>
@@ -97,10 +100,17 @@ class ScreenA extends BaseComponent {
                                     onPress={() => this._onAlertDialogPress()}
                                 />
                             </View>
+                            <View style={{marginTop: 10}}>
+                                <Button
+                                    text="ShowSinglePicker"
+                                    color={themeColor.danger.toDarkerColor(50)}
+                                    onPress={() => this._onSinglePickerPress()}
+                                />
+                            </View>
                         </View>
                         <View>
-                            <Text style={[styles.textCenter, styles.titleText]}>Badge</Text>
                             <View style={{marginTop: 10}}>
+                                <Text style={[styles.textCenter, styles.titleText]}>Badge</Text>
                                 <Button
                                     text="AddToScreenA"
                                     color={themeColor.success.toHex()}
@@ -123,6 +133,7 @@ class ScreenA extends BaseComponent {
                             </View>
                         </View>
                     </ScrollView>
+                    <SinglePicker ref={ref => this.SinglePicker = ref} />
                 </SafeAreaView>
             </View>
         );

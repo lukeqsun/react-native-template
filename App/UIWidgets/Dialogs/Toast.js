@@ -6,7 +6,7 @@
 import React from 'react';
 
 import {View, Text, Animated} from 'react-native';
-import {BaseComponent} from '../Utilities';
+import {BaseComponent} from '../../Utilities';
 import {connect} from 'react-redux';
 import I18n from 'react-native-i18n';
 

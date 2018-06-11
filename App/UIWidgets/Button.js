@@ -6,8 +6,7 @@
 
 import React from 'react';
 import {View, TouchableOpacity, Text, Image} from 'react-native';
-import {MyStyleSheet, BaseComponent} from '../Utilities';
-import I18n from 'react-native-i18n';
+import {MyStyleSheet, BaseComponent, I18n} from '../Utilities';
 import {connect} from 'react-redux';
 
 class Button extends BaseComponent {
@@ -35,7 +34,7 @@ class Button extends BaseComponent {
                                 color: _tintColor
                             }
                         ]}>
-                        {I18n.t(`buttons.${text || children}`, {locale: language})}
+                        {I18n.t('buttons', `${text || children}`, {locale: language})}
                     </Text>
                 );
             } else if (image) {

@@ -9,7 +9,7 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import {connect} from 'react-redux';
 
 import BaseDialog from './BaseDialog';
-import {I18n} from '../Utilities';
+import {I18n} from '../../Utilities';
 
 class AlertDialog extends BaseDialog {
     constructor(props) {

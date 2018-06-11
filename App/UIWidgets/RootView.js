@@ -1,6 +1,6 @@
 import React from 'react';
-import Toast from './Toast';
-import AlertDialog from './AlertDialog';
+import Toast from './Dialogs/Toast';
+import AlertDialog from './Dialogs/AlertDialog';
 import {View} from 'react-native';
 
 import {BaseComponent} from '../Utilities';
