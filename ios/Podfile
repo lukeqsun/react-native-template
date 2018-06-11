@@ -24,7 +24,7 @@ pod 'React', path: rn_path, subspecs: [
 
 pod 'RNI18n', :path => '../node_modules/react-native-i18n'
 pod 'react-native-orientation', :path => '../node_modules/react-native-orientation'
-
+pod 'RNSVG', :path => '../node_modules/react-native-svg'
 
 end
 
