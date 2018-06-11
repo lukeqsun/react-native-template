@@ -19,15 +19,15 @@ class Color {
     }
 
     _getR(hex) {
-        return parseInt(hex.substring(0, 2), 16);
+        return parseInt(hex.length == 3 ? hex.slice(0, 1).repeat(2) : hex.slice(0, 2), 16);
     }
 
     _getG(hex) {
-        return parseInt(hex.substring(2, 4), 16);
+        return parseInt(hex.length == 3 ? hex.slice(1, 2).repeat(2) : hex.slice(2, 4), 16);
     }
 
     _getB(hex) {
-        return parseInt(hex.substring(4, 6), 16);
+        return parseInt(hex.length == 3 ? hex.slice(2, 3).repeat(2) : hex.slice(4, 6), 16);
     }
 
     toDarkerColor(number) {

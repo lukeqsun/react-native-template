@@ -11,6 +11,7 @@ import {connect} from 'react-redux';
 import {Button, FontAwesomeIcon, Badge} from '../../UIWidgets';
 import DialogsActions from '../../Reducers/Dialogs';
 import BadgeActions from '../../Reducers/Badge';
+import Color from '../../Utilities/Classes/Color';
 
 class ScreenA extends BaseComponent {
     static navigationOptions = {
@@ -69,6 +70,7 @@ class ScreenA extends BaseComponent {
         const {language, theme} = this.props;
         const styles = MyStyleSheet.get(theme);
         const themeColor = MyStyleSheet.getThemeColor(theme);
+        
         return (
             <View style={styles.flexBox}>
                 <SafeAreaView style={styles.container}>
@@ -141,4 +143,7 @@ const mapStateToDispatch = (dispatch) => ({
     deleteAllBadgeLabel: (label, key) => dispatch(BadgeActions.deleteAllLabel(label, key))
 });
 
-export default connect(mapStateToProps, mapStateToDispatch)(ScreenA);
+export default connect(
+    mapStateToProps,
+    mapStateToDispatch
+)(ScreenA);
