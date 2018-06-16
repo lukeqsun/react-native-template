@@ -133,7 +133,7 @@ class ScreenA extends BaseComponent {
                             </View>
                         </View>
                     </ScrollView>
-                    <SinglePicker ref={ref => this.SinglePicker = ref} />
+                    <SinglePicker ref={ref => this.SinglePicker = ref} cancelable/>
                 </SafeAreaView>
             </View>
         );

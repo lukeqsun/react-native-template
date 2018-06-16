@@ -10,13 +10,6 @@ import {Animated, TouchableOpacity, Modal} from 'react-native';
 import {BaseComponent} from '../../Utilities';
 
 class BaseDialog extends BaseComponent {
-    static defaultProps = {
-        removeSubviews: true,
-        cancelable: true,
-        onCoverPress: null,
-        animationType: 'spring'
-    };
-
     _path = new Animated.Value(0);
 
     constructor(props) {
@@ -125,5 +118,12 @@ class BaseDialog extends BaseComponent {
         }
     }
 }
+
+BaseDialog.defaultProps = {
+    removeSubviews: true,
+    cancelable: true,
+    onCoverPress: null,
+    animationType: 'spring'
+};
 
 export default BaseDialog;
