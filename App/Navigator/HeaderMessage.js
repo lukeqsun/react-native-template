@@ -1,6 +1,11 @@
+/*
+ * Created on Sat Jun 16 2018
+ *
+ * Copyright (c) 2018 Youke Xiang
+ */
 import React from 'react';
 import {Constraints, BaseComponent} from '../Utilities';
-import FontAwesome from '../UIWidgets/FontAwesomeJs/FontAwesome';
+import FontAwesome from '../UIWidgets/FontAwesomeJs';
 import {Animated, StyleSheet} from 'react-native';
 
 class HeaderMessage extends BaseComponent {

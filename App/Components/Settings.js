@@ -5,15 +5,13 @@ import SettingsActions from '../Reducers/Settings';
 import I18n from 'react-native-i18n';
 import {MyStyleSheet, BaseComponent} from '../Utilities';
 import CacheStore from 'react-native-cache-store';
-import {Button, FontAwesomeIcon, Badge} from '../UIWidgets';
+import {Button, FontAwesome, Badge} from '../UIWidgets';
 class Settings extends BaseComponent {
     static navigationOptions = {
-        tabBarIcon: ({tintColor, theme}) => (
+        tabBarIcon: ({tintColor}) => (
             <View>
                 <Badge label={0} size="small" badgeKey="SettingsBadge" />
-                <FontAwesomeIcon style={[MyStyleSheet.get(theme).tabBarIconText, {color: tintColor}]}>
-                    {FontAwesomeIcon.Icons.cog}
-                </FontAwesomeIcon>
+                <FontAwesome size={MyStyleSheet.getAdjustHeight(28)} type={'solid'} color={tintColor} name={'cog'} />
             </View>
         )
     };
@@ -78,4 +76,7 @@ const mapStateToDispatch = (dispatch) => ({
     changeTheme: () => dispatch(SettingsActions.changeTheme())
 });
 
-export default connect(mapStateToProps, mapStateToDispatch)(Settings);
+export default connect(
+    mapStateToProps,
+    mapStateToDispatch
+)(Settings);

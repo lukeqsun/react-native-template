@@ -3,9 +3,10 @@
  *
  * Copyright (c) 2018 Youke Xiang
  */
-import {ReactNode} from 'react';
-import {TouchableOpacityProps, ImageSourcePropType, TextProps} from 'react-native';
+import {ReactNode, Component} from 'react';
+import {TouchableOpacityProps, ImageSourcePropType, TextProps, StyleProp} from 'react-native';
 import {BaseComponent} from '../Utilities';
+import {FontAwesome} from './FontAwesomeJs';
 
 export interface ButtonProps extends TouchableOpacityProps {
     text?: string;
@@ -14,10 +15,6 @@ export interface ButtonProps extends TouchableOpacityProps {
 }
 
 export class Button extends BaseComponent<ButtonProps> {}
-
-export interface FontAwesomeIconProps extends TextProps {}
-
-export class FontAwesomeIcon extends BaseComponent<FontAwesomeIconProps> {}
 
 export interface BadgeProps {
     badgeKey?: string;
@@ -29,3 +26,14 @@ export interface BadgeProps {
 }
 
 export class Badge extends BaseComponent<BadgeProps> {}
+
+export interface FontAwesomeProps {
+    name?: string;
+    size?: string;
+    color?: string;
+    type?: 'regular' | 'solid' | 'brands';
+    containerStyle?: StyleProp;
+    iconStyle?: StyleProp;
+}
+
+export class FontAwesome extends Component<FontAwesomeProps> {}

@@ -5,16 +5,14 @@
  */
 
 import Button from './Button';
-import FontAwesomeIcon from './FontAwesomeJs/Icon';
-import FontAwesomeSpinner from './FontAwesomeJs/SpinningIcon';
+import FontAwesome from './FontAwesomeJs';
 import Toast from './Dialogs/Toast';
 import RootView from './RootView';
 import Badge from './Badge';
 
 module.exports = {
     Button: Button,
-    FontAwesomeIcon: FontAwesomeIcon,
-    FontAwesomeSpinner: FontAwesomeSpinner,
+    FontAwesome: FontAwesome,
     Toast: Toast,
     RootView: RootView,
     Badge: Badge

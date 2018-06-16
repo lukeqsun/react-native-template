@@ -8,8 +8,9 @@ import * as React from 'react';
 import Constraints from './Constraints';
 export interface IMyStyleSheet {
     Dimensions?: Object;
-    get?(theme: String): Object;
+    get(theme: String): Object;
     getThemeColor(theme: String): Constraints.IColors;
+    getAdjustHeight(number: Number): Object;
 }
 export declare const MyStyleSheet: IMyStyleSheet;
 

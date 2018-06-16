@@ -19,7 +19,6 @@ let _screenSize;
  */
 const styles = (theme = 'default', height = _height, width = _width) => {
     const themeColor = Constraints.Themes.get(theme);
-    const adjustHeight = height < width ? 1.5 : 1;
     return {
         container: {
             flex: 1,
@@ -115,11 +114,11 @@ const styles = (theme = 'default', height = _height, width = _width) => {
             flexDirection: 'row'
         },
         tabBarIcon: {
-            height: parseInt(height / 28 * adjustHeight),
+            height: MyStyleSheet.getAdjustHeight(28),
             margin: parseInt(_screenSize / 150)
         },
         tabBarIconText: {
-            fontSize: parseInt(height / 28 * adjustHeight)
+            fontSize: MyStyleSheet.getAdjustHeight(28)
         }
     };
 };
@@ -147,6 +146,11 @@ class MyStyleSheet {
         _width = width;
         _screenSize = screenSize;
         styles(undefined, height, width);
+    }
+
+    static getAdjustHeight(number) {
+        const adjustHeight = _height < _width ? 1.5 : 1;
+        return parseInt((height / number) * adjustHeight);
     }
 }
 

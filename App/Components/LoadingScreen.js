@@ -10,7 +10,8 @@ import {connect} from 'react-redux';
 import CacheStore from 'react-native-cache-store';
 
 import {MyStyleSheet, BaseComponent} from '../Utilities';
-import {FontAwesomeSpinner} from '../UIWidgets';
+import Spinner from 'react-native-spinkit';
+
 import SettingsActions from '../Reducers/Settings';
 import NavigationHelper from '../Utilities/Helpers/NavigationHelper';
 
@@ -43,9 +44,12 @@ class LoadingScreen extends BaseComponent {
             <SafeAreaView style={styles.flexBox}>
                 <View style={[styles.container, styles.center]}>
                     <Text style={styles.textLarge}>Loading...</Text>
-                    <FontAwesomeSpinner style={styles.textLarge}>
-                        {FontAwesomeSpinner.Icons.spinner}
-                    </FontAwesomeSpinner>
+                    <Spinner
+                        style={styles.spinner}
+                        size={this.getSize(20)}
+                        type={'Wave'}
+                        color={MyStyleSheet.getThemeColor(theme).textDark.toHex()}
+                    />
                 </View>
             </SafeAreaView>
         );
@@ -63,4 +67,7 @@ const mapStateToDispatch = (dispatch) => ({
     changeLanguage: (newLang) => dispatch(SettingsActions.changeLanguage(newLang))
 });
 
-export default connect(mapStateToProps, mapStateToDispatch)(LoadingScreen);
+export default connect(
+    mapStateToProps,
+    mapStateToDispatch
+)(LoadingScreen);

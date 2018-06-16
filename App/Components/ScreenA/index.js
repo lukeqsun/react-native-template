@@ -8,7 +8,7 @@ import React from 'react';
 import {Text, View, SafeAreaView, ScrollView} from 'react-native';
 import {MyStyleSheet, BaseComponent, I18n} from '../../Utilities';
 import {connect} from 'react-redux';
-import {Button, FontAwesomeIcon, Badge} from '../../UIWidgets';
+import {Button, FontAwesome, Badge} from '../../UIWidgets';
 import DialogsActions from '../../Reducers/Dialogs';
 import BadgeActions from '../../Reducers/Badge';
 import SinglePicker from '../../UIWidgets/Dialogs/SinglePicker';
@@ -16,17 +16,16 @@ import SinglePicker from '../../UIWidgets/Dialogs/SinglePicker';
 class ScreenA extends BaseComponent {
     static navigationOptions = {
         tabBarIcon: (props) => {
-            let {tintColor, theme} = props;
+            let {tintColor} = props;
             return (
                 <View>
                     <Badge size="small" badgeKey="ScreenABadge" />
-                    <FontAwesomeIcon
-                        style={[
-                            MyStyleSheet.get(theme).tabBarIconText,
-                            {fontFamily: 'Font Awesome 5 Brands', color: tintColor}
-                        ]}>
-                        {'\uf170'}
-                    </FontAwesomeIcon>
+                    <FontAwesome
+                        size={MyStyleSheet.getAdjustHeight(28)}
+                        type={'brands'}
+                        color={tintColor}
+                        name={'aws'}
+                    />
                 </View>
             );
         }
@@ -133,7 +132,7 @@ class ScreenA extends BaseComponent {
                             </View>
                         </View>
                     </ScrollView>
-                    <SinglePicker ref={ref => this.SinglePicker = ref} cancelable/>
+                    <SinglePicker ref={(ref) => (this.SinglePicker = ref)} cancelable />
                 </SafeAreaView>
             </View>
         );
