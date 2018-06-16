@@ -84,10 +84,7 @@ class TabBarBottom extends BaseComponent {
         const styles = MyStyleSheet.get(theme);
         const themeColor = Constraints.Themes.get(theme);
         const tabBarStyle = [styles.tabBar, style];
-        let tabBarHeight = parseInt(this.screenHeight * 0.09);
-        if (this.state.orientation == 'LANDSCAPE') {
-            tabBarHeight = parseInt(this.screenHeight * 0.12);
-        }
+        let tabBarHeight = MyStyleSheet.getAdjustHeight(11);
 
         return (
             <SafeAreaView style={tabBarStyle} forceInset={{bottom: 'always', top: 'never'}}>

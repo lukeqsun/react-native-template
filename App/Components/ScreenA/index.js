@@ -21,7 +21,7 @@ class ScreenA extends BaseComponent {
                 <View>
                     <Badge size="small" badgeKey="ScreenABadge" />
                     <FontAwesome
-                        size={28}
+                        size={MyStyleSheet.getAdjustHeight(26)}
                         type={'brands'}
                         color={tintColor}
                         name={'aws'}

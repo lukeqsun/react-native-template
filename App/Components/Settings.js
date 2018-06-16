@@ -11,7 +11,7 @@ class Settings extends BaseComponent {
         tabBarIcon: ({tintColor}) => (
             <View>
                 <Badge label={0} size="small" badgeKey="SettingsBadge" />
-                <FontAwesome size={28} type={'solid'} color={tintColor} name={'cog'} />
+                <FontAwesome size={MyStyleSheet.getAdjustHeight(26)} type={'solid'} color={tintColor} name={'cog'} />
             </View>
         )
     };
