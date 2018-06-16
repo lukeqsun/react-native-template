@@ -10,6 +10,9 @@ import {MyStyleSheet, BaseComponent, I18n} from '../Utilities';
 import {connect} from 'react-redux';
 
 class Button extends BaseComponent {
+    componentDidMount() {
+        super.componentDidMount();
+    }
     render() {
         const {useDefaultStyle, disabled, color, language, theme} = this.props;
         const styles = MyStyleSheet.get(theme);
@@ -44,7 +47,7 @@ class Button extends BaseComponent {
             }
         };
         return (
-            <TouchableOpacity {...this.props} disabled={disabled}>
+            <TouchableOpacity {...this.props} style={{alignSelf: 'center'}} disabled={disabled}>
                 <View style={containerStyle}>{childView()}</View>
             </TouchableOpacity>
         );

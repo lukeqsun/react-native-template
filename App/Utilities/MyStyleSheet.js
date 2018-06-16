@@ -150,6 +150,7 @@ class MyStyleSheet {
 
     static getAdjustHeight(number) {
         const adjustHeight = _height < _width ? 1.5 : 1;
+        
         return parseInt((height / number) * adjustHeight);
     }
 }

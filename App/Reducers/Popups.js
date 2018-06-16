@@ -9,7 +9,8 @@ import Immutable from 'seamless-immutable';
 
 const {Types, Creators} = createActions({
     showToast: ['message', 'duration'],
-    showAlert: ['message', 'onPress']
+    showAlert: ['message', 'onPress'],
+    showHeaderMessage: ['message', 'duration', 'backgroundType']
 });
 
 export const SettingsTypes = Types;
@@ -25,7 +26,12 @@ export const showAlert = (state, {message, onPress}) => {
     return {type: 'alert', message, onPress};
 };
 
+export const showHeaderMessage = (state, {message, duration, backgroundType}) => {
+    return {type: 'header_message', message, duration, backgroundType}; // unable using immutable merge here. it should always receive new props
+};
+
 export const reducer = createReducer(INITIAL_STATE, {
     [Types.SHOW_TOAST]: showToast,
-    [Types.SHOW_ALERT]: showAlert
+    [Types.SHOW_ALERT]: showAlert,
+    [Types.SHOW_HEADER_MESSAGE]: showHeaderMessage
 });

@@ -12,6 +12,6 @@ const navReducer = createNavigationReducer(AppNavigator);
 export const appReducer = combineReducers({
     nav: navReducer,
     settings: require('./Settings').reducer,
-    dialogs: require('./Dialogs').reducer,
+    popups: require('./Popups').reducer,
     badge: require('./Badge').reducer
 });

@@ -6,9 +6,8 @@
 import React from 'react';
 
 import {View, Text, Animated} from 'react-native';
-import {BaseComponent} from '../../Utilities';
+import {BaseComponent, I18n} from '../../Utilities';
 import {connect} from 'react-redux';
-import I18n from 'react-native-i18n';
 
 class Toast extends BaseComponent {
     static defaultProps = {
@@ -34,10 +33,10 @@ class Toast extends BaseComponent {
         };
     }
 
-    UNSAFE_componentWillReceiveProps({dialogs, language}) {
-        const {message, duration, type} = dialogs;
+    UNSAFE_componentWillReceiveProps({popups, language}) {
+        const {message, duration, type} = popups;
         if (message && type == 'toast') {
-            let _message = I18n.t(message, {locale: language}) || message;
+            let _message = I18n.t('toast', message, {locale: language});
             this.show(_message);
             this.timeoutId = setTimeout(() => {
                 Animated.timing(this.opacity, {toValue: 0, duration: 200}).start(() => {
@@ -100,7 +99,7 @@ class Toast extends BaseComponent {
 
 const mapStateToProps = (state) => {
     return {
-        dialogs: state.dialogs,
+        popups: state.popups,
         language: state.settings.language
     };
 };

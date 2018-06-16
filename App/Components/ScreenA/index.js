@@ -9,9 +9,9 @@ import {Text, View, SafeAreaView, ScrollView} from 'react-native';
 import {MyStyleSheet, BaseComponent, I18n} from '../../Utilities';
 import {connect} from 'react-redux';
 import {Button, FontAwesome, Badge} from '../../UIWidgets';
-import DialogsActions from '../../Reducers/Dialogs';
+import PopupActions from '../../Reducers/Popups';
 import BadgeActions from '../../Reducers/Badge';
-import SinglePicker from '../../UIWidgets/Dialogs/SinglePicker';
+import SinglePicker from '../../UIWidgets/Popups/SinglePicker';
 
 class ScreenA extends BaseComponent {
     static navigationOptions = {
@@ -21,7 +21,7 @@ class ScreenA extends BaseComponent {
                 <View>
                     <Badge size="small" badgeKey="ScreenABadge" />
                     <FontAwesome
-                        size={MyStyleSheet.getAdjustHeight(28)}
+                        size={28}
                         type={'brands'}
                         color={tintColor}
                         name={'aws'}
@@ -69,6 +69,11 @@ class ScreenA extends BaseComponent {
         this.SinglePicker.show();
     }
 
+    _onHeaderMessage() {
+        const {showHeaderMessage} = this.props;
+        showHeaderMessage('DefaultMessage', 2000, 'success');
+    }
+
     render() {
         const {language, theme} = this.props;
         const styles = MyStyleSheet.get(theme);
@@ -104,6 +109,13 @@ class ScreenA extends BaseComponent {
                                     text="ShowSinglePicker"
                                     color={themeColor.danger.toDarkerColor(50)}
                                     onPress={() => this._onSinglePickerPress()}
+                                />
+                            </View>
+                            <View style={{marginTop: 10}}>
+                                <Button
+                                    text="ShowHeaderMessage"
+                                    color={themeColor.danger.toDarkerColor(-50)}
+                                    onPress={() => this._onHeaderMessage()}
                                 />
                             </View>
                         </View>
@@ -147,8 +159,10 @@ const mapStateToProps = (state) => {
 };
 
 const mapStateToDispatch = (dispatch) => ({
-    showToast: (message) => dispatch(DialogsActions.showToast(message)),
-    showAlert: (message, onPress) => dispatch(DialogsActions.showAlert(message, onPress)),
+    showToast: (message) => dispatch(PopupActions.showToast(message)),
+    showAlert: (message, onPress) => dispatch(PopupActions.showAlert(message, onPress)),
+    showHeaderMessage: (message, duration, backgroundType) =>
+        dispatch(PopupActions.showHeaderMessage(message, duration, backgroundType)),
     updateBadgeLabel: (label, key) => dispatch(BadgeActions.updateLabel(label, key)),
     deleteAllBadgeLabel: (label, key) => dispatch(BadgeActions.deleteAllLabel(label, key))
 });

@@ -6,14 +6,16 @@
 
 import Button from './Button';
 import FontAwesome from './FontAwesomeJs';
-import Toast from './Dialogs/Toast';
+import Toast from './Popups/Toast';
 import RootView from './RootView';
 import Badge from './Badge';
+import HeaderMessage from './Popups/HeaderMessage';
 
 module.exports = {
     Button: Button,
     FontAwesome: FontAwesome,
     Toast: Toast,
     RootView: RootView,
-    Badge: Badge
+    Badge: Badge,
+    HeaderMessage: HeaderMessage
 };

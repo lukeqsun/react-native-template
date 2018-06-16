@@ -19,7 +19,7 @@ class HeaderLeft extends BaseComponent {
             <View>
                 <FontAwesome
                     containerStyle={[styles.spaceLeft, styles.center]}
-                    size={MyStyleSheet.getAdjustHeight(28)}
+                    size={this.getSize(22)}
                     type={'brands'}
                     color={MyStyleSheet.getThemeColor(theme).textLight.toHex()}
                     name={'react'}

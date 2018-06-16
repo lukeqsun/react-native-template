@@ -19,9 +19,16 @@
         "DeleteAllBadge": "Delete All Badge",
         "AddToSettings": "Add To Settings",
         "ShowAlertDialog": "Show Alert Dialog",
-        "ShowSinglePicker": "Show Single Picker"
+        "ShowSinglePicker": "Show Single Picker",
+        "ShowHeaderMessage": "Show Header Message"
     },
     "alerts": {
         "DefaultMessage": "Default message"
+    },
+    "toast": {
+        "welcome": "Welcome"
+    },
+    "header_message": {
+        "DefaultMessage": "Default Message"
     }
 }

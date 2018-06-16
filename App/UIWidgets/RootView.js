@@ -1,6 +1,6 @@
 import React from 'react';
-import Toast from './Dialogs/Toast';
-import AlertDialog from './Dialogs/AlertDialog';
+import Toast from './Popups/Toast';
+import AlertDialog from './Popups/AlertDialog';
 import {View} from 'react-native';
 
 import {BaseComponent} from '../Utilities';
@@ -8,6 +8,10 @@ import {BaseComponent} from '../Utilities';
 class RootView extends BaseComponent {
     constructor(props) {
         super(props);
+    }
+    
+    componentDidMount() {
+        super.componentDidMount();
     }
 
     render() {

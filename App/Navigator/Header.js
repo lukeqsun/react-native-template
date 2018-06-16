@@ -10,7 +10,7 @@ import HeaderBackButton from 'react-navigation/src/views/Header/HeaderBackButton
 import ModularHeaderBackButton from 'react-navigation/src/views/Header//ModularHeaderBackButton';
 import HeaderStyleInterpolator from 'react-navigation/src/views/Header//HeaderStyleInterpolator';
 import {Constraints} from '../Utilities';
-import HeaderMessage from './HeaderMessage';
+import {HeaderMessage} from '../UIWidgets';
 
 const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
@@ -529,7 +529,7 @@ const mapStateToProps = (state) => {
     return {
         language: state.settings.language,
         theme: state.settings.theme,
-        dialogs: state.dialogs
+        popups: state.popups
     };
 };
 

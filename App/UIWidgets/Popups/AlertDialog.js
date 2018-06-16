@@ -16,8 +16,8 @@ class AlertDialog extends BaseDialog {
         super(props);
     }
 
-    UNSAFE_componentWillReceiveProps({dialogs}) {
-        let {message, type, onPress} = dialogs;
+    UNSAFE_componentWillReceiveProps({popups}) {
+        let {message, type, onPress} = popups;
         if (message && type == 'alert') {
             this.setState({message, onPress});
             this.show();
@@ -141,7 +141,7 @@ AlertDialog.defaultProps = {
 
 const mapStateToProps = (state) => {
     return {
-        dialogs: state.dialogs,
+        popups: state.popups,
         language: state.settings.language
     };
 };
