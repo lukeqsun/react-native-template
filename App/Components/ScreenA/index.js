@@ -12,6 +12,7 @@ import {Button, FontAwesome, Badge} from '../../UIWidgets';
 import PopupActions from '../../Reducers/Popups';
 import BadgeActions from '../../Reducers/Badge';
 import SinglePicker from '../../UIWidgets/Popups/SinglePicker';
+import InputDialog from '../../UIWidgets/Popups/InputDialog';
 
 class ScreenA extends BaseComponent {
     static navigationOptions = {
@@ -75,6 +76,10 @@ class ScreenA extends BaseComponent {
         showHeaderMessage('DefaultMessage', 2000, 'success');
     }
 
+    _onInputDialogPress() {
+        this.refs['InputDialog'].getWrappedInstance().show();
+    }
+
     render() {
         const {language, theme} = this.props;
         const styles = MyStyleSheet.get(theme);
@@ -114,8 +119,15 @@ class ScreenA extends BaseComponent {
                             </View>
                             <View style={{marginTop: 10}}>
                                 <Button
-                                    text="ShowHeaderMessage"
+                                    text="showInputDialog"
                                     color={themeColor.danger.toDarkerColor(-50)}
+                                    onPress={() => this._onInputDialogPress()}
+                                />
+                            </View>
+                            <View style={{marginTop: 10}}>
+                                <Button
+                                    text="ShowHeaderMessage"
+                                    color={themeColor.info.toHex()}
                                     onPress={() => this._onHeaderMessage()}
                                 />
                             </View>
@@ -146,6 +158,7 @@ class ScreenA extends BaseComponent {
                         </View>
                     </ScrollView>
                     <SinglePicker ref={'SinglePicker'} cancelable />
+                    <InputDialog ref={'InputDialog'} cancelable />
                 </SafeAreaView>
             </View>
         );

@@ -32,7 +32,7 @@ class Button extends BaseComponent {
                 return (
                     <Text
                         style={[
-                            styles.textMedium,
+                            styles.textSmall,
                             {
                                 color: _tintColor
                             }
@@ -47,8 +47,8 @@ class Button extends BaseComponent {
             }
         };
         return (
-            <TouchableOpacity {...this.props} style={{alignSelf: 'center'}} disabled={disabled}>
-                <View style={containerStyle}>{childView()}</View>
+            <TouchableOpacity {...this.props} style={[{alignSelf: 'center'}, containerStyle]} disabled={disabled}>
+                <View>{childView()}</View>
             </TouchableOpacity>
         );
     }

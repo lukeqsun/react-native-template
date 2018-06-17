@@ -16,6 +16,7 @@
         "Cancel": "Cancel",
         "Confirm": "Confirm",
         "Select": "Select",
+        "Submit": "Submit",
         "Yes": "Yes",
         "OK": "OK",
         "No": "No",
@@ -30,6 +31,11 @@
     },
     "alerts": {
         "DefaultMessage": "Default message"
+    },
+    "dialogs": {
+        "DefaultMessage": "Default message",
+        "InputTitle": "Default Title",
+        "DefaultPlaceholder": "Default placeholder"
     },
     "toast": {
         "welcome": "Welcome"

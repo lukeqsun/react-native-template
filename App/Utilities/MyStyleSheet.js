@@ -87,7 +87,7 @@ const styles = (theme = 'default', height = _height, width = _width) => {
             paddingHorizontal: parseInt(width / 30),
             paddingVertical: parseInt(height / 100),
             backgroundColor: 'transparent',
-            borderRadius: parseInt(height / 100)
+            borderRadius: parseInt(_screenSize / 150)
         },
         btnDisabled: {
             justifyContent: 'center',
@@ -96,7 +96,7 @@ const styles = (theme = 'default', height = _height, width = _width) => {
             paddingHorizontal: parseInt(width / 30),
             paddingVertical: parseInt(height / 100),
             backgroundColor: '#aaa',
-            borderRadius: parseInt(height / 100)
+            borderRadius: parseInt(_screenSize / 150)
         },
         row: {
             flexDirection: 'row'

@@ -16,6 +16,7 @@
         "Cancel": "取消",
         "Confirm": "确定",
         "Select": "选择",
+        "Submit": "提交",
         "Yes": "好",
         "OK": "好",
         "No": "不",
@@ -27,5 +28,14 @@
         "ShowAlertDialog": "显示弹出窗口",
         "ShowSinglePicker": "显示单选选框",
         "ShowHeaderMessage": "显示标题信息"
+    },
+    "alerts": {
+        "DefaultMessage": "默认信息"
+    },
+    "toast": {
+        "welcome": "欢迎"
+    },
+    "header_message": {
+        "DefaultMessage": "默认信息"
     }
 }

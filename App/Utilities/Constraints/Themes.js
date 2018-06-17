@@ -28,7 +28,7 @@ const _themes = {
         success: new Color('#28a745'),
         danger: new Color('#dc3545'),
         warning: new Color('#ffc107'),
-        info: new Color('#c1c1c1'),
+        info: new Color('#17a2b8'),
         textLight: new Color('#eee'),
         textDark: new Color('#ccc'),
         background: new Color('#2b2b2b'),

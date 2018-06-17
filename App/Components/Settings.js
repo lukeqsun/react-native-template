@@ -37,7 +37,6 @@ class Settings extends BaseComponent {
                     {I18n.t('settings.language', {locale: language})}
                 </Text>
                 <Picker
-                    style={styles.flexBox}
                     selectedValue={language}
                     onValueChange={this._languageChanged(changeLanguage, setParams)}>
                     {languageOptions}

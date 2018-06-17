@@ -58,7 +58,7 @@ class HeaderMessage extends BaseComponent {
             marginHorizontal: parseInt(this.screenWidth / 100)
         };
 
-        const statusBar = DeviceHelper.isIPhoneX ? 30 : 20;
+        const statusBarHeight = DeviceHelper.isIPhoneX ? 42 : 20;
 
         return (
             <Animated.View style={StyleSheet.absoluteFill}>
@@ -79,7 +79,7 @@ class HeaderMessage extends BaseComponent {
                     }}>
                     <Animated.View
                         style={{
-                            marginTop: this.isLandscape() ? 0 : statusBar,
+                            marginTop: this.isLandscape() ? 0 : statusBarHeight,
                             flexDirection: 'row',
                             alignItems: 'center'
                         }}>

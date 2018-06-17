@@ -1,3 +1,9 @@
+/*
+ * Created on Sun Jun 17 2018
+ *
+ * Copyright (c) 2018 Youke Xiang
+ */
+
 import React from 'react';
 
 import {Text, View, TouchableOpacity, SafeAreaView} from 'react-native';
@@ -58,7 +64,7 @@ class SinglePicker extends BaseDialog {
                     }}>
                     {this.renderPicker()}
                 </View>
-                <View
+                <SafeAreaView
                     style={{
                         width: this.screenWidth,
                         height: this.getSize(30),
@@ -109,7 +115,7 @@ class SinglePicker extends BaseDialog {
                             {I18n.t('buttons', this.props.confirmText, {locale: language})}
                         </Text>
                     </TouchableOpacity>
-                </View>
+                </SafeAreaView>
             </SafeAreaView>
         );
     }

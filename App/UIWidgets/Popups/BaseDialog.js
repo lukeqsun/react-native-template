@@ -6,7 +6,7 @@
 
 import React from 'react';
 
-import {Animated, TouchableOpacity, Modal, KeyboardAvoidingView, Platform} from 'react-native';
+import {Animated, TouchableOpacity, Modal} from 'react-native';
 import {BaseComponent} from '../../Utilities';
 
 class BaseDialog extends BaseComponent {
@@ -15,7 +15,7 @@ class BaseDialog extends BaseComponent {
     constructor(props) {
         super(props);
         this.state = {
-            _isShow: false,
+            _isShow: false
         };
     }
 
@@ -107,17 +107,12 @@ class BaseDialog extends BaseComponent {
                                 opacity: this._path.interpolate({inputRange: [0, 0.5, 1], outputRange: [0, 0, 1]}),
                                 transform: this._getContentInterpolate(this._path)
                             }}>
-                            <KeyboardAvoidingView
-                                behavior={Platform.OS === 'ios' ? 'padding' : null}
-                                pointerEvents="box-none"
-                                style={{margin: 0, transform: [{translateY: 0}]}}>
-                                {this.renderContent()}
-                            </KeyboardAvoidingView>
+                            {this.renderContent()}
                         </Animated.View>
                     </Animated.View>
                 </Modal>
             );
-        } 
+        }
         return null;
     }
 }
