@@ -15,7 +15,7 @@ class BaseDialog extends BaseComponent {
     constructor(props) {
         super(props);
         this.state = {
-            _isShow: false
+            _isShow: false,
         };
     }
 
@@ -117,9 +117,8 @@ class BaseDialog extends BaseComponent {
                     </Animated.View>
                 </Modal>
             );
-        } else {
-            return null;
-        }
+        } 
+        return null;
     }
 }
 

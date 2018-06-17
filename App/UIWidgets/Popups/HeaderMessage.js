@@ -9,6 +9,7 @@ import {Constraints, BaseComponent, DeviceHelper, MyStyleSheet} from '../../Util
 import {I18n} from '../../Utilities';
 import FontAwesome from '../FontAwesomeJs';
 import {connect} from 'react-redux';
+import PopupActions from '../../Reducers/Popups';
 
 class HeaderMessage extends BaseComponent {
     _path = new Animated.Value(0);
@@ -25,13 +26,15 @@ class HeaderMessage extends BaseComponent {
         if (message && type == 'header_message') {
             let _message = I18n.t('header_message', message, {locale: language}) || message;
             this.show(_message, backgroundType);
-            setTimeout(() => {
+            this.props.resetMessage();
+            this._timeoutId = setTimeout(() => {
                 this.dismiss();
             }, duration || 1500);
         }
     }
 
     show(message, backgroundType) {
+        this._timeoutId && clearTimeout(this._timeoutId);
         this.setState({message: message, backgroundType: backgroundType});
         Animated.timing(this._path, {toValue: 1, duration: 350}).start(() => {});
     }
@@ -40,6 +43,10 @@ class HeaderMessage extends BaseComponent {
         Animated.timing(this._path, {toValue: 0, duration: 350}).start(() => {
             this.setState({_isShow: false});
         });
+    }
+
+    componentWillUnmount() {
+        this._timeoutId && clearTimeout(this._timeoutId);
     }
 
     render() {
@@ -96,4 +103,11 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps)(HeaderMessage);
+const mapStateToDispatch = (dispatch) => ({
+    resetMessage: () => dispatch(PopupActions.resetMessage())
+});
+
+export default connect(
+    mapStateToProps,
+    mapStateToDispatch
+)(HeaderMessage);

@@ -9,7 +9,8 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import {connect} from 'react-redux';
 
 import BaseDialog from './BaseDialog';
-import {I18n} from '../../Utilities';
+import {I18n, Constraints} from '../../Utilities';
+import PopupActions from '../../Reducers/Popups';
 
 class AlertDialog extends BaseDialog {
     constructor(props) {
@@ -19,8 +20,10 @@ class AlertDialog extends BaseDialog {
     UNSAFE_componentWillReceiveProps({popups}) {
         let {message, type, onPress} = popups;
         if (message && type == 'alert') {
+            console.warn(this.state._isShow);
             this.setState({message, onPress});
             this.show();
+            this.props.resetMessage();
         }
     }
 
@@ -29,13 +32,24 @@ class AlertDialog extends BaseDialog {
     }
 
     renderContent() {
-        const {language} = this.props;
+        const {
+            language,
+            theme,
+            messageTextSize,
+            positiveColor,
+            positiveSize,
+            positiveText,
+            negativeColor,
+            negativeSize,
+            negativeText
+        } = this.props;
+        const themeColor = Constraints.Themes.get(theme);
         return (
             <View
                 style={{
                     height: this.getSize(160),
                     width: this.getSize(230),
-                    backgroundColor: '#ffffff',
+                    backgroundColor: themeColor.background.toHex(),
                     borderRadius: this.getSize(10)
                 }}>
                 <View
@@ -48,9 +62,9 @@ class AlertDialog extends BaseDialog {
                     }}>
                     <Text
                         style={{
-                            fontSize: this.props.messageTextSize || this.getSize(15),
-                            fontWeight: '100',
-                            color: this.props.messageTextColor,
+                            fontSize: messageTextSize || this.getSize(15),
+                            fontWeight: '200',
+                            color: themeColor.textDark.toHex(),
                             lineHeight: 20,
                             textAlign: 'center'
                         }}>
@@ -62,7 +76,7 @@ class AlertDialog extends BaseDialog {
                         alignSelf: 'center',
                         width: this.getSize(220),
                         height: this.onePixel,
-                        backgroundColor: '#e6e6e6'
+                        backgroundColor: themeColor.secondary.toRGBA(0.3)
                     }}
                 />
                 <View
@@ -88,17 +102,17 @@ class AlertDialog extends BaseDialog {
                         }}>
                         <Text
                             style={{
-                                color: this.props.positiveColor,
-                                fontSize: this.props.positiveSize || this.getSize(15)
+                                color: positiveColor || themeColor.primary.toHex(),
+                                fontSize: positiveSize || this.getSize(15)
                             }}>
-                            {this.props.positiveText}
+                            {positiveText}
                         </Text>
                     </TouchableOpacity>
                     <View
                         style={{
                             height: this.getSize(28),
                             width: this.onePixel,
-                            backgroundColor: '#e6e6e6'
+                            backgroundColor: themeColor.secondary.toRGBA(0.3)
                         }}
                     />
                     <TouchableOpacity
@@ -117,10 +131,10 @@ class AlertDialog extends BaseDialog {
                         }}>
                         <Text
                             style={{
-                                color: this.props.negativeColor,
-                                fontSize: this.props.negativeSize || this.getSize(15)
+                                color: negativeColor || themeColor.secondary.toHex(),
+                                fontSize: negativeSize || this.getSize(15)
                             }}>
-                            {this.props.negativeText}
+                            {negativeText}
                         </Text>
                     </TouchableOpacity>
                 </View>
@@ -131,19 +145,24 @@ class AlertDialog extends BaseDialog {
 
 AlertDialog.defaultProps = {
     message: 'Alert Message',
-    messageTextColor: '#444444',
     negativeText: 'Cancel',
-    negativeColor: '#666666',
     positiveText: 'OK',
-    positiveColor: '#1097D5',
     onPress: null
 };
 
 const mapStateToProps = (state) => {
     return {
         popups: state.popups,
-        language: state.settings.language
+        language: state.settings.language,
+        theme: state.settings.theme
     };
 };
 
-export default connect(mapStateToProps)(AlertDialog);
+const mapStateToDispatch = (dispatch) => ({
+    resetMessage: () => dispatch(PopupActions.resetMessage())
+});
+
+export default connect(
+    mapStateToProps,
+    mapStateToDispatch
+)(AlertDialog);
