@@ -1,27 +1,13 @@
 import React from 'react';
 
 import {Text, View, TouchableOpacity, SafeAreaView} from 'react-native';
+import {connect} from 'react-redux';
+
 import BaseDialog from './BaseDialog';
-
 import PickerView from './PickerView';
+import {I18n, Constraints} from '../../Utilities';
 
-export default class SinglePicker extends BaseDialog {
-    static defaultProps = {
-        list: ['item0', 'item1', 'item2', 'item3', 'item4', 'item5', 'item6', 'item7', 'item8', 'item9'],
-        confirmText: 'Select',
-        confirmTextSize: 14,
-        confirmTextColor: '#333333',
-        cancelText: 'Cancel',
-        cancelTextSize: 14,
-        cancelTextColor: '#333333',
-        itemTextColor: 0x333333ff,
-        itemSelectedColor: 0x1097d5ff,
-        itemHeight: 30,
-        onPickerCancel: null,
-        onPickerConfirm: null,
-        removeSubviews: false
-    };
-
+class SinglePicker extends BaseDialog {
     constructor(props) {
         super(props);
     }
@@ -51,19 +37,22 @@ export default class SinglePicker extends BaseDialog {
     }
 
     renderContent() {
+        const {language, theme} = this.props;
+        const themeColor = Constraints.Themes.get(theme);
+
         return (
             <SafeAreaView
                 style={{
                     height: this.props.itemHeight * 6 + this.getSize(15) + this.getSize(30),
                     width: this.screenWidth,
-                    backgroundColor: '#ffffff'
+                    backgroundColor: themeColor.background.toHex()
                 }}>
                 <View
                     style={{
                         width: this.screenWidth,
                         height: this.props.itemHeight * 5 + this.getSize(15),
                         flexDirection: 'row',
-                        justifyContent:'center',
+                        justifyContent: 'center',
                         position: 'absolute',
                         bottom: this.props.itemHeight
                     }}>
@@ -94,9 +83,9 @@ export default class SinglePicker extends BaseDialog {
                             style={{
                                 fontSize: this.props.cancelTextSize,
                                 fontWeight: '400',
-                                color: this.props.cancelTextColor
+                                color: themeColor.textDark.toHex()
                             }}>
-                            {this.props.cancelText}
+                            {I18n.t('buttons', this.props.cancelText, {locale: language})}
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -115,9 +104,9 @@ export default class SinglePicker extends BaseDialog {
                             style={{
                                 fontSize: this.props.confirmTextSize,
                                 fontWeight: '400',
-                                color: this.props.confirmTextColor
+                                color: themeColor.textDark.toHex()
                             }}>
-                            {this.props.confirmText}
+                            {I18n.t('buttons', this.props.confirmText, {locale: language})}
                         </Text>
                     </TouchableOpacity>
                 </View>
@@ -125,3 +114,29 @@ export default class SinglePicker extends BaseDialog {
         );
     }
 }
+
+SinglePicker.defaultProps = {
+    list: ['item0', 'item1', 'item2', 'item3', 'item4', 'item5', 'item6', 'item7', 'item8', 'item9'],
+    confirmText: 'Select',
+    confirmTextSize: 14,
+    cancelText: 'Cancel',
+    cancelTextSize: 14,
+    itemHeight: 30,
+    onPickerCancel: null,
+    onPickerConfirm: null,
+    removeSubviews: false
+};
+
+const mapStateToProps = (state) => {
+    return {
+        language: state.settings.language,
+        theme: state.settings.theme
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    null,
+    null,
+    {withRef: true}
+)(SinglePicker);

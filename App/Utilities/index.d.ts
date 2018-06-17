@@ -14,8 +14,11 @@ export interface IMyStyleSheet {
 }
 export declare const MyStyleSheet: IMyStyleSheet;
 
+class Options {
+    locale: 'zh' | 'en';
+}
 export interface II18n {
-    t(prefix, scope, options);
+    t(prefix: string, scope?: string, options?: Options): string;
 }
 export declare const I18n: II18n;
 

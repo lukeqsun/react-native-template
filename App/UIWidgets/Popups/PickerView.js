@@ -5,16 +5,16 @@
  */
 import React from 'react';
 
-import {View, Animated, PanResponder, SafeAreaView} from 'react-native';
+import {View, Animated, PanResponder} from 'react-native';
 
 import {BaseComponent} from '../../Utilities';
 
 import Svg, {LinearGradient, Rect, Stop} from 'react-native-svg';
+import {connect} from 'react-redux';
+import {I18n, Constraints} from '../../Utilities';
 
 class PickerView extends BaseComponent {
     static defaultProps = {
-        itemTextColor: '#000',
-        itemSelectedColor: '#1097d5',
         itemHeight: 40,
         onPickerSelected: null,
         selectedIndex: 0
@@ -231,6 +231,9 @@ class PickerView extends BaseComponent {
     }
 
     renderItem(item, index) {
+        const {language, theme} = this.props;
+        const themeColor = Constraints.Themes.get(theme);
+
         return (
             <View
                 key={index}
@@ -244,19 +247,22 @@ class PickerView extends BaseComponent {
                     style={{
                         color: this.colorPath[index].interpolate({
                             inputRange: [0, 1],
-                            outputRange: [this.props.itemTextColor, this.props.itemSelectedColor]
+                            outputRange: [themeColor.textDark.toHex(), themeColor.primary.toHex()]
                         }),
                         fontSize: this.props.fontSize ? this.props.fontSize : this.getSize(15),
                         backgroundColor: 'transparent',
                         fontWeight: 'normal'
                     }}>
-                    {item}
+                    {I18n.t('list_items', item, {locale: language})}
                 </Animated.Text>
             </View>
         );
     }
 
     render() {
+        const {theme} = this.props;
+        const themeColor = Constraints.Themes.get(theme);
+
         return (
             <View
                 style={{
@@ -286,19 +292,21 @@ class PickerView extends BaseComponent {
                     <View
                         style={{
                             position: 'absolute',
-                            width: this.props.itemWidth,
-                            height: this.mOnePixel,
+                            alignSelf:'center',
+                            width: parseInt(this.props.itemWidth * 0.9),
+                            height: this.onePixel,
                             top: (this.props.itemHeight * 4) / 2,
-                            backgroundColor: '#E8EEF0'
+                            backgroundColor: themeColor.secondary.toRGBA(0.7)
                         }}
                     />
                     <View
                         style={{
                             position: 'absolute',
-                            width: this.props.itemWidth,
-                            height: this.mOnePixel,
+                            alignSelf:'center',
+                            width: parseInt(this.props.itemWidth * 0.9),
+                            height: this.onePixel,
                             top: (this.props.itemHeight * 6) / 2,
-                            backgroundColor: '#E8EEF0'
+                            backgroundColor: themeColor.secondary.toRGBA(0.7)
                         }}
                     />
                     <Svg
@@ -312,8 +320,8 @@ class PickerView extends BaseComponent {
                         height={this.props.itemHeight}
                         width={this.props.itemWidth}>
                         <LinearGradient id="grad" x1="0" y1={this.props.itemHeight} x2={0} y2="0">
-                            <Stop offset="0" stopColor="#ffffff" stopOpacity="0.2" />
-                            <Stop offset="1" stopColor="#ffffff" stopOpacity="1" />
+                            <Stop offset="0" stopColor={themeColor.background.toHex()} stopOpacity="0.2" />
+                            <Stop offset="1" stopColor={themeColor.background.toHex()} stopOpacity="1" />
                         </LinearGradient>
                         <Rect
                             x="0"
@@ -336,8 +344,8 @@ class PickerView extends BaseComponent {
                         height={this.props.itemHeight}
                         width={this.props.itemWidth}>
                         <LinearGradient id="grad" x1="0" y1={this.props.itemHeight} x2={0} y2="0">
-                            <Stop offset="0" stopColor="#ffffff" stopOpacity="1" />
-                            <Stop offset="1" stopColor="#ffffff" stopOpacity="0.4" />
+                            <Stop offset="0" stopColor={themeColor.background.toHex()} stopOpacity="1" />
+                            <Stop offset="1" stopColor={themeColor.background.toHex()} stopOpacity="0.4" />
                         </LinearGradient>
                         <Rect
                             x="0"
@@ -353,7 +361,7 @@ class PickerView extends BaseComponent {
                             width: this.screenWidth,
                             height: this.props.itemHeight,
                             bottom: 0,
-                            backgroundColor: '#fff',
+                            backgroundColor: themeColor.background.toHex(),
                             position: 'absolute'
                         }}
                     />
@@ -363,4 +371,11 @@ class PickerView extends BaseComponent {
     }
 }
 
-export default PickerView;
+const mapStateToProps = (state) => {
+    return {
+        language: state.settings.language,
+        theme: state.settings.theme
+    };
+};
+
+export default connect(mapStateToProps)(PickerView);

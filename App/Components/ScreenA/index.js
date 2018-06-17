@@ -66,7 +66,8 @@ class ScreenA extends BaseComponent {
     }
 
     _onSinglePickerPress() {
-        this.SinglePicker.show();
+        // this.SinglePicker.getWrappedInstance.show();
+        this.refs['SinglePicker'].getWrappedInstance().show();
     }
 
     _onHeaderMessage() {
@@ -144,7 +145,7 @@ class ScreenA extends BaseComponent {
                             </View>
                         </View>
                     </ScrollView>
-                    <SinglePicker ref={(ref) => (this.SinglePicker = ref)} cancelable />
+                    <SinglePicker ref={'SinglePicker'} cancelable />
                 </SafeAreaView>
             </View>
         );

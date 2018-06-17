@@ -13,6 +13,12 @@
         "Settings": "Settings"
     },
     "buttons": {
+        "Cancel": "Cancel",
+        "Confirm": "Confirm",
+        "Select": "Select",
+        "Yes": "Yes",
+        "OK": "OK",
+        "No": "No",
         "ShowToast": "Show Toast",
         "ChangeTheme": "Change Theme",
         "AddToScreenA": "Add To ScreenA",
