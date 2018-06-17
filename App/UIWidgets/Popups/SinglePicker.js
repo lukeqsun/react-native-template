@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Text, View, TouchableOpacity} from 'react-native';
+import {Text, View, TouchableOpacity, SafeAreaView} from 'react-native';
 import BaseDialog from './BaseDialog';
 
 import PickerView from './PickerView';
@@ -19,7 +19,7 @@ export default class SinglePicker extends BaseDialog {
         itemHeight: 30,
         onPickerCancel: null,
         onPickerConfirm: null,
-        removeSubviews: false,
+        removeSubviews: false
     };
 
     constructor(props) {
@@ -34,8 +34,7 @@ export default class SinglePicker extends BaseDialog {
         return (
             <View
                 style={{
-                    width: this.screenWidth,
-                    backgroundColor: '#f00'
+                    width: this.screenWidth
                 }}>
                 <PickerView
                     list={this.props.list}
@@ -45,7 +44,7 @@ export default class SinglePicker extends BaseDialog {
                     selectedIndex={0}
                     fontSize={this.getSize(14)}
                     itemWidth={this.screenWidth}
-                    itemHeight={this.getSize(30)}
+                    itemHeight={this.getSize(25)}
                 />
             </View>
         );
@@ -53,9 +52,9 @@ export default class SinglePicker extends BaseDialog {
 
     renderContent() {
         return (
-            <View
+            <SafeAreaView
                 style={{
-                    height: this.props.itemHeight * 5 + this.getSize(15) + this.getSize(44),
+                    height: this.props.itemHeight * 6 + this.getSize(15) + this.getSize(30),
                     width: this.screenWidth,
                     backgroundColor: '#ffffff'
                 }}>
@@ -64,16 +63,16 @@ export default class SinglePicker extends BaseDialog {
                         width: this.screenWidth,
                         height: this.props.itemHeight * 5 + this.getSize(15),
                         flexDirection: 'row',
+                        justifyContent:'center',
                         position: 'absolute',
-                        bottom: 0
+                        bottom: this.props.itemHeight
                     }}>
                     {this.renderPicker()}
                 </View>
                 <View
                     style={{
                         width: this.screenWidth,
-                        height: this.getSize(44),
-                        backgroundColor: '#ffffff',
+                        height: this.getSize(30),
                         flexDirection: 'row',
                         justifyContent: 'space-between',
                         position: 'absolute',
@@ -122,7 +121,7 @@ export default class SinglePicker extends BaseDialog {
                         </Text>
                     </TouchableOpacity>
                 </View>
-            </View>
+            </SafeAreaView>
         );
     }
 }

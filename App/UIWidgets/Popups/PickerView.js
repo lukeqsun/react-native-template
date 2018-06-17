@@ -5,7 +5,7 @@
  */
 import React from 'react';
 
-import {View, Animated, PanResponder} from 'react-native';
+import {View, Animated, PanResponder, SafeAreaView} from 'react-native';
 
 import {BaseComponent} from '../../Utilities';
 
@@ -13,8 +13,8 @@ import Svg, {LinearGradient, Rect, Stop} from 'react-native-svg';
 
 class PickerView extends BaseComponent {
     static defaultProps = {
-        itemTextColor: 0x333333ff,
-        itemSelectedColor: 0x1097d5ff,
+        itemTextColor: '#000',
+        itemSelectedColor: '#1097d5',
         itemHeight: 40,
         onPickerSelected: null,
         selectedIndex: 0
@@ -46,8 +46,8 @@ class PickerView extends BaseComponent {
         this.onPanResponderMove = this.onPanResponderMove.bind(this);
         this.onPanResponderEnd = this.onPanResponderEnd.bind(this);
 
-        this.parentTopY = this.mScreenHeight - props.itemHeight * 5 - this.getSize(15);
-        this.parentBottomY = this.mScreenHeight - this.getSize(15);
+        this.parentTopY = this.screenHeight - props.itemHeight * 5 - this.getSize(15);
+        this.parentBottomY = this.screenHeight - this.getSize(15);
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -246,7 +246,7 @@ class PickerView extends BaseComponent {
                             inputRange: [0, 1],
                             outputRange: [this.props.itemTextColor, this.props.itemSelectedColor]
                         }),
-                        fontSize: this.props.fontSize ? this.props.fontSize : this.getSize(20),
+                        fontSize: this.props.fontSize ? this.props.fontSize : this.getSize(15),
                         backgroundColor: 'transparent',
                         fontWeight: 'normal'
                     }}>
@@ -262,7 +262,7 @@ class PickerView extends BaseComponent {
                 style={{
                     width: this.props.itemWidth,
                     height: this.props.itemHeight * 5 + this.getSize(15),
-                    backgroundColor: '#ffffff'
+                    backgroundColor: 'transparent'
                 }}>
                 <View
                     ref={(ref) => (this.ref = ref)}
@@ -271,7 +271,7 @@ class PickerView extends BaseComponent {
                         overflow: 'hidden',
                         width: this.props.itemWidth,
                         height: this.props.itemHeight * 5 + this.getSize(15),
-                        backgroundColor: '#ffffff'
+                        backgroundColor: 'transparent'
                     }}>
                     <Animated.View
                         style={{
@@ -309,9 +309,9 @@ class PickerView extends BaseComponent {
                             return false;
                         }}
                         style={{position: 'absolute', top: 0}}
-                        height={this.props.itemHeight * 1}
+                        height={this.props.itemHeight}
                         width={this.props.itemWidth}>
-                        <LinearGradient id="grad" x1="0" y1={this.props.itemHeight * 1} x2={0} y2="0">
+                        <LinearGradient id="grad" x1="0" y1={this.props.itemHeight} x2={0} y2="0">
                             <Stop offset="0" stopColor="#ffffff" stopOpacity="0.2" />
                             <Stop offset="1" stopColor="#ffffff" stopOpacity="1" />
                         </LinearGradient>
@@ -319,7 +319,7 @@ class PickerView extends BaseComponent {
                             x="0"
                             y="0"
                             width={this.props.itemWidth}
-                            height={this.props.itemHeight * 1}
+                            height={this.props.itemHeight}
                             fill="url(#grad)"
                             clipPath="url(#clip)"
                         />
@@ -333,9 +333,9 @@ class PickerView extends BaseComponent {
                             return false;
                         }}
                         style={{position: 'absolute', bottom: this.getSize(15)}}
-                        height={this.props.itemHeight * 1}
+                        height={this.props.itemHeight}
                         width={this.props.itemWidth}>
-                        <LinearGradient id="grad" x1="0" y1={this.props.itemHeight * 1} x2={0} y2="0">
+                        <LinearGradient id="grad" x1="0" y1={this.props.itemHeight} x2={0} y2="0">
                             <Stop offset="0" stopColor="#ffffff" stopOpacity="1" />
                             <Stop offset="1" stopColor="#ffffff" stopOpacity="0.4" />
                         </LinearGradient>
@@ -343,17 +343,17 @@ class PickerView extends BaseComponent {
                             x="0"
                             y="0"
                             width={this.props.itemWidth}
-                            height={this.props.itemHeight * 1}
+                            height={this.props.itemHeight}
                             fill="url(#grad)"
                             clipPath="url(#clip)"
                         />
                     </Svg>
                     <View
                         style={{
-                            width: this.mScreenWidth,
-                            height: this.getSize(15),
+                            width: this.screenWidth,
+                            height: this.props.itemHeight,
                             bottom: 0,
-                            backgroundColor: '#ffffff',
+                            backgroundColor: '#fff',
                             position: 'absolute'
                         }}
                     />
