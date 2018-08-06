@@ -78,7 +78,7 @@ class InputDialog extends BaseDialog {
                                 color: cancelColor || colorTheme.secondary.toHex(),
                                 marginLeft: this.getSize(5)
                             }}>
-                            {cancelText}
+                            {I18n.t('buttons', cancelText, {locale: language})}
                         </Text>
                     </TouchableOpacity>
                     <Text
@@ -90,11 +90,36 @@ class InputDialog extends BaseDialog {
                         }}>
                         {I18n.t('dialogs', title, {locale: language})}
                     </Text>
+                    <TouchableOpacity
+                        onPress={() => {
+                            this.dismiss(() => {
+                                onSubmit && onSubmit(this.inputText);
+                            });
+                        }}
+                        style={{
+                            position: 'absolute',
+                            right: this.getSize(10),
+                            height: this.getSize(40),
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            marginLeft: this.getSize(5)
+                        }}>
+                        <Text
+                            style={{
+                                fontSize: cancelSize,
+                                color: btnBgColor || colorTheme.primary.toHex(),
+                                marginLeft: this.getSize(5)
+                            }}>
+                            {I18n.t('buttons', btnText, {locale: language})}
+                        </Text>
+                    </TouchableOpacity>
                 </View>
                 <TextInput
                     ref={(ref) => (this.textInput = ref)}
                     style={{
-                        marginHorizontal: this.getSize(15),
+                        margin: this.getSize(15),
+                        marginTop:0,
                         minHeight: parseInt(this.screenHeight / 5),
                         color: colorTheme.textDark.toRGBA(0.9),
                         fontSize: this.getSize(14),
@@ -116,23 +141,6 @@ class InputDialog extends BaseDialog {
                         this.inputText = text;
                     }}
                 />
-                <View
-                    style={{
-                        padding: this.getSize(15)
-                    }}>
-                    <Button
-                        onPress={() =>
-                            this.dismiss(() => {
-                                onSubmit && onSubmit(this.inputText);
-                            })
-                        }
-                        text={I18n.t('buttons', btnText, {locale: language})}
-                        style={{
-                            alignSelf: 'flex-end',
-                            backgroundColor: btnBgColor || colorTheme.primary.toHex()
-                        }}
-                    />
-                </View>
                 <KeyboardSpacer />
             </SafeAreaView>
         );
