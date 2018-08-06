@@ -13,10 +13,34 @@
         "Settings": "Settings"
     },
     "buttons": {
+        "Cancel": "Cancel",
+        "Confirm": "Confirm",
+        "Select": "Select",
+        "Submit": "Submit",
+        "Yes": "Yes",
+        "OK": "OK",
+        "No": "No",
         "ShowToast": "Show Toast",
         "ChangeTheme": "Change Theme",
         "AddToScreenA": "Add To ScreenA",
         "DeleteAllBadge": "Delete All Badge",
-        "AddToSettings": "Add To Settings"
+        "AddToSettings": "Add To Settings",
+        "ShowAlertDialog": "Show Alert Dialog",
+        "ShowSinglePicker": "Show Single Picker",
+        "ShowHeaderMessage": "Show Header Message"
+    },
+    "alerts": {
+        "DefaultMessage": "Default message"
+    },
+    "dialogs": {
+        "DefaultMessage": "Default message",
+        "InputTitle": "Default Title",
+        "DefaultPlaceholder": "Default placeholder"
+    },
+    "toast": {
+        "welcome": "Welcome"
+    },
+    "header_message": {
+        "DefaultMessage": "Default Message"
     }
 }

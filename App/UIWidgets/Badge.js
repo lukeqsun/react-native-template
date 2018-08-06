@@ -31,15 +31,15 @@ class Badge extends BaseComponent {
 
     render() {
         let {backgroundColor, fontSize, labels, textColor, size, badgeKey} = this.props;
-        let _height = parseInt(this.screenHeight / 35);
+        let _height = parseInt(this.screenHeight / 30);
 
-        if (size == 'small') _height = parseInt(this.screenHeight / 40);
-        else if (size == 'large') _height = parseInt(this.screenHeight / 30);
+        if (size == 'small') _height = parseInt(_height * 0.85);
+        else if (size == 'large') _height = parseInt(_height * 1.1);
 
         let label = labels[badgeKey] || this.props.label;
 
         if (label == 0) {
-            _height = parseInt(this.screenHeight / 120);
+            _height = parseInt(this.screenHeight / 80);
         }
 
         if (this.isLandscape()) {

@@ -3,35 +3,36 @@
  *
  * Copyright (c) 2018 Youke Xiang
  */
+import Color from '../Classes/Color';
 
 const _themes = {
     default: {
-        black: '#2b2b2b',
-        white: '#fff',
-        primary: '#007bff',
-        secondary: '#6c757d',
-        success: '#28a745',
-        danger: '#dc3545',
-        warning: '#ffc107',
-        info: '#17a2b8',
-        textLight: '#fff',
-        textDark: '#000',
-        background: '#fff',
-        secondaryBackground: '#ccc'
+        black: new Color('#2b2b2b'),
+        white: new Color('#fff'),
+        primary: new Color('#007bff'),
+        secondary: new Color('#6c757d'),
+        success: new Color('#28a745'),
+        danger: new Color('#dc3545'),
+        warning: new Color('#ffc107'),
+        info: new Color('#17a2b8'),
+        textLight: new Color('#fff'),
+        textDark: new Color('#000'),
+        background: new Color('#fff'),
+        secondaryBackground: new Color('#ccc')
     },
     gray: {
-        black: '#000',
-        white: '#fff',
-        primary: '#555',
-        secondary: '#888',
-        success: '#28a745',
-        danger: '#dc3545',
-        warning: '#ffc107',
-        info: '#c1c1c1',
-        textLight: '#eee',
-        textDark: '#ccc',
-        background: '#2b2b2b',
-        secondaryBackground: '#ccc'
+        black: new Color('#000'),
+        white: new Color('#fff'),
+        primary: new Color('#555'),
+        secondary: new Color('#888'),
+        success: new Color('#28a745'),
+        danger: new Color('#dc3545'),
+        warning: new Color('#ffc107'),
+        info: new Color('#17a2b8'),
+        textLight: new Color('#eee'),
+        textDark: new Color('#ccc'),
+        background: new Color('#2b2b2b'),
+        secondaryBackground: new Color('#ccc')
     }
 };
 

@@ -7,9 +7,13 @@
 import MyStyleSheet from './MyStyleSheet';
 import BaseComponent from './BaseComponent';
 import Constraints from './Constraints';
+import I18n from './Helpers/I18nHelper';
+import DeviceHelper from './Helpers/DeviceHelper';
 
 module.exports = {
     MyStyleSheet: MyStyleSheet,
     Constraints: Constraints,
-    BaseComponent: BaseComponent
+    BaseComponent: BaseComponent,
+    I18n: I18n,
+    DeviceHelper: DeviceHelper
 };

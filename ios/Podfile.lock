@@ -3,6 +3,8 @@ PODS:
     - React/Core (= 0.55.4)
   - react-native-orientation (3.1.3):
     - React
+  - react-native-spinkit (1.0.2):
+    - React
   - React/Core (0.55.4):
     - yoga (= 0.55.4.React)
   - React/DevSupport (0.55.4):
@@ -36,10 +38,13 @@ PODS:
     - React/RCTBlob
   - RNI18n (2.0.12):
     - React
+  - RNSVG (6.3.1):
+    - React
   - yoga (0.55.4.React)
 
 DEPENDENCIES:
   - react-native-orientation (from `../node_modules/react-native-orientation`)
+  - react-native-spinkit (from `../node_modules/react-native-spinkit`)
   - React/Core (from `../node_modules/react-native`)
   - React/DevSupport (from `../node_modules/react-native`)
   - React/RCTActionSheet (from `../node_modules/react-native`)
@@ -53,6 +58,7 @@ DEPENDENCIES:
   - React/RCTVibration (from `../node_modules/react-native`)
   - React/RCTWebSocket (from `../node_modules/react-native`)
   - RNI18n (from `../node_modules/react-native-i18n`)
+  - RNSVG (from `../node_modules/react-native-svg`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
 
 EXTERNAL SOURCES:
@@ -60,17 +66,23 @@ EXTERNAL SOURCES:
     :path: ../node_modules/react-native
   react-native-orientation:
     :path: ../node_modules/react-native-orientation
+  react-native-spinkit:
+    :path: ../node_modules/react-native-spinkit
   RNI18n:
     :path: ../node_modules/react-native-i18n
+  RNSVG:
+    :path: ../node_modules/react-native-svg
   yoga:
     :path: ../node_modules/react-native/ReactCommon/yoga/yoga.podspec
 
 SPEC CHECKSUMS:
   React: aa2040dbb6f317b95314968021bd2888816e03d5
   react-native-orientation: 3d9a0a8273d18260f7528414093a6a36491382b6
+  react-native-spinkit: c9f5826e1a0bf0da889b3795278eb96ae15c1350
   RNI18n: db9be06a40336f04d136f24dd5de3f5eb9f3207c
+  RNSVG: 6252323c0312735f0af5f58b5adf2965b6a9ffbf
   yoga: a23273df0088bf7f2bb7e5d7b00044ea57a2a54a
 
-PODFILE CHECKSUM: 5c39ebe22e0d21610b759c6880b86f4bba4ece2d
+PODFILE CHECKSUM: 4d3125f42b2c57acf5f228b83c032bacebab3513
 
 COCOAPODS: 1.4.0

@@ -5,15 +5,13 @@ import SettingsActions from '../Reducers/Settings';
 import I18n from 'react-native-i18n';
 import {MyStyleSheet, BaseComponent} from '../Utilities';
 import CacheStore from 'react-native-cache-store';
-import {Button, FontAwesomeIcon, Badge} from '../UIWidgets';
+import {Button, FontAwesome, Badge} from '../UIWidgets';
 class Settings extends BaseComponent {
     static navigationOptions = {
-        tabBarIcon: ({tintColor, theme}) => (
+        tabBarIcon: ({tintColor}) => (
             <View>
                 <Badge label={0} size="small" badgeKey="SettingsBadge" />
-                <FontAwesomeIcon style={[MyStyleSheet.get(theme).tabBarIconText, {color: tintColor}]}>
-                    {FontAwesomeIcon.Icons.cog}
-                </FontAwesomeIcon>
+                <FontAwesome size={MyStyleSheet.getAdjustHeight(26)} type={'solid'} color={tintColor} name={'cog'} />
             </View>
         )
     };
@@ -27,7 +25,7 @@ class Settings extends BaseComponent {
             return (
                 <Picker.Item
                     key={i}
-                    color={themeColor.textDark}
+                    color={themeColor.textDark.toHex()}
                     label={I18n.translations[lang].id}
                     value={lang}
                 />
@@ -39,14 +37,13 @@ class Settings extends BaseComponent {
                     {I18n.t('settings.language', {locale: language})}
                 </Text>
                 <Picker
-                    style={styles.flexBox}
                     selectedValue={language}
                     onValueChange={this._languageChanged(changeLanguage, setParams)}>
                     {languageOptions}
                 </Picker>
                 <Button
                     text="ChangeTheme"
-                    color={themeColor.primary}
+                    color={themeColor.primary.toHex()}
                     onPress={() => this._onColorChangePress(changeTheme)}
                 />
             </SafeAreaView>
@@ -78,4 +75,7 @@ const mapStateToDispatch = (dispatch) => ({
     changeTheme: () => dispatch(SettingsActions.changeTheme())
 });
 
-export default connect(mapStateToProps, mapStateToDispatch)(Settings);
+export default connect(
+    mapStateToProps,
+    mapStateToDispatch
+)(Settings);

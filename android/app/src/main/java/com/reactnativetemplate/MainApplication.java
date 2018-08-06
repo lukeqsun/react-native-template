@@ -9,6 +9,8 @@ import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
 import com.github.yamill.orientation.OrientationPackage;
+import com.horcrux.svg.SvgPackage;
+import com.react.rnspinkit.RNSpinkitPackage; 
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +28,9 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
           new RNI18nPackage(),
-          new OrientationPackage()
+          new OrientationPackage(),
+          new SvgPackage(),
+          new RNSpinkitPackage()
       );
     }
 

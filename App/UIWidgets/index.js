@@ -5,17 +5,19 @@
  */
 
 import Button from './Button';
-import FontAwesomeIcon from './FontAwesomeJs/Icon';
-import FontAwesomeSpinner from './FontAwesomeJs/SpinningIcon';
-import Toast from './Toast';
+import FontAwesome from './FontAwesomeJs';
+import Toast from './Popups/Toast';
 import RootView from './RootView';
 import Badge from './Badge';
+import KeyboardSpacer from './KeyboardSpacer';
+import HeaderMessage from './Popups/HeaderMessage';
 
 module.exports = {
     Button: Button,
-    FontAwesomeIcon: FontAwesomeIcon,
-    FontAwesomeSpinner: FontAwesomeSpinner,
+    FontAwesome: FontAwesome,
     Toast: Toast,
     RootView: RootView,
-    Badge: Badge
+    Badge: Badge,
+    HeaderMessage: HeaderMessage,
+    KeyboardSpacer: KeyboardSpacer
 };

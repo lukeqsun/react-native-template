@@ -6,11 +6,13 @@
 
 import React from 'react';
 import {View, TouchableOpacity, Text, Image} from 'react-native';
-import {MyStyleSheet, BaseComponent} from '../Utilities';
-import I18n from 'react-native-i18n';
+import {MyStyleSheet, BaseComponent, I18n} from '../Utilities';
 import {connect} from 'react-redux';
 
 class Button extends BaseComponent {
+    componentDidMount() {
+        super.componentDidMount();
+    }
     render() {
         const {useDefaultStyle, disabled, color, language, theme} = this.props;
         const styles = MyStyleSheet.get(theme);
@@ -30,12 +32,12 @@ class Button extends BaseComponent {
                 return (
                     <Text
                         style={[
-                            styles.textMedium,
+                            styles.textSmall,
                             {
                                 color: _tintColor
                             }
                         ]}>
-                        {I18n.t(`buttons.${text || children}`, {locale: language})}
+                        {I18n.t('buttons', `${text || children}`, {locale: language})}
                     </Text>
                 );
             } else if (image) {
@@ -45,8 +47,8 @@ class Button extends BaseComponent {
             }
         };
         return (
-            <TouchableOpacity {...this.props} disabled={disabled}>
-                <View style={containerStyle}>{childView()}</View>
+            <TouchableOpacity {...this.props} style={[{alignSelf: 'center'}, containerStyle]} disabled={disabled}>
+                <View>{childView()}</View>
             </TouchableOpacity>
         );
     }

@@ -6,9 +6,9 @@
 import React from 'react';
 
 import {View, Text, Animated} from 'react-native';
-import {BaseComponent} from '../Utilities';
+import {BaseComponent, I18n} from '../../Utilities';
 import {connect} from 'react-redux';
-import I18n from 'react-native-i18n';
+import PopupActions from '../../Reducers/Popups';
 
 class Toast extends BaseComponent {
     static defaultProps = {
@@ -34,28 +34,33 @@ class Toast extends BaseComponent {
         };
     }
 
-    UNSAFE_componentWillReceiveProps({toast, language}) {
-        const {message, duration} = toast;
-        if (message) {
-            let _message = I18n.t(message, {locale: language}) || message;
+    UNSAFE_componentWillReceiveProps({popups, language}) {
+        const {message, duration, type} = popups;
+        if (message && type == 'toast') {
+            let _message = I18n.t('toast', message, {locale: language});
             this.show(_message);
-            this.timeoutId = setTimeout(() => {
-                Animated.timing(this.opacity, {toValue: 0, duration: 200}).start(() => {
-                    this.setState({toastVisible: false});
-                });
+            this.props.resetMessage();
+            this._timeoutId = setTimeout(() => {
+                this.hide();
             }, duration);
         }
     }
 
     show(message) {
-        this.timeoutId && clearTimeout(this.timeoutId);
+        this._timeoutId && clearTimeout(this._timeoutId);
         this.opacity.setValue(0);
         this.setState({toastText: message, toastVisible: true});
         Animated.timing(this.opacity, {toValue: 1, duration: 200}).start();
     }
 
+    hide() {
+        Animated.timing(this.opacity, {toValue: 0, duration: 200}).start(() => {
+            this.setState({toastVisible: false});
+        });
+    }
+
     componentWillUnmount() {
-        this.timeoutId && clearTimeout(this.timeoutId);
+        this._timeoutId && clearTimeout(this._timeoutId);
     }
 
     render() {
@@ -92,17 +97,23 @@ class Toast extends BaseComponent {
                     </View>
                 </Animated.View>
             );
-        } else {
-            return <View />;
         }
+        return null;
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        toast: state.toast,
+        popups: state.popups,
         language: state.settings.language
     };
 };
 
-export default connect(mapStateToProps)(Toast);
+const mapStateToDispatch = (dispatch) => ({
+    resetMessage: () => dispatch(PopupActions.resetMessage())
+});
+
+export default connect(
+    mapStateToProps,
+    mapStateToDispatch
+)(Toast);

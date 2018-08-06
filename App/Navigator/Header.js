@@ -10,6 +10,7 @@ import HeaderBackButton from 'react-navigation/src/views/Header/HeaderBackButton
 import ModularHeaderBackButton from 'react-navigation/src/views/Header//ModularHeaderBackButton';
 import HeaderStyleInterpolator from 'react-navigation/src/views/Header//HeaderStyleInterpolator';
 import {Constraints} from '../Utilities';
+import {HeaderMessage} from '../UIWidgets';
 
 const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
@@ -411,7 +412,7 @@ class Header extends React.PureComponent {
         const themeColor = Constraints.Themes.get(theme);
         const containerStyles = [
             options.headerTransparent ? styles.transparentContainer : styles.container,
-            {height: appBarHeight, backgroundColor: themeColor.primary},
+            {height: appBarHeight, backgroundColor: themeColor.primary.toHex()},
             safeHeaderStyle
         ];
 
@@ -423,6 +424,7 @@ class Header extends React.PureComponent {
                 <SafeAreaView forceInset={forceInset} style={containerStyles}>
                     <View style={StyleSheet.absoluteFill}>{options.headerBackground}</View>
                     <View style={styles.flexOne}>{appBar}</View>
+                    <HeaderMessage />
                 </SafeAreaView>
             </Animated.View>
         );
@@ -526,7 +528,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
     return {
         language: state.settings.language,
-        theme: state.settings.theme
+        theme: state.settings.theme,
+        popups: state.popups
     };
 };
 

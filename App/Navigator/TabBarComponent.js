@@ -35,7 +35,7 @@ class TabBarBottom extends BaseComponent {
         }
         const themeColor = Constraints.Themes.get(theme);
         const label = I18n.t(`navigator.${route.routeName}`, {locale: language});
-        const tintColor = focused ? themeColor.primary : themeColor.secondary;
+        const tintColor = focused ? themeColor.primary.toHex() : themeColor.secondary.toHex();
         let styles = MyStyleSheet.get(theme);
         if (typeof label === 'string') {
             return (
@@ -70,8 +70,8 @@ class TabBarBottom extends BaseComponent {
                 navigation={navigation}
                 activeOpacity={activeOpacity}
                 inactiveOpacity={inactiveOpacity}
-                activeTintColor={themeColor.primary}
-                inactiveTintColor={themeColor.secondary}
+                activeTintColor={themeColor.primary.toHex()}
+                inactiveTintColor={themeColor.secondary.toHex()}
                 renderIcon={renderIcon}
                 style={styles.tabBarIcon}
             />
@@ -84,10 +84,7 @@ class TabBarBottom extends BaseComponent {
         const styles = MyStyleSheet.get(theme);
         const themeColor = Constraints.Themes.get(theme);
         const tabBarStyle = [styles.tabBar, style];
-        let tabBarHeight = parseInt(this.screenHeight * 0.07);
-        if (this.state.orientation == 'LANDSCAPE') {
-            tabBarHeight = parseInt(this.screenHeight * 0.1);
-        }
+        let tabBarHeight = MyStyleSheet.getAdjustHeight(11);
 
         return (
             <SafeAreaView style={tabBarStyle} forceInset={{bottom: 'always', top: 'never'}}>
@@ -96,8 +93,8 @@ class TabBarBottom extends BaseComponent {
                     const scene = {route, focused};
 
                     const backgroundColor = focused
-                        ? themeColor.secondaryBackground
-                        : themeColor.background;
+                        ? themeColor.secondaryBackground.toHex()
+                        : themeColor.background.toHex();
 
                     return (
                         <TouchableWithoutFeedback

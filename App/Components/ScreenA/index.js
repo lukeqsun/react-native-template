@@ -6,27 +6,27 @@
 
 import React from 'react';
 import {Text, View, SafeAreaView, ScrollView} from 'react-native';
-import {MyStyleSheet, BaseComponent} from '../../Utilities';
+import {MyStyleSheet, BaseComponent, I18n} from '../../Utilities';
 import {connect} from 'react-redux';
-import I18n from 'react-native-i18n';
-import {Button, FontAwesomeIcon, Badge} from '../../UIWidgets';
-import ToastActions from '../../Reducers/Toast';
+import {Button, FontAwesome, Badge} from '../../UIWidgets';
+import PopupActions from '../../Reducers/Popups';
 import BadgeActions from '../../Reducers/Badge';
+import SinglePicker from '../../UIWidgets/Popups/SinglePicker';
+import InputDialog from '../../UIWidgets/Popups/InputDialog';
 
 class ScreenA extends BaseComponent {
     static navigationOptions = {
         tabBarIcon: (props) => {
-            let {tintColor, theme} = props;
+            let {tintColor} = props;
             return (
                 <View>
                     <Badge size="small" badgeKey="ScreenABadge" />
-                    <FontAwesomeIcon
-                        style={[
-                            MyStyleSheet.get(theme).tabBarIconText,
-                            {fontFamily: 'Font Awesome 5 Brands', color: tintColor}
-                        ]}>
-                        {'\uf170'}
-                    </FontAwesomeIcon>
+                    <FontAwesome
+                        size={MyStyleSheet.getAdjustHeight(26)}
+                        type={'brands'}
+                        color={tintColor}
+                        name={'aws'}
+                    />
                 </View>
             );
         }
@@ -59,6 +59,27 @@ class ScreenA extends BaseComponent {
         deleteAllBadgeLabel();
     }
 
+    _onAlertDialogPress() {
+        const {showAlert} = this.props;
+        showAlert('This is alert message!', (cb) => {
+            console.log(cb);
+        });
+    }
+
+    _onSinglePickerPress() {
+        // this.SinglePicker.getWrappedInstance.show();
+        this.refs['SinglePicker'].getWrappedInstance().show();
+    }
+
+    _onHeaderMessage() {
+        const {showHeaderMessage} = this.props;
+        showHeaderMessage('DefaultMessage', 2000, 'success');
+    }
+
+    _onInputDialogPress() {
+        this.refs['InputDialog'].getWrappedInstance().show();
+    }
+
     render() {
         const {language, theme} = this.props;
         const styles = MyStyleSheet.get(theme);
@@ -69,44 +90,75 @@ class ScreenA extends BaseComponent {
                     <ScrollView>
                         <View style={[styles.row]}>
                             <Text style={[styles.textSmall, styles.flexBox, styles.textDark]}>
-                                {I18n.t('settings.height', {locale: language})} {this.screenHeight}
+                                {I18n.t('settings', 'height', {locale: language})} {this.screenHeight}
                             </Text>
                             <Text style={[styles.textSmall, styles.textDark]}>
-                                {I18n.t('settings.width', {locale: language})} {this.screenWidth}
+                                {I18n.t('settings', 'width', {locale: language})} {this.screenWidth}
                             </Text>
                         </View>
                         <View>
+                            <Text style={[styles.textCenter, styles.titleText]}>Pop Up</Text>
                             <Button
                                 text="ShowToast"
-                                color={themeColor.warning}
+                                color={themeColor.warning.toDarkerColor(50)}
                                 onPress={() => this._onToasterPress()}
                             />
-                        </View>
-                        <View>
-                            <Text style={[styles.textCenter, styles.titleText]}>Badge</Text>
                             <View style={{marginTop: 10}}>
                                 <Button
+                                    text="ShowAlertDialog"
+                                    color={themeColor.warning.toHex()}
+                                    onPress={() => this._onAlertDialogPress()}
+                                />
+                            </View>
+                            <View style={{marginTop: 10}}>
+                                <Button
+                                    text="ShowSinglePicker"
+                                    color={themeColor.danger.toDarkerColor(50)}
+                                    onPress={() => this._onSinglePickerPress()}
+                                />
+                            </View>
+                            <View style={{marginTop: 10}}>
+                                <Button
+                                    text="showInputDialog"
+                                    color={themeColor.danger.toDarkerColor(-50)}
+                                    onPress={() => this._onInputDialogPress()}
+                                />
+                            </View>
+                            <View style={{marginTop: 10}}>
+                                <Button
+                                    text="ShowHeaderMessage"
+                                    color={themeColor.info.toHex()}
+                                    onPress={() => this._onHeaderMessage()}
+                                />
+                            </View>
+                        </View>
+                        <View>
+                            <View style={{marginTop: 10}}>
+                                <Text style={[styles.textCenter, styles.titleText]}>Badge</Text>
+                                <Button
                                     text="AddToScreenA"
-                                    color={themeColor.success}
+                                    color={themeColor.success.toHex()}
                                     onPress={() => this._onBtnAddBadgePress('ScreenABadge')}
                                 />
                             </View>
                             <View style={{marginTop: 10}}>
                                 <Button
                                     text="AddToSettings"
-                                    color={themeColor.success}
+                                    color={themeColor.success.toRGBA(0.7)}
                                     onPress={() => this._onBtnAddBadgePress('SettingsBadge')}
                                 />
                             </View>
                             <View style={{marginTop: 10}}>
                                 <Button
                                     text="DeleteAllBadge"
-                                    color={themeColor.danger}
+                                    color={themeColor.danger.toHex()}
                                     onPress={() => this._onDeleteAllBadgePress()}
                                 />
                             </View>
                         </View>
                     </ScrollView>
+                    <SinglePicker ref={'SinglePicker'} cancelable />
+                    <InputDialog ref={'InputDialog'} cancelable />
                 </SafeAreaView>
             </View>
         );
@@ -121,9 +173,15 @@ const mapStateToProps = (state) => {
 };
 
 const mapStateToDispatch = (dispatch) => ({
-    showToast: (message) => dispatch(ToastActions.showToast(message)),
+    showToast: (message) => dispatch(PopupActions.showToast(message)),
+    showAlert: (message, onPress) => dispatch(PopupActions.showAlert(message, onPress)),
+    showHeaderMessage: (message, duration, backgroundType) =>
+        dispatch(PopupActions.showHeaderMessage(message, duration, backgroundType)),
     updateBadgeLabel: (label, key) => dispatch(BadgeActions.updateLabel(label, key)),
     deleteAllBadgeLabel: (label, key) => dispatch(BadgeActions.deleteAllLabel(label, key))
 });
 
-export default connect(mapStateToProps, mapStateToDispatch)(ScreenA);
+export default connect(
+    mapStateToProps,
+    mapStateToDispatch
+)(ScreenA);
