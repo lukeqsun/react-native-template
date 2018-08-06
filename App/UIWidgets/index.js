@@ -9,6 +9,7 @@ import FontAwesome from './FontAwesomeJs';
 import Toast from './Popups/Toast';
 import RootView from './RootView';
 import Badge from './Badge';
+import KeyboardSpacer from './KeyboardSpacer';
 import HeaderMessage from './Popups/HeaderMessage';
 
 module.exports = {
@@ -17,5 +18,6 @@ module.exports = {
     Toast: Toast,
     RootView: RootView,
     Badge: Badge,
-    HeaderMessage: HeaderMessage
+    HeaderMessage: HeaderMessage,
+    KeyboardSpacer: KeyboardSpacer
 };

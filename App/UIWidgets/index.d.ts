@@ -37,3 +37,5 @@ export interface FontAwesomeProps {
 }
 
 export class FontAwesome extends Component<FontAwesomeProps> {}
+
+export class KeyboardSpacer  {}

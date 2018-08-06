@@ -6,7 +6,7 @@
 
 import React from 'react';
 
-import {Animated, TouchableOpacity, Modal} from 'react-native';
+import {Animated, TouchableOpacity, Modal, StyleSheet} from 'react-native';
 import {BaseComponent} from '../../Utilities';
 
 class BaseDialog extends BaseComponent {
@@ -73,27 +73,25 @@ class BaseDialog extends BaseComponent {
                     animationType={'none'}
                     supportedOrientations={['portrait', 'landscape']}>
                     <Animated.View
-                        style={{
-                            position: 'absolute',
-                            left: 0,
-                            right: 0,
-                            top: 0,
-                            bottom: 0,
-                            backgroundColor: 'rgba(0,0,0,0.7)',
-                            opacity: this._path.interpolate({
-                                inputRange: [0, 0.5, 1],
-                                outputRange: [0, 1, 1]
-                            }),
-                            ...this._getContentPosition(),
-                            transform: [
-                                {
-                                    translateX: this._path.interpolate({
-                                        inputRange: [0, 0.01, 1],
-                                        outputRange: [-this.screenWidth, 0, 0]
-                                    })
-                                }
-                            ]
-                        }}>
+                        style={[
+                            StyleSheet.absoluteFill,
+                            {
+                                backgroundColor: 'rgba(0,0,0,0.7)',
+                                opacity: this._path.interpolate({
+                                    inputRange: [0, 0.5, 1],
+                                    outputRange: [0, 1, 1]
+                                }),
+                                ...this._getContentPosition(),
+                                transform: [
+                                    {
+                                        translateX: this._path.interpolate({
+                                            inputRange: [0, 0.01, 1],
+                                            outputRange: [-this.screenWidth, 0, 0]
+                                        })
+                                    }
+                                ]
+                            }
+                        ]}>
                         <TouchableOpacity
                             onPress={() => {
                                 if (this.props.cancelable) {

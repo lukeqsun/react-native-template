@@ -8,8 +8,7 @@ import React from 'react';
 import {View, Text, TouchableOpacity, TextInput, SafeAreaView} from 'react-native';
 
 import BaseDialog from './BaseDialog';
-import KeyboardSpacer from './KeyboardSpacer';
-import {Button} from '../../UIWidgets';
+import KeyboardSpacer from '../KeyboardSpacer';
 import {connect} from 'react-redux';
 import {I18n, Constraints} from '../../Utilities';
 
