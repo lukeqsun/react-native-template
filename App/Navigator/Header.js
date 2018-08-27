@@ -1,14 +1,13 @@
 import React from 'react';
 
-import {Animated, Image, Platform, StyleSheet, View, I18nManager} from 'react-native';
-import {MaskedViewIOS} from 'react-navigation/src/PlatformHelpers';
+import {Animated, Image, Platform, StyleSheet, View, I18nManager, MaskedViewIOS} from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
 import {connect} from 'react-redux';
 
 import HeaderTitle from './HeaderTitle';
-import HeaderBackButton from 'react-navigation/src/views/Header/HeaderBackButton';
-import ModularHeaderBackButton from 'react-navigation/src/views/Header//ModularHeaderBackButton';
-import HeaderStyleInterpolator from 'react-navigation/src/views/Header//HeaderStyleInterpolator';
+import HeaderBackButton from 'react-navigation-stack/dist/views/Header/HeaderBackButton';
+import ModularHeaderBackButton from 'react-navigation-stack/dist/views/Header/ModularHeaderBackButton';
+import HeaderStyleInterpolator from 'react-navigation-stack/dist/views/Header/HeaderStyleInterpolator';
 import {Constraints} from '../Utilities';
 import {HeaderMessage} from '../UIWidgets';
 

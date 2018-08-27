@@ -2,7 +2,7 @@ project 'ReactNativeTemplate.xcodeproj'
 source 'https://github.com/CocoaPods/Specs.git'
 
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '9.0'
 
 target 'ReactNativeTemplate' do
 rn_path = '../node_modules/react-native'
@@ -23,7 +23,6 @@ pod 'React', path: rn_path, subspecs: [
 ]
 
 pod 'RNI18n', :path => '../node_modules/react-native-i18n'
-pod 'react-native-orientation', :path => '../node_modules/react-native-orientation'
 pod 'react-native-spinkit', :path => '../node_modules/react-native-spinkit'
 pod 'RNSVG', :path => '../node_modules/react-native-svg'
 

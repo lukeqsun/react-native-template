@@ -36,7 +36,6 @@ After you have downloaded or cloned this repository, run `npm install` or `yarn`
 - [redux](https://github.com/AlexanderZaytsev/react-native-i18n)
 - [react-navigation](https://reactnavigation.org/)
 - [react-native-i18n](https://github.com/AlexanderZaytsev/react-native-i18n)
-- [react-native-orientation](https://github.com/yamill/react-native-orientation)
 - [react-native-cache-store](https://github.com/cheeaun/react-native-cache-store)
 
 ## Contributors

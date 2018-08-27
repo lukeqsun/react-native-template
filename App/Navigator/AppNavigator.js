@@ -6,9 +6,8 @@
 
 import React from 'react';
 import {connect} from 'react-redux';
-import {createReduxBoundAddListener, createReactNavigationReduxMiddleware} from 'react-navigation-redux-helpers';
+import {reduxifyNavigator, createReactNavigationReduxMiddleware} from 'react-navigation-redux-helpers';
 import {StackNavigator, createBottomTabNavigator} from 'react-navigation';
-import {MyStyleSheet} from '../Utilities';
 import TabBarComponent from './TabBarComponent';
 import HeaderTitle from './HeaderTitle';
 import HeaderLeft from './HeaderLeft';
@@ -68,25 +67,9 @@ export const AppNavigator = StackNavigator(
 );
 // Note: createReactNavigationReduxMiddleware must be run before createReduxBoundAddListener
 export const middleware = createReactNavigationReduxMiddleware('root', (state) => state.nav);
-const addListener = createReduxBoundAddListener('root');
 
-class AppWithNavigationState extends React.Component {
-    render() {
-        const {dispatch, nav} = this.props;
-        return (
-            <AppNavigator
-                navigation={{
-                    dispatch,
-                    state: nav,
-                    addListener
-                }}
-            />
-        );
-    }
-}
-
+const App = reduxifyNavigator(AppNavigator, 'root');
 const mapStateToProps = (state) => ({
-    nav: state.nav
+    state: state.nav
 });
-
-export default connect(mapStateToProps)(AppWithNavigationState);
+export const AppWithNavigationState = connect(mapStateToProps)(App);

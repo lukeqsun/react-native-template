@@ -42,10 +42,6 @@ class Badge extends BaseComponent {
             _height = parseInt(this.screenHeight / 80);
         }
 
-        if (this.isLandscape()) {
-            _height *= 1.5;
-        }
-
         let _fontSize = parseInt(_height / 1.5);
         let _borderRadius = parseInt(_height / 2);
 
