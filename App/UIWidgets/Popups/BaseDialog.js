@@ -70,8 +70,7 @@ class BaseDialog extends BaseComponent {
                 <Modal
                     visible={this.state._isShow}
                     transparent={true}
-                    animationType={'none'}
-                    supportedOrientations={['portrait', 'landscape']}>
+                    animationType={'none'}>
                     <Animated.View
                         style={[
                             StyleSheet.absoluteFill,

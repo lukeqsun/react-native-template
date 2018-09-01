@@ -28,7 +28,6 @@ export class BaseComponent<P = {}, S = {}, SS = any> extends React.Component<P, 
     screenSize?: number;
     onePixel?: number;
     getSize(): number;
-    isLandscape(): boolean;
 }
 
 export interface IConstraints {

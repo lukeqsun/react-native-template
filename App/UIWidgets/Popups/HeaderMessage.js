@@ -79,7 +79,7 @@ class HeaderMessage extends BaseComponent {
                     }}>
                     <Animated.View
                         style={{
-                            marginTop: this.isLandscape() ? 0 : statusBarHeight,
+                            marginTop: statusBarHeight,
                             flexDirection: 'row',
                             alignItems: 'center'
                         }}>

@@ -3,7 +3,6 @@
  */
 import {Component} from 'react';
 import {Dimensions, PixelRatio} from 'react-native';
-import Orientation from 'react-native-orientation';
 import MyStyleSheet from './MyStyleSheet';
 const {height, width} = Dimensions.get('screen');
 
@@ -21,18 +20,15 @@ class BaseComponent extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            orientation: null
-        };
+        this.state = {};
     }
 
-    _orientationDidChange(orientation) {
+    _setDemensions() {
         const {height, width} = Dimensions.get('screen');
         this._setDimensionsToStyle(height, width);
 
         this.screenWidth = width;
         this.screenHeight = height;
-        this.setState({orientation: orientation}); // HACK: set state here to re-rend views
     }
 
     _setDimensionsToStyle(height, width) {
@@ -40,18 +36,10 @@ class BaseComponent extends Component {
     }
 
     componentDidMount() {
-        const initial = Orientation.getInitialOrientation();
-        this._orientationDidChange(initial);
-        Orientation.addOrientationListener(this._orientationDidChange.bind(this));
+        this._setDemensions();
     }
 
-    componentWillUnmount() {
-        Orientation.removeOrientationListener(this._orientationDidChange);
-    }
-
-    isLandscape() {
-        return this.state.orientation == 'LANDSCAPE';
-    }
+    componentWillUnmount() {}
 }
 
 export default BaseComponent;
